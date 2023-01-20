@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Ground.tscn" type="PackedScene" id=2]
+
+[node name="TestScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 258, 187 )
+
+[node name="Node2D2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 520, 480 )
+scale = Vector2( 4.32, 0.599998 )
+
+[node name="Node2D5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 896, 296 )
+scale = Vector2( 4.32, 0.599998 )
+
+[node name="Node2D6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 904, 144 )
+scale = Vector2( 4.32, 0.599998 )
+
+[node name="Node2D4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 712, 384 )
+rotation = 1.57079
+scale = Vector2( 2.88, 0.599998 )
+
+[node name="Node2D3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 176, 480 )
+scale = Vector2( 4.32, 0.599998 )
