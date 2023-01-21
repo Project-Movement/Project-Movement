@@ -1,28 +1,41 @@
 extends KinematicBody2D
 
 #export (int) var speed = 200
-export var h_accel = 2000
-export var ground_friction = 900
-export var max_grounded_speed = 300
-export var gravity = 750
-export var jump_vel = 400
+export var h_accel_ground = 2200  # player's horizontal acceleration
+export var h_accel_air = 200
+export var max_h_air_influence_speed = 100
+export var ground_friction = 1100  # friction of ground
+export var max_grounded_speed = 300  # maximum speed on ground
+export var gravity = 750  # gravitational acceleration
+export var jump_vel = 400  # instantaneous velocity on jump
+export var dash_magnitude: int = 350
 
 var constant_forces = { "gravity": Vector2(0, gravity) }
 var velocity = Vector2()
 var has_double_jump: bool = true
-#var last_jump_time: int = Time.get_ticks_msec()
-#var jump_deadtime: int = 200
+
+
+func _physics_process(delta):
+	apply_constant_forces(delta)
+	player_move(delta)
+	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+func _input(event):
+	# some abilities activations can probably go here later
+	pass
 
 
 func player_move(delta):
-	var direction = velocity.normalized()
 	var grounded = is_on_floor()
+
+	# apply grounded kinematics
 	if grounded:
-		has_double_jump = true
+		has_double_jump = true  # refresh double jump
 		if Input.is_action_pressed("right"):
-			velocity.x += h_accel * delta
+			velocity.x += h_accel_ground * delta
 		if Input.is_action_pressed("left"):
-			velocity.x -= h_accel * delta
+			velocity.x -= h_accel_ground * delta
 
 		# apply grounded friction - force opposite direction of motion
 		if velocity.x > 0:
@@ -31,23 +44,29 @@ func player_move(delta):
 		if velocity.x < 0:
 			velocity.x = min(0, velocity.x + ground_friction * delta)
 			velocity.x = max(-max_grounded_speed, velocity.x)
+	else:  # not grounded, in air
+		if Input.is_action_pressed("right") and velocity.x < max_h_air_influence_speed:
+			velocity.x += h_accel_air * delta
+		if Input.is_action_pressed("left") and velocity.x > -max_h_air_influence_speed:
+			velocity.x -= h_accel_air * delta
 
-#	if Input.is_action_pressed("jump") and Time.get_ticks_msec() - last_jump_time > jump_deadtime:
+
+	# handle jump and double jump (midair jump)
 	if Input.is_action_just_pressed("jump"):
-#		print("jump press")
-		print("has double jump: " + str(has_double_jump))
 		if grounded or has_double_jump:
 			velocity.y = -jump_vel
-		
+
 		has_double_jump = false if not grounded else true
+
+	# dash
+	if Input.is_action_just_pressed("dash"):
+		var target = get_global_mouse_position()
+		var diff = (target - self.global_position).normalized()
+
+		velocity += diff * dash_magnitude
+
 
 
 func apply_constant_forces(delta):
 	for val in constant_forces.values():
 		velocity += val * delta
-	
-
-func _physics_process(delta):
-	apply_constant_forces(delta)
-	player_move(delta)
-	velocity = move_and_slide(velocity, Vector2.UP)
