@@ -8,57 +8,59 @@
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 258, 187 )
 
-[node name="Ground" parent="." instance=ExtResource( 2 )]
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="Ground" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 1544, 528 )
 scale = Vector2( 160.953, 2.36 )
 
-[node name="Ground2" parent="." instance=ExtResource( 2 )]
+[node name="Ground2" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 3136, -272 )
 rotation = -1.57079
 scale = Vector2( 81.96, 2.36 )
 
-[node name="Ground3" parent="." instance=ExtResource( 2 )]
+[node name="Ground3" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( -48, -272 )
 rotation = -1.57079
 scale = Vector2( 81.96, 2.36 )
 
-[node name="Ground4" parent="." instance=ExtResource( 2 )]
+[node name="Ground4" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 904, 296 )
 scale = Vector2( 14.7697, 2.21431 )
 
-[node name="Ground5" parent="." instance=ExtResource( 2 )]
+[node name="Ground5" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 904, 128 )
 scale = Vector2( 14.7697, 2.21431 )
 
-[node name="Ground11" parent="." instance=ExtResource( 2 )]
+[node name="Ground11" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 2336, 432 )
 scale = Vector2( 14.7697, 2.21431 )
 
-[node name="Ground12" parent="." instance=ExtResource( 2 )]
+[node name="Ground12" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 2864, 280 )
 scale = Vector2( 29.1972, 2.26442 )
 
-[node name="Ground10" parent="." instance=ExtResource( 2 )]
+[node name="Ground10" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 1864, -176 )
 rotation = 1.57079
 scale = Vector2( 14.9297, 2.21431 )
 
-[node name="Ground6" parent="." instance=ExtResource( 2 )]
+[node name="Ground6" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 1376, -48 )
 scale = Vector2( 50.2097, 2.21431 )
 
-[node name="Ground7" parent="." instance=ExtResource( 2 )]
+[node name="Ground7" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 440, -288 )
 scale = Vector2( 50.2097, 2.21431 )
 
-[node name="Ground9" parent="." instance=ExtResource( 2 )]
+[node name="Ground9" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 2656, -800 )
 scale = Vector2( 50.2097, 2.21431 )
 
-[node name="Ground8" parent="." instance=ExtResource( 2 )]
+[node name="Ground8" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 1944, 344 )
 scale = Vector2( 26.3422, 16.5692 )
 
-[node name="Ground13" parent="." instance=ExtResource( 2 )]
+[node name="Ground13" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 472, 464 )
 scale = Vector2( 11.4521, 6.15382 )
