@@ -21,8 +21,6 @@ var last_tick_vel = Vector2()  # save what the engine thinks should be the new v
 
 func _physics_process(delta):
 	player_move(delta)
-	apply_constant_forces(delta)
-	apply_frictions(delta)
 	last_tick_vel = move_and_slide(velocity, Vector2.UP)
 
 
@@ -35,7 +33,8 @@ func player_move(delta):
 	var grounded = is_on_floor()
 
 	# if we don't bounce, accept the engine's default move and slide velocity change
-	if not do_any_bounce():
+	var bounced = do_any_bounce()
+	if not bounced:
 		velocity = last_tick_vel
 
 	# handle jump and double jump (midair jump)
@@ -56,7 +55,7 @@ func player_move(delta):
 
 
 	# grounded character movement
-	if grounded:
+	if grounded and not bounced:
 		has_double_jump = true  # refresh double jump
 		if Input.is_action_pressed("right"):
 			velocity.x += h_accel_ground * delta
@@ -76,11 +75,15 @@ func player_move(delta):
 
 		velocity += diff * dash_magnitude
 
+	# do other movement kinematics calculations
+	apply_constant_forces(delta)  # like gravity
+	apply_frictions(delta, bounced)  # and friction
+
 
 func do_any_bounce() -> bool:
 	var has_bounced = false
 	# handle bouncing off walls, jump up, perfect reflection of x vel
-	if is_on_wall() and Input.is_action_pressed("jump") and abs(velocity.x) > max_grounded_speed * 1.2:
+	if is_on_wall() and Input.is_action_pressed("jump") and abs(velocity.x) > walljump_speed:
 		velocity.x = -velocity.x
 		# velocity.y = -jump_vel
 		has_bounced = true
@@ -93,8 +96,8 @@ func do_any_bounce() -> bool:
 	return has_bounced
 
 
-func apply_frictions(delta):
-	if is_on_floor():
+func apply_frictions(delta, bounced):
+	if is_on_floor() and not bounced:  # don't slow down if bounced (bhopped)
 		# apply grounded friction - force opposite direction of motion
 		var friction = ground_friction if abs(velocity.x) <= max_grounded_speed else exceeding_ground_friction
 		if velocity.x > 0:
