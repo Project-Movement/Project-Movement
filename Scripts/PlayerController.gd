@@ -12,12 +12,14 @@ export var jump_vel = 400  # instantaneous velocity on jump
 export var dash_magnitude: int = 400
 export var walljump_speed = 350
 export var wall_friction = 300
+export var coyote_time_ms = 80
 
 var constant_forces = { "gravity": Vector2(0, gravity) }
 var velocity = Vector2()
 var has_double_jump: bool = true
 
 var last_tick_vel = Vector2()  # save what the engine thinks should be the new velocity after moving and sliding
+var last_time_on_floor = 0
 
 func _physics_process(delta):
 	player_move(delta)
@@ -31,6 +33,9 @@ func _input(event):
 
 func player_move(delta):
 	var grounded = is_on_floor()
+	var time = Time.get_ticks_msec()
+	if grounded:
+		last_time_on_floor = time
 
 	# if we don't bounce, accept the engine's default move and slide velocity change
 	var bounced = do_any_bounce()
@@ -38,8 +43,13 @@ func player_move(delta):
 		velocity = last_tick_vel
 
 	# handle jump and double jump (midair jump)
+	var coyote_activated = false
 	if Input.is_action_just_pressed("jump"):
 		if grounded:
+			velocity.y = -jump_vel
+		elif ((time - last_time_on_floor) <= coyote_time_ms):
+			print("coyote activated")
+			coyote_activated = true
 			velocity.y = -jump_vel
 		elif is_on_wall():
 			velocity.y = -jump_vel
@@ -51,7 +61,8 @@ func player_move(delta):
 				velocity.x = -velocity.x
 
 
-		has_double_jump = grounded or is_on_wall()  # if we were grounded or on wall, we didn't use double jump
+		# if we were grounded or on wall, we didn't use double jump
+		has_double_jump = grounded or coyote_activated or is_on_wall()
 
 
 	# grounded character movement
