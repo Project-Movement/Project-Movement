@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-#export (int) var speed = 200
 export var h_accel_ground = 2200  # player's horizontal acceleration
 export var h_accel_air = 200
 export var max_h_air_influence_speed = 100
@@ -49,35 +48,30 @@ func player_move(delta):
 
 	# handle jump and double jump (midair jump)
 	if Input.is_action_just_pressed("jump"):
-		# var coyote_activated = false
-		# var did_walljump = false
 		if grounded:
 			velocity.y = -jump_vel
 			has_double_jump = true
+
 		elif ((time - last_time_on_floor) <= coyote_time_ms):
 			# print("coyote activated")
 			# coyote_activated = true
 			velocity.y = -jump_vel
 			has_double_jump = true
+
 		elif is_on_wall():
 			velocity.y = -jump_vel
 			var wall_collider = get_last_slide_collision()
 			velocity.x = walljump_speed if wall_collider.normal.x > 0 else -walljump_speed
-			# did_walljump = true
-		elif has_double_jump:  # not grounded by double jump is available
+
+		elif has_double_jump:  # not grounded and double jump is available
 			velocity.y = -jump_vel
 			if (Input.is_action_pressed("left") and velocity.x > 0) or (Input.is_action_pressed("right") and velocity.x < 0):
 				velocity.x = -velocity.x
 			has_double_jump = false
 
 
-		# if we were grounded or on wall, we didn't use double jump
-		# has_double_jump = grounded or coyote_activated or (is_on_wall() and not bounced)
-
-
 	# grounded character movement
 	if grounded and not bounced:
-		# has_double_jump = true  # refresh double jump
 		if Input.is_action_pressed("right"):
 			velocity.x += h_accel_ground * delta
 		if Input.is_action_pressed("left"):
@@ -124,7 +118,6 @@ func do_any_bounce() -> bool:
 	# handle bouncing off walls, jump up, perfect reflection of x vel
 	if is_on_wall() and Input.is_action_pressed("jump") and abs(velocity.x) > walljump_speed:
 		velocity.x = -velocity.x
-		# velocity.y = -jump_vel
 		has_bounced = true
 
 	# bouncing off ground, bhopping, perfect preservation of x vel
