@@ -10,18 +10,26 @@ export var exceeding_ground_friction = 3000 # friction of ground when exceeding 
 export var max_grounded_speed = 300  # maximum speed on ground
 export var gravity = 750  # gravitational acceleration
 export var jump_vel = 400  # instantaneous velocity on jump
+export var wall_friction = 300  # wall friction
+
+# bhopping and walljumping
+export var walljump_speed = 350  # x speed after walljump
+export var bhop_bonus = 100
+export var wallhop_bonus_factor = 0.4
+export var bhop_interval = 0.1  # interval to be able to do a bhop, in seconds
+
 
 # abilities
 export var dash_magnitude: int = 400  # how much the dash moves
-export var walljump_speed = 350  # x speed after walljump
-export var wall_friction = 300  # wall friction
 export var coyote_time_ms = 80  # coyote time, where player can jump despite not being grounded if they were just grounded
+
 export var glider_x_conversion_efficiency = 0.8  # efficiency of conversion between x and up
 export var glider_y_conversion_efficiency = 0.8  # efficiency of conversion between down and x
 export var glider_x_rate = 2  # how fast horizontal is converted to up in glider
 export var glider_y_rate = 2.7  # how fast down is converted to horizontal in glider
 export var glider_up_antigravity_factor = 0.6  # ratio of gravity that is cancelled when gliding up
 export var glider_up_ideal_vector: Vector2 = Vector2(1, 1).normalized()
+
 
 # other variables
 var constant_forces = { "gravity": Vector2(0, gravity) }
@@ -31,14 +39,21 @@ var has_double_jump: bool = true
 var last_tick_vel = Vector2()  # save what the engine thinks should be the new velocity after moving and sliding
 var last_time_on_floor = 0
 
+var has_jumped_in_bhop_interval = false
+
+func _ready():
+	$JumpTimer.wait_time = bhop_interval
+	$JumpTimer.one_shot = true
+
 func _physics_process(delta):
 	player_move(delta)
 	last_tick_vel = move_and_slide(velocity, Vector2.UP)
 
-
-func _input(_event):
-	# some abilities activations can probably go here later
-	pass
+func _process(_delta):
+	if Input.is_action_just_pressed("jump"):
+		print("jump was pressed")
+		has_jumped_in_bhop_interval = true
+		$JumpTimer.start()
 
 
 func player_move(delta):
@@ -54,6 +69,7 @@ func player_move(delta):
 
 	# handle jump and double jump (midair jump)
 	if Input.is_action_just_pressed("jump"):
+
 		if grounded:
 			velocity.y = -jump_vel
 			has_double_jump = true
@@ -139,16 +155,37 @@ func player_move(delta):
 func do_any_bounce() -> bool:
 	var has_bounced = false
 	# handle bouncing off walls, jump up, perfect reflection of x vel
-	if is_on_wall() and Input.is_action_pressed("jump") and abs(velocity.x) > walljump_speed:
-		velocity.x = -velocity.x
-		has_bounced = true
+	if is_on_wall():
+		if Input.is_action_pressed("jump") and abs(velocity.x) > walljump_speed:
+			velocity.x = -velocity.x
+			has_bounced = true
+		# elif has_jumped_in_bhop_interval:
+		# 	print("jump was pressed in the last interval, doing a wallhop")
+		# 	# if they time the jump, player goes up instead of just reflecting
+		# 	# and keep some horizontal velocity but not all of it, so like
+		# 	# a more powerful walljump
+		# 	if velocity.x > 0:
+		# 		velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
+		# 	elif velocity.x < 0:
+		# 		velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
+
 
 	# bouncing off ground, bhopping, perfect preservation of x vel
-	if is_on_floor() and Input.is_action_pressed("jump"):
-		velocity.y = -jump_vel
-		has_bounced = true
-		has_double_jump = true  # TODO evaluate whether it should be ok to refresh double jump after bhop
+	# if the player presses jump within the interval in time, they get bonus velocity as well
+	if is_on_floor():
+		if Input.is_action_pressed("jump"):
+			velocity.y = -jump_vel
+			has_bounced = true
+			has_double_jump = true
+		if has_jumped_in_bhop_interval:
+			velocity.y = -jump_vel
+			if velocity.x < 0:
+				velocity.x -= bhop_bonus
+			elif velocity.x > 0:
+				velocity.x += bhop_bonus
 
+			has_bounced = true
+			has_double_jump = true  # TODO evaluate whether it should be ok to refresh double jump after bhop
 	return has_bounced
 
 
@@ -175,3 +212,7 @@ func apply_frictions(delta, bounced):
 func apply_constant_forces(delta):
 	for val in constant_forces.values():
 		velocity += val * delta
+
+
+func _on_JumpTimer_timeout():
+	has_jumped_in_bhop_interval = false
