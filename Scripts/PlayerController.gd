@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+# yea, this is definitely a real mess right now
+# basic player movement kinematics
 export var h_accel_ground = 2200  # player's horizontal acceleration
 export var h_accel_air = 200
 export var max_h_air_influence_speed = 100
@@ -8,6 +10,8 @@ export var exceeding_ground_friction = 3000 # friction of ground when exceeding 
 export var max_grounded_speed = 300  # maximum speed on ground
 export var gravity = 750  # gravitational acceleration
 export var jump_vel = 400  # instantaneous velocity on jump
+
+# abilities
 export var dash_magnitude: int = 400  # how much the dash moves
 export var walljump_speed = 350  # x speed after walljump
 export var wall_friction = 300  # wall friction
@@ -17,7 +21,9 @@ export var glider_y_conversion_efficiency = 0.8  # efficiency of conversion betw
 export var glider_x_rate = 2  # how fast horizontal is converted to up in glider
 export var glider_y_rate = 2.7  # how fast down is converted to horizontal in glider
 export var glider_up_antigravity_factor = 0.6  # ratio of gravity that is cancelled when gliding up
+export var glider_up_ideal_vector: Vector2 = Vector2(1, 1).normalized()
 
+# other variables
 var constant_forces = { "gravity": Vector2(0, gravity) }
 var velocity = Vector2()
 var has_double_jump: bool = true
@@ -30,7 +36,7 @@ func _physics_process(delta):
 	last_tick_vel = move_and_slide(velocity, Vector2.UP)
 
 
-func _input(event):
+func _input(_event):
 	# some abilities activations can probably go here later
 	pass
 
@@ -84,11 +90,23 @@ func player_move(delta):
 			velocity.x -= h_accel_air * delta
 
 		# glider motion - convert horizontal to vertical or vice versa
-		if Input.is_action_pressed("up"):
-			var x_speed_lost = glider_x_rate * velocity.x * delta
-			velocity.y -= abs(x_speed_lost) * glider_x_conversion_efficiency
-			velocity.x -= x_speed_lost
-			velocity.y -= gravity * delta * glider_up_antigravity_factor  # counter some of gravity
+		# if Input.is_action_pressed("up"):
+		# 	# var current_vel_magnitude = velocity.length_squared()
+		# 	var is_moving_down = Vector2.UP.dot(velocity) < 0
+		# 	var should_apply_antigravity = is_moving_down
+
+		# 	var x_speed_lost = glider_x_rate * velocity.x * delta
+		# 	velocity.y -= abs(x_speed_lost) * glider_x_conversion_efficiency
+		# 	velocity.x -= x_speed_lost
+
+		# 	# don't allow y vel to be greater than x vel
+		# 	if is_moving_down and abs(velocity.y) > abs(velocity.x):
+		# 		var avg = (abs(velocity.y) + abs(velocity.x)) / 2
+		# 		velocity.y = -avg
+		# 		velocity.x = avg if velocity.x > 0 else -avg
+
+		# 	if should_apply_antigravity:
+		# 		velocity.y -= gravity * delta * glider_up_antigravity_factor  # counter some of gravity
 
 		elif Input.is_action_pressed("down"):  # can't do both up and down
 			# this one only works when falling
@@ -100,6 +118,9 @@ func player_move(delta):
 				elif velocity.x < 0:
 					velocity.x -= y_speed_lost * glider_y_conversion_efficiency
 				# TODO: how to handle when player is falling straight down?
+				# 		i assume that for animation/sprite purposes we may eventually
+				#		have to store the last direction the player character was
+				#		facing when they stopped moving, so it could be used here?
 
 	# dash
 	if Input.is_action_just_pressed("dash"):
