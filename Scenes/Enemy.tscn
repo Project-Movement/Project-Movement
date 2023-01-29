@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/icon.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 41.7461, 29.5832 )
+
+[node name="Enemy" type="Area2D" groups=["Damageable"]]
+position = Vector2( -313, 597 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 350.5, -643.254 )
+rotation = 1.5708
+scale = Vector2( 1, 1.2 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 348, -635 )
+scale = Vector2( 1, 1.2 )
+texture = ExtResource( 1 )
+
+[connection signal="body_shape_entered" from="." to="." method="_on_Enemy_body_shape_entered"]
+[connection signal="body_shape_exited" from="." to="." method="_on_Enemy_body_shape_exited"]
