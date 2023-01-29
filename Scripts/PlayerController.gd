@@ -80,8 +80,10 @@ func player_move(delta):
 	if grounded and not bounced:
 		if Input.is_action_pressed("right"):
 			velocity.x += h_accel_ground * delta
+			velocity.x = min(velocity.x, 300)
 		if Input.is_action_pressed("left"):
 			velocity.x -= h_accel_ground * delta
+			velocity.x = max(velocity.x, -300)
 
 	else:  # not grounded, in air
 		if Input.is_action_pressed("right") and velocity.x < max_h_air_influence_speed:
@@ -153,11 +155,19 @@ func do_any_bounce() -> bool:
 func apply_frictions(delta, bounced):
 	if is_on_floor() and not bounced:  # don't slow down if bounced (bhopped)
 		# apply grounded friction - force opposite direction of motion
-		var friction = ground_friction if abs(velocity.x) <= max_grounded_speed else exceeding_ground_friction
+		var friction
+		if abs(velocity.x) < max_grounded_speed:
+			friction = ground_friction
+		elif abs(velocity.x) > max_grounded_speed:
+			friction = exceeding_ground_friction
+		else:
+			friction = 0 if Input.is_action_pressed("left") or Input.is_action_pressed("right") else ground_friction
+
 		if velocity.x > 0:
 			velocity.x = max(0, velocity.x + -friction * delta)
 		if velocity.x < 0:
 			velocity.x = min(0, velocity.x + friction * delta)
+
 	elif is_on_wall() and velocity.y > 0:
 		# wall sliding, slow down player if falling down wall
 		velocity.y -= wall_friction * delta
