@@ -30,7 +30,6 @@ export var glider_y_rate = 2.7  # how fast down is converted to horizontal in gl
 # other variables
 var constant_forces = { "gravity": Vector2(0, gravity) }
 var velocity = Vector2()
-var has_double_jump: bool = true
 
 var last_tick_vel = Vector2()  # save what the engine thinks should be the new velocity after moving and sliding
 var last_time_on_floor = 0
@@ -72,16 +71,14 @@ func player_move(delta):
 
 		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
 			velocity.y = -jump_vel
-			has_double_jump = true
 
 		elif is_on_wall():  # walljump
 			velocity.y = -jump_vel
 			var wall_collider = get_last_slide_collision()
 			velocity.x = walljump_speed if wall_collider.normal.x > 0 else -walljump_speed
 
-	if Input.is_action_just_pressed("airjump") and has_double_jump and not grounded:  # not grounded and double jump is available
-		velocity.y = -jump_vel
-		has_double_jump = false
+	if Input.is_action_just_pressed("airjump") and not grounded:  # try airjump if in air
+		$AbilitySystem.use_ability("airjump")
 
 
 	# grounded character movement
@@ -130,11 +127,11 @@ func do_any_bounce() -> bool:
 			velocity.x = -velocity.x
 			has_bounced = true
 		elif has_jumped_in_bhop_interval:
-			# print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
+			print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
 			# if they time the jump, player goes up instead of just reflecting
 			# and keep some horizontal velocity but not all of it, so like
 			# a more powerful walljump
-			velocity.y = -walljump_speed
+			velocity.y = -jump_vel
 			if velocity.x > 0:
 				velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
 			elif velocity.x < 0:
@@ -149,7 +146,6 @@ func do_any_bounce() -> bool:
 		if Input.is_action_pressed("jump"):
 			velocity.y = -jump_vel
 			has_bounced = true
-			has_double_jump = true
 		if has_jumped_in_bhop_interval:
 			velocity.y = -jump_vel
 			if velocity.x < 0:
@@ -158,7 +154,6 @@ func do_any_bounce() -> bool:
 				velocity.x += bhop_bonus
 
 			has_bounced = true
-			has_double_jump = true  # TODO evaluate whether it should be ok to refresh double jump after bhop
 	return has_bounced
 
 

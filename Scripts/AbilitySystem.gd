@@ -1,7 +1,13 @@
 extends Node2D
 
-var ability_timers = {}
 
+export var max_dashes = 1
+export var max_airjumps = 1
+
+var ability_timers = {}
+var ability_uses = {}
+
+onready var parent_body = get_parent()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -10,15 +16,21 @@ func _ready():
 	# ability_timers[ABILITIES.AIRJUMP] =
 	# ability_timers[ABILITIES.GRAPPLEHOOK] =
 
+	ability_uses["airjump"] = 1
+	ability_uses["dash"] = 1
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _physics_process(_delta):
+	# for checking abilities that are dependent on the world, like double jump
+	if parent_body.is_on_floor():
+		ability_uses["airjump"] = max_airjumps
 
 
 func is_ability_available(ability: String) -> bool:
-	return ability_timers[ability].time_left == 0
+	print("tried to use ability " + ability + " with " + str(ability_uses[ability]) + " uses left")
+	return ability_uses[ability] > 0
 
 
 func use_ability(ability: String) -> bool:
@@ -28,6 +40,8 @@ func use_ability(ability: String) -> bool:
 			"dash":
 				do_dash()
 				ability_timers["dash"].start()
+			"airjump":
+				do_airjump()
 
 	return was_available
 
@@ -35,7 +49,6 @@ func use_ability(ability: String) -> bool:
 func do_dash():
 	var target = get_global_mouse_position()
 	var diff = (target - self.global_position).normalized()
-	var parent_body = get_parent()
 	var dash_magnitude = parent_body.dash_magnitude
 
 	# apply impulse for dash
@@ -47,3 +60,14 @@ func do_dash():
 		parent_body.velocity.y = diff.y * dash_magnitude
 	if diff.x * parent_body.velocity.x < abs(diff.x * dash_magnitude):
 		parent_body.velocity.x = diff.x * dash_magnitude
+
+	ability_uses["dash"] -= 1
+
+
+func do_airjump():
+	parent_body.velocity.y = -parent_body.jump_vel
+	ability_uses["airjump"] -= 1
+
+
+func _on_DashTimer_timeout():
+	ability_uses["dash"] = max_dashes
