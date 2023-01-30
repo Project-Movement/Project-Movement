@@ -37,6 +37,9 @@ var last_time_on_floor = 0
 
 var has_jumped_in_bhop_interval = false
 
+const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
+
+
 func _ready():
 	$JumpTimer.wait_time = bhop_interval
 	$JumpTimer.one_shot = true
@@ -112,18 +115,7 @@ func player_move(delta):
 
 	# dash
 	if Input.is_action_just_pressed("dash"):
-		var target = get_global_mouse_position()
-		var diff = (target - self.global_position).normalized()
-
-		# apply impulse for dash
-		velocity += diff * dash_magnitude
-		# dash minimums - if result after adding isn't as high as base magnitude
-		# force it to be the base magnitude
-		# so the dash will enfore minimum speed after using it
-		if diff.y * velocity.y < abs(diff.y * dash_magnitude):
-			velocity.y = diff.y * dash_magnitude
-		if diff.x * velocity.x < abs(diff.x * dash_magnitude):
-			velocity.x = diff.x * dash_magnitude
+		$AbilitySystem.use_ability("dash")
 
 	# do other movement kinematics calculations
 	apply_constant_forces(delta)  # like gravity
