@@ -51,7 +51,7 @@ func _physics_process(delta):
 
 func _process(_delta):
 	if Input.is_action_just_pressed("jump"):
-		print("jump was pressed")
+		# print("jump was pressed")
 		has_jumped_in_bhop_interval = true
 		$JumpTimer.start()
 
@@ -145,7 +145,15 @@ func player_move(delta):
 		var target = get_global_mouse_position()
 		var diff = (target - self.global_position).normalized()
 
+		# apply impulse for dash
 		velocity += diff * dash_magnitude
+		# dash minimums - if result after adding isn't as high as base magnitude
+		# force it to be the base magnitude
+		# so the dash will enfore minimum speed after using it
+		if diff.y * velocity.y < abs(diff.y * dash_magnitude):
+			velocity.y = diff.y * dash_magnitude
+		if diff.x * velocity.x < abs(diff.x * dash_magnitude):
+			velocity.x = diff.x * dash_magnitude
 
 	# do other movement kinematics calculations
 	apply_constant_forces(delta)  # like gravity
