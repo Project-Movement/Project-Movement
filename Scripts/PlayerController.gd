@@ -43,15 +43,10 @@ func _ready():
 	$JumpTimer.wait_time = bhop_interval
 	$JumpTimer.one_shot = true
 
+
 func _physics_process(delta):
 	player_move(delta)
 	last_tick_vel = move_and_slide(velocity, Vector2.UP)
-
-func _process(_delta):
-	if Input.is_action_just_pressed("jump"):
-		# print("jump was pressed")
-		has_jumped_in_bhop_interval = true
-		$JumpTimer.start()
 
 
 func player_move(delta):
@@ -76,6 +71,11 @@ func player_move(delta):
 			velocity.y = -jump_vel
 			var wall_collider = get_last_slide_collision()
 			velocity.x = walljump_speed if wall_collider.normal.x > 0 else -walljump_speed
+
+		else:
+			# if we didn't jump from the ground, record that we pressed jump
+			has_jumped_in_bhop_interval = true
+			$JumpTimer.start()
 
 	if Input.is_action_just_pressed("airjump") and not grounded:  # try airjump if in air
 		$AbilitySystem.use_ability("airjump")
