@@ -63,6 +63,7 @@ func player_move(delta):
 		last_time_on_floor = time
 
 	# if we don't bounce, accept the engine's default move and slide velocity change
+	# (like if we ran up against a wall we get stopped)
 	var bounced = do_any_bounce()
 	if not bounced:
 		velocity = last_tick_vel
@@ -70,26 +71,20 @@ func player_move(delta):
 	# handle jump and double jump (midair jump)
 	if Input.is_action_just_pressed("jump"):
 
-		if grounded:
+		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
 			velocity.y = -jump_vel
 			has_double_jump = true
 
-		elif ((time - last_time_on_floor) <= coyote_time_ms):
-			# print("coyote activated")
-			# coyote_activated = true
-			velocity.y = -jump_vel
-			has_double_jump = true
-
-		elif is_on_wall():
+		elif is_on_wall():  # walljump
 			velocity.y = -jump_vel
 			var wall_collider = get_last_slide_collision()
 			velocity.x = walljump_speed if wall_collider.normal.x > 0 else -walljump_speed
 
-		elif has_double_jump:  # not grounded and double jump is available
-			velocity.y = -jump_vel
-			if (Input.is_action_pressed("left") and velocity.x > 0) or (Input.is_action_pressed("right") and velocity.x < 0):
-				velocity.x = -velocity.x
-			has_double_jump = false
+	if Input.is_action_just_pressed("airjump") and has_double_jump and not grounded:  # not grounded and double jump is available
+		velocity.y = -jump_vel
+		# if (Input.is_action_pressed("left") and velocity.x > 0) or (Input.is_action_pressed("right") and velocity.x < 0):
+		# 	velocity.x = -velocity.x
+		has_double_jump = false
 
 
 	# grounded character movement
@@ -167,15 +162,18 @@ func do_any_bounce() -> bool:
 		if Input.is_action_pressed("jump") and abs(velocity.x) > walljump_speed:
 			velocity.x = -velocity.x
 			has_bounced = true
-		# elif has_jumped_in_bhop_interval:
-		# 	print("jump was pressed in the last interval, doing a wallhop")
-		# 	# if they time the jump, player goes up instead of just reflecting
-		# 	# and keep some horizontal velocity but not all of it, so like
-		# 	# a more powerful walljump
-		# 	if velocity.x > 0:
-		# 		velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
-		# 	elif velocity.x < 0:
-		# 		velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
+		elif has_jumped_in_bhop_interval:
+			print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
+			# if they time the jump, player goes up instead of just reflecting
+			# and keep some horizontal velocity but not all of it, so like
+			# a more powerful walljump
+			velocity.y = -walljump_speed
+			if velocity.x > 0:
+				velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
+			elif velocity.x < 0:
+				velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
+
+			has_bounced = true
 
 
 	# bouncing off ground, bhopping, perfect preservation of x vel
@@ -224,3 +222,4 @@ func apply_constant_forces(delta):
 
 func _on_JumpTimer_timeout():
 	has_jumped_in_bhop_interval = false
+
