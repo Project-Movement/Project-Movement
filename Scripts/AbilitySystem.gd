@@ -29,7 +29,7 @@ func _physics_process(_delta):
 
 
 func is_ability_available(ability: String) -> bool:
-	print("tried to use ability " + ability + " with " + str(ability_uses[ability]) + " uses left")
+	# print("tried to use ability " + ability + " with " + str(ability_uses[ability]) + " uses left")
 	return ability_uses[ability] > 0
 
 
