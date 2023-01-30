@@ -138,7 +138,7 @@ func do_any_bounce() -> bool:
 			velocity.x = -velocity.x
 			has_bounced = true
 		elif has_jumped_in_bhop_interval:
-			print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
+			# print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
 			# if they time the jump, player goes up instead of just reflecting
 			# and keep some horizontal velocity but not all of it, so like
 			# a more powerful walljump
