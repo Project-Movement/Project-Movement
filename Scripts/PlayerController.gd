@@ -11,6 +11,7 @@ export var max_grounded_speed = 300  # maximum speed on ground
 export var gravity = 750  # gravitational acceleration
 export var jump_vel = 400  # instantaneous velocity on jump
 export var wall_friction = 300  # wall friction
+export var coyote_time_ms = 80  # coyote time, where player can jump despite not being grounded if they were just grounded
 
 # bhopping and walljumping
 export var walljump_speed = 350  # x speed after walljump
@@ -21,14 +22,9 @@ export var bhop_interval = 0.1  # interval to be able to do a bhop, in seconds
 
 # abilities
 export var dash_magnitude: int = 400  # how much the dash moves
-export var coyote_time_ms = 80  # coyote time, where player can jump despite not being grounded if they were just grounded
 
-export var glider_x_conversion_efficiency = 0.8  # efficiency of conversion between x and up
 export var glider_y_conversion_efficiency = 0.8  # efficiency of conversion between down and x
-export var glider_x_rate = 2  # how fast horizontal is converted to up in glider
 export var glider_y_rate = 2.7  # how fast down is converted to horizontal in glider
-export var glider_up_antigravity_factor = 0.6  # ratio of gravity that is cancelled when gliding up
-export var glider_up_ideal_vector: Vector2 = Vector2(1, 1).normalized()
 
 
 # other variables
@@ -82,8 +78,6 @@ func player_move(delta):
 
 	if Input.is_action_just_pressed("airjump") and has_double_jump and not grounded:  # not grounded and double jump is available
 		velocity.y = -jump_vel
-		# if (Input.is_action_pressed("left") and velocity.x > 0) or (Input.is_action_pressed("right") and velocity.x < 0):
-		# 	velocity.x = -velocity.x
 		has_double_jump = false
 
 
@@ -101,25 +95,6 @@ func player_move(delta):
 			velocity.x += h_accel_air * delta
 		if Input.is_action_pressed("left") and velocity.x > -max_h_air_influence_speed:
 			velocity.x -= h_accel_air * delta
-
-		# glider motion - convert horizontal to vertical or vice versa
-		# if Input.is_action_pressed("up"):
-		# 	# var current_vel_magnitude = velocity.length_squared()
-		# 	var is_moving_down = Vector2.UP.dot(velocity) < 0
-		# 	var should_apply_antigravity = is_moving_down
-
-		# 	var x_speed_lost = glider_x_rate * velocity.x * delta
-		# 	velocity.y -= abs(x_speed_lost) * glider_x_conversion_efficiency
-		# 	velocity.x -= x_speed_lost
-
-		# 	# don't allow y vel to be greater than x vel
-		# 	if is_moving_down and abs(velocity.y) > abs(velocity.x):
-		# 		var avg = (abs(velocity.y) + abs(velocity.x)) / 2
-		# 		velocity.y = -avg
-		# 		velocity.x = avg if velocity.x > 0 else -avg
-
-		# 	if should_apply_antigravity:
-		# 		velocity.y -= gravity * delta * glider_up_antigravity_factor  # counter some of gravity
 
 		elif Input.is_action_pressed("down"):  # can't do both up and down
 			# this one only works when falling
