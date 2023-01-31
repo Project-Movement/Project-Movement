@@ -11,5 +11,5 @@ func _process(delta):
 		var vel = get_parent().get_node("PlayerBody").velocity
 		label.text = "X Speed: %.f" % abs(vel.x)
 	if playerHealth <= 0:
-		label.text = "Skill issues, cant' relate."
+		label.text = "You died, try again."
 
