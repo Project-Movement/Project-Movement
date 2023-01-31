@@ -20,12 +20,18 @@ func _ready():
 	ability_uses["dash"] = 1
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	# for checking abilities that are dependent on the world, like double jump
 	if parent_body.is_on_floor():
 		ability_uses["airjump"] = max_airjumps
+
+
+func reset_state():
+	ability_uses["airjump"] = 1
+	ability_uses["dash"] = 1
+	$DashTimer.stop()
+	# $DashTimer.time_left = 0
 
 
 func is_ability_available(ability: String) -> bool:

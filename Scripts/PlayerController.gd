@@ -49,6 +49,11 @@ func _physics_process(delta):
 	last_tick_vel = move_and_slide(velocity, Vector2.UP)
 
 
+func _input(event):
+	if event.is_action("return_title"):
+		var _a = get_tree().change_scene("res://Scenes/TitleScreen.tscn")
+
+
 func player_move(delta):
 	var grounded = is_on_floor()
 	var time = Time.get_ticks_msec()
@@ -96,19 +101,19 @@ func player_move(delta):
 		if Input.is_action_pressed("left") and velocity.x > -max_h_air_influence_speed:
 			velocity.x -= h_accel_air * delta
 
-		elif Input.is_action_pressed("down"):  # can't do both up and down
-			# this one only works when falling
-			if velocity.y > 0:
-				var y_speed_lost = glider_y_rate * velocity.y * delta
-				velocity.y -= y_speed_lost
-				if velocity.x > 0:
-					velocity.x += y_speed_lost * glider_y_conversion_efficiency
-				elif velocity.x < 0:
-					velocity.x -= y_speed_lost * glider_y_conversion_efficiency
-				# TODO: how to handle when player is falling straight down?
-				# 		i assume that for animation/sprite purposes we may eventually
-				#		have to store the last direction the player character was
-				#		facing when they stopped moving, so it could be used here?
+		# elif Input.is_action_pressed("down"):  # can't do both up and down
+		# 	# this one only works when falling
+		# 	if velocity.y > 0:
+		# 		var y_speed_lost = glider_y_rate * velocity.y * delta
+		# 		velocity.y -= y_speed_lost
+		# 		if velocity.x > 0:
+		# 			velocity.x += y_speed_lost * glider_y_conversion_efficiency
+		# 		elif velocity.x < 0:
+		# 			velocity.x -= y_speed_lost * glider_y_conversion_efficiency
+		# 		# TODO: how to handle when player is falling straight down?
+		# 		# 		i assume that for animation/sprite purposes we may eventually
+		# 		#		have to store the last direction the player character was
+		# 		#		facing when they stopped moving, so it could be used here?
 
 	# dash
 	if Input.is_action_just_pressed("dash"):
@@ -180,6 +185,12 @@ func apply_frictions(delta, bounced):
 func apply_constant_forces(delta):
 	for val in constant_forces.values():
 		velocity += val * delta
+
+
+func reset_state():
+	velocity = Vector2.ZERO
+	last_tick_vel = Vector2.ZERO
+	$AbilitySystem.reset_state()
 
 
 func _on_JumpTimer_timeout():
