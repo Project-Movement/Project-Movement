@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/KillZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/PlayerSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/PlayerSpawner.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Stopwatch.tscn" type="PackedScene" id=6]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -89,6 +90,8 @@ scale = Vector2( -17.029, -0.827618 )
 position = Vector2( 1648, 472 )
 rotation = 1.57079
 scale = Vector2( 3.23217, -3.2639 )
+
+[node name="Stopwatch" parent="." instance=ExtResource( 6 )]
 
 [connection signal="body_entered" from="KillZone" to="PlayerSpawner" method="_on_KillZone_body_entered"]
 [connection signal="body_entered" from="KillZone2" to="PlayerSpawner" method="_on_KillZone_body_entered"]
