@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/white.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="KillZone" type="Area2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+modulate = Color( 1, 0.156863, 0.156863, 1 )
+self_modulate = Color( 1, 0.168627, 0.168627, 1 )
+scale = Vector2( 20, 19.962 )
+texture = ExtResource( 1 )

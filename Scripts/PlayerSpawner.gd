@@ -2,13 +2,7 @@ extends Node2D
 
 export var spawn_position = Vector2()
 
-
 onready var player_body = $"../Player/PlayerBody"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 
 func _input(event):
@@ -24,3 +18,6 @@ func respawn_player():
 func set_spawn_position(point: Vector2):
 	spawn_position = point
 
+
+func _on_KillZone_body_entered(_body:Node):
+	respawn_player()
