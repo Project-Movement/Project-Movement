@@ -182,6 +182,12 @@ func apply_constant_forces(delta):
 		velocity += val * delta
 
 
+func reset_state():
+	velocity = Vector2.ZERO
+	last_tick_vel = Vector2.ZERO
+	$AbilitySystem.reset_state()
+
+
 func _on_JumpTimer_timeout():
 	has_jumped_in_bhop_interval = false
 

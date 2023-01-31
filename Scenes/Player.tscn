@@ -10,7 +10,6 @@
 extents = Vector2( 15, 31.5 )
 
 [node name="Player" type="Node2D"]
-position = Vector2( 2, -5 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 script = ExtResource( 4 )
