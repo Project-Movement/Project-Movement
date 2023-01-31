@@ -20,3 +20,18 @@ margin_right = 129.0
 margin_bottom = 97.0
 custom_fonts/font = SubResource( 1 )
 text = "Speed: 0"
+
+[node name="Dash" type="Label" parent="."]
+margin_top = 488.0
+margin_right = 129.0
+margin_bottom = 537.0
+custom_fonts/font = SubResource( 1 )
+text = "Dash
+"
+
+[node name="Airjump" type="Label" parent="."]
+margin_top = 528.0
+margin_right = 129.0
+margin_bottom = 577.0
+custom_fonts/font = SubResource( 1 )
+text = "Airjump"
