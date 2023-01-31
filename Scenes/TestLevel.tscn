@@ -82,7 +82,13 @@ position = Vector2( 472, 464 )
 scale = Vector2( 11.4521, 6.15382 )
 
 [node name="KillZone" parent="." instance=ExtResource( 3 )]
-position = Vector2( 872, 464 )
-scale = Vector2( 19.8152, 4.21345 )
+position = Vector2( 904, 496 )
+scale = Vector2( -17.029, -0.827618 )
+
+[node name="KillZone2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1648, 472 )
+rotation = 1.57079
+scale = Vector2( 3.23217, -3.2639 )
 
 [connection signal="body_entered" from="KillZone" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="KillZone2" to="PlayerSpawner" method="_on_KillZone_body_entered"]
