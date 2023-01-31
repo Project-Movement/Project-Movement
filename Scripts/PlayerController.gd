@@ -49,6 +49,11 @@ func _physics_process(delta):
 	last_tick_vel = move_and_slide(velocity, Vector2.UP)
 
 
+func _input(event):
+	if event.is_action("return_title"):
+		var _a = get_tree().change_scene("res://Scenes/TitleScreen.tscn")
+
+
 func player_move(delta):
 	var grounded = is_on_floor()
 	var time = Time.get_ticks_msec()

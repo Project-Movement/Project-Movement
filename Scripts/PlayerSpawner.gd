@@ -20,4 +20,5 @@ func set_spawn_position(point: Vector2):
 
 
 func _on_KillZone_body_entered(_body:Node):
-	respawn_player()
+	if _body.name == "PlayerBody":
+		respawn_player()
