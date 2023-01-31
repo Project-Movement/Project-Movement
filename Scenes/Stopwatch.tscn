@@ -20,5 +20,5 @@ margin_top = -3.2
 margin_right = 0.12793
 margin_bottom = 35.8
 custom_fonts/font = SubResource( 1 )
-text = "Time"
+text = "00:00.00"
 align = 2
