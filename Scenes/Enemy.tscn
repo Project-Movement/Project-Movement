@@ -1,25 +1,46 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Resources/icon.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Resources/sword.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Enemy_attack_zone.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 1.41421
+height = 4.24264
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 41.7461, 29.5832 )
+extents = Vector2( 36.5001, 24.9999 )
 
 [node name="Enemy" type="Area2D" groups=["Damageable"]]
 position = Vector2( -313, 597 )
 script = ExtResource( 2 )
 
+[node name="Enemy_attack_zone" type="Area2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_attack_zone"]
+position = Vector2( 285, -683 )
+rotation = -0.785398
+scale = Vector2( 5, 5 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Enemy_attack_zone"]
+position = Vector2( 298, -670 )
+rotation = 4.71239
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 3 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 350.5, -643.254 )
+position = Vector2( 349, -643.5 )
 rotation = 1.5708
 scale = Vector2( 1, 1.2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 348, -635 )
+position = Vector2( 350, -643 )
 scale = Vector2( 1, 1.2 )
 texture = ExtResource( 1 )
 
-[connection signal="body_shape_entered" from="." to="." method="_on_Enemy_body_shape_entered"]
-[connection signal="body_shape_exited" from="." to="." method="_on_Enemy_body_shape_exited"]
+[connection signal="body_shape_entered" from="Enemy_attack_zone" to="Enemy_attack_zone" method="_on_Enemy_attack_zone_body_shape_entered"]
+[connection signal="body_shape_exited" from="Enemy_attack_zone" to="Enemy_attack_zone" method="_on_Enemy_attack_zone_body_shape_exited"]

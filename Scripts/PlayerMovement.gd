@@ -13,7 +13,8 @@ export var dash_magnitude: int = 400
 export var walljump_speed = 350
 export var wall_friction = 300
 export var coyote_time_ms = 80
-export var health:int = 20
+var health:int = 20
+var dead: bool = false
 
 
 var constant_forces = { "gravity": Vector2(0, gravity) }
@@ -31,8 +32,9 @@ var plweapon = ("res://Scenes/Weapon.tscn")
 #		enemyInArea.damage_taken(5)
 
 func _physics_process(delta):
-	player_move(delta)
-	last_tick_vel = move_and_slide(velocity, Vector2.UP)
+	if dead == false:
+		player_move(delta)
+		last_tick_vel = move_and_slide(velocity, Vector2.UP)
 
 func _input(event):
 	# some abilities activations can probably go here later
@@ -138,10 +140,11 @@ func apply_constant_forces(delta):
 		velocity += val * delta
 
 func damage_taken(amount:int):
-	health-=amount
-	print(health)
+	if(health > 0):
+		health-=amount
+		print(health)
 	if health <= 0:
-		queue_free()
+		dead = true
 		print("Skill issue, can't relate.")
 
 
