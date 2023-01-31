@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Ground.tscn" type="PackedScene" id=2]
@@ -7,11 +7,15 @@
 [ext_resource path="res://Scripts/PlayerSpawner.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Stopwatch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Resources/white.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Checkpoint.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 80, 56 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 93 )
 
 [node name="TestLevel" type="Node2D"]
 
@@ -125,8 +129,26 @@ position = Vector2( 9.72748e-05, -1.90735e-06 )
 scale = Vector2( 160, 112 )
 texture = ExtResource( 7 )
 
+[node name="Checkpoint" type="Area2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+position = Vector2( -88, -1179 )
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Checkpoint/CollisionShape2D"]
+modulate = Color( 0.909804, 0.964706, 0.239216, 0.458824 )
+show_behind_parent = true
+position = Vector2( -0.500008, -0.999978 )
+scale = Vector2( 17, 184 )
+texture = ExtResource( 7 )
+
+[node name="SpawnPos" type="Position2D" parent="Checkpoint"]
+position = Vector2( -88, -1120 )
+
 [connection signal="body_entered" from="KillZone" to="PlayerSpawner" method="_on_KillZone_body_entered"]
 [connection signal="body_entered" from="KillZone2" to="PlayerSpawner" method="_on_KillZone_body_entered"]
 [connection signal="body_entered" from="StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
 [connection signal="body_entered" from="EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
+[connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="_on_Checkpoint_body_entered"]
