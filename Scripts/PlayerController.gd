@@ -33,8 +33,10 @@ var velocity = Vector2()
 
 var last_tick_vel = Vector2()  # save what the engine thinks should be the new velocity after moving and sliding
 var last_time_on_floor = 0
+var was_in_air = false
 
-var has_jumped_in_bhop_interval = false
+var bhop_interval_open = false
+var wjump_interval_open = false
 
 const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 
@@ -42,6 +44,8 @@ const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 func _ready():
 	$JumpTimer.wait_time = bhop_interval
 	$JumpTimer.one_shot = true
+	$WallTimer.wait_time = bhop_interval
+	$WallTimer.one_shot = true
 
 
 func _physics_process(delta):
@@ -59,6 +63,17 @@ func player_move(delta):
 	var time = Time.get_ticks_msec()
 	if grounded:
 		last_time_on_floor = time
+	
+	if was_in_air and grounded:
+		bhop_interval_open = true
+		$JumpTimer.start()
+		print("bhop open")
+	if was_in_air and is_on_wall():
+		wjump_interval_open = true
+		$WallTimer.start()
+		print("wjump open")
+		
+	was_in_air = false if is_on_wall() or grounded else true
 
 	# if we don't bounce, accept the engine's default move and slide velocity change
 	# (like if we ran up against a wall we get stopped)
@@ -77,12 +92,7 @@ func player_move(delta):
 			var wall_collider = get_last_slide_collision()
 			velocity.x = walljump_speed if wall_collider.normal.x > 0 else -walljump_speed
 
-		else:
-			# if we didn't jump from the ground, record that we pressed jump
-			has_jumped_in_bhop_interval = true
-			$JumpTimer.start()
-
-	if Input.is_action_just_pressed("airjump") and not grounded:  # try airjump if in air
+	if  Input.is_action_just_pressed("jump") and not (grounded or is_on_wall()):  # try airjump if in air
 		$AbilitySystem.use_ability("airjump")
 
 
@@ -128,10 +138,7 @@ func do_any_bounce() -> bool:
 	var has_bounced = false
 	# handle bouncing off walls, jump up, perfect reflection of x vel
 	if is_on_wall():
-		if Input.is_action_pressed("jump") and abs(velocity.x) > walljump_speed:
-			velocity.x = -velocity.x
-			has_bounced = true
-		elif has_jumped_in_bhop_interval:
+		if wjump_interval_open and Input.is_action_just_pressed("jump"):
 			print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
 			# if they time the jump, player goes up instead of just reflecting
 			# and keep some horizontal velocity but not all of it, so like
@@ -148,15 +155,15 @@ func do_any_bounce() -> bool:
 	# bouncing off ground, bhopping, perfect preservation of x vel
 	# if the player presses jump within the interval in time, they get bonus velocity as well
 	if is_on_floor():
-		if Input.is_action_pressed("jump"):
+		if Input.is_action_just_pressed("jump"):
 			velocity.y = -jump_vel
 			has_bounced = true
-		if has_jumped_in_bhop_interval:
-			velocity.y = -jump_vel
-			if velocity.x < 0:
-				velocity.x -= bhop_bonus
-			elif velocity.x > 0:
-				velocity.x += bhop_bonus
+			if bhop_interval_open:
+				print("bhop!")
+				if velocity.x < 0:
+					velocity.x -= bhop_bonus
+				elif velocity.x > 0:
+					velocity.x += bhop_bonus
 
 			has_bounced = true
 	return has_bounced
@@ -192,7 +199,11 @@ func reset_state():
 	last_tick_vel = Vector2.ZERO
 	$AbilitySystem.reset_state()
 
-
 func _on_JumpTimer_timeout():
-	has_jumped_in_bhop_interval = false
+	bhop_interval_open = false
+	print("bhop closed")
+
+func _on_WallTimer_timeout():
+	wjump_interval_open = false
+	print("wjump closed")
 

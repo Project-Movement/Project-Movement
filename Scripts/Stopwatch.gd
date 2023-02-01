@@ -7,9 +7,9 @@ func _process(delta):
 	if active:
 		time += delta
 
-	var minutes = round(time / 60)
+	var minutes = floor(time / 60)
 
-	$Time.text = "%02d:%05.2f" % [minutes, time]
+	$Time.text = "%02d:%05.2f" % [minutes, fmod(time, 60.0)]
 
 
 func reset():
