@@ -33,6 +33,7 @@ var velocity = Vector2()
 var last_tick_vel = Vector2()  # save what the engine thinks should be the new velocity after moving and sliding
 var last_time_on_floor = 0
 var was_in_air = false
+var last_recorded_max_x = []
 
 var bhop_interval_open = false
 var whop_interval_open = false
@@ -45,6 +46,7 @@ func _ready():
 	$JumpTimer.one_shot = true
 	$WallTimer.wait_time = whop_interval
 	$WallTimer.one_shot = true
+	last_recorded_max_x.resize(30)
 
 
 func _physics_process(delta):
@@ -60,6 +62,10 @@ func _input(event):
 func player_move(delta):
 	var grounded = is_on_floor()
 	var time = Time.get_ticks_msec()
+
+	last_recorded_max_x.pop_back()
+	last_recorded_max_x.push_front(velocity.x)
+
 	if grounded:
 		last_time_on_floor = time
 	
@@ -85,7 +91,7 @@ func player_move(delta):
 		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
 			velocity.y = -jump_vel
 
-		elif is_on_wall():  # walljump
+		elif is_on_wall() and not bounced:  # walljump
 			velocity.y = -jump_vel
 			var wall_collider = get_last_slide_collision()
 			velocity.x = walljump_speed if wall_collider.normal.x > 0 else -walljump_speed
@@ -122,10 +128,13 @@ func do_any_bounce() -> bool:
 			# and keep some horizontal velocity but not all of it, so like
 			# a more powerful walljump
 			velocity.y = -jump_vel
+			var prev_vel = last_recorded_max_x.max() if last_recorded_max_x.back() > 0 else last_recorded_max_x.min()
+			print (str(prev_vel))
+			print (str(velocity.x))
 			if velocity.x > 0:
-				velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
+				velocity.x = -prev_vel * wallhop_bonus_factor - walljump_speed
 			elif velocity.x < 0:
-				velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
+				velocity.x = -prev_vel * wallhop_bonus_factor + walljump_speed
 
 			has_bounced = true
 
