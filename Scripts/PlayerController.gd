@@ -2,23 +2,22 @@ extends KinematicBody2D
 
 # yea, this is definitely a real mess right now
 # basic player movement kinematics
-export var h_accel_ground = 2200  # player's horizontal acceleration
-export var h_accel_air = 200
-export var max_h_air_influence_speed = 100
-export var ground_friction = 1100  # friction of ground
-export var exceeding_ground_friction = 3000 # friction of ground when exceeding the max speed
+export var h_accel_ground = 0.1  # horizontal ground acceleration, in lerp weight
+export var h_accel_air = 200  #  horizontal air accelration
+export var max_h_air_influence_speed = 350  # maximum speed in air
 export var max_grounded_speed = 300  # maximum speed on ground
 export var gravity = 750  # gravitational acceleration
 export var jump_vel = 400  # instantaneous velocity on jump
+export var ground_friction = 0.5  # wall friction, in lerp weight
 export var wall_friction = 300  # wall friction
 export var coyote_time_ms = 80  # coyote time, where player can jump despite not being grounded if they were just grounded
 
 # bhopping and walljumping
-export var walljump_speed = 350  # x speed after walljump
+export var walljump_speed = 350  # x speed after wall hop
 export var bhop_bonus = 100
 export var wallhop_bonus_factor = 0.4
 export var bhop_interval = 0.1  # interval to be able to do a bhop, in seconds
-
+export var whop_interval = 0.1  # interval to be able to do a whop, in seconds
 
 # abilities
 export var dash_magnitude: int = 400  # how much the dash moves
@@ -36,7 +35,7 @@ var last_time_on_floor = 0
 var was_in_air = false
 
 var bhop_interval_open = false
-var wjump_interval_open = false
+var whop_interval_open = false
 
 const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 
@@ -44,7 +43,7 @@ const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 func _ready():
 	$JumpTimer.wait_time = bhop_interval
 	$JumpTimer.one_shot = true
-	$WallTimer.wait_time = bhop_interval
+	$WallTimer.wait_time = whop_interval
 	$WallTimer.one_shot = true
 
 
@@ -69,7 +68,7 @@ func player_move(delta):
 		$JumpTimer.start()
 		print("bhop open")
 	if was_in_air and is_on_wall():
-		wjump_interval_open = true
+		whop_interval_open = true
 		$WallTimer.start()
 		print("wjump open")
 		
@@ -82,8 +81,7 @@ func player_move(delta):
 		velocity = last_tick_vel
 
 	# handle jump and double jump (midair jump)
-	if Input.is_action_just_pressed("jump"):
-
+	if Input.is_action_pressed("jump"):
 		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
 			velocity.y = -jump_vel
 
@@ -95,35 +93,16 @@ func player_move(delta):
 	if  Input.is_action_just_pressed("jump") and not (grounded or is_on_wall()):  # try airjump if in air
 		$AbilitySystem.use_ability("airjump")
 
-
-	# grounded character movement
-	if grounded and not bounced:
-		if Input.is_action_pressed("right"):
-			velocity.x += h_accel_ground * delta
-			velocity.x = min(velocity.x, 300)
-		if Input.is_action_pressed("left"):
-			velocity.x -= h_accel_ground * delta
-			velocity.x = max(velocity.x, -300)
-
-	else:  # not grounded, in air
-		if Input.is_action_pressed("right") and velocity.x < max_h_air_influence_speed:
-			velocity.x += h_accel_air * delta
-		if Input.is_action_pressed("left") and velocity.x > -max_h_air_influence_speed:
-			velocity.x -= h_accel_air * delta
-
-		# elif Input.is_action_pressed("down"):  # can't do both up and down
-		# 	# this one only works when falling
-		# 	if velocity.y > 0:
-		# 		var y_speed_lost = glider_y_rate * velocity.y * delta
-		# 		velocity.y -= y_speed_lost
-		# 		if velocity.x > 0:
-		# 			velocity.x += y_speed_lost * glider_y_conversion_efficiency
-		# 		elif velocity.x < 0:
-		# 			velocity.x -= y_speed_lost * glider_y_conversion_efficiency
-		# 		# TODO: how to handle when player is falling straight down?
-		# 		# 		i assume that for animation/sprite purposes we may eventually
-		# 		#		have to store the last direction the player character was
-		# 		#		facing when they stopped moving, so it could be used here?
+	var dir = Input.get_axis("left", "right")
+	if dir != 0:
+		if grounded:
+			velocity.x = lerp(velocity.x, dir * max_grounded_speed, 0.1)
+		else:  # not grounded, in air
+			if abs(velocity.x) < max_h_air_influence_speed:
+				velocity.x += h_accel_air * dir * delta
+	else:  # dir == 0
+		if grounded:
+			velocity.x = lerp(velocity.x, 0.0, 0.5)
 
 	# dash
 	if Input.is_action_just_pressed("dash"):
@@ -131,14 +110,13 @@ func player_move(delta):
 
 	# do other movement kinematics calculations
 	apply_constant_forces(delta)  # like gravity
-	apply_frictions(delta, bounced)  # and friction
 
 
 func do_any_bounce() -> bool:
 	var has_bounced = false
 	# handle bouncing off walls, jump up, perfect reflection of x vel
 	if is_on_wall():
-		if wjump_interval_open and Input.is_action_just_pressed("jump"):
+		if whop_interval_open and Input.is_action_just_pressed("jump"):
 			print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
 			# if they time the jump, player goes up instead of just reflecting
 			# and keep some horizontal velocity but not all of it, so like
@@ -168,30 +146,12 @@ func do_any_bounce() -> bool:
 			has_bounced = true
 	return has_bounced
 
-
-func apply_frictions(delta, bounced):
-	if is_on_floor() and not bounced:  # don't slow down if bounced (bhopped)
-		# apply grounded friction - force opposite direction of motion
-		var friction
-		if abs(velocity.x) < max_grounded_speed:
-			friction = ground_friction
-		elif abs(velocity.x) > max_grounded_speed:
-			friction = exceeding_ground_friction
-		else:
-			friction = 0 if Input.is_action_pressed("left") or Input.is_action_pressed("right") else ground_friction
-
-		if velocity.x > 0:
-			velocity.x = max(0, velocity.x + -friction * delta)
-		if velocity.x < 0:
-			velocity.x = min(0, velocity.x + friction * delta)
-
-	elif is_on_wall() and velocity.y > 0:
-		# wall sliding, slow down player if falling down wall
-		velocity.y -= wall_friction * delta
-
 func apply_constant_forces(delta):
 	for val in constant_forces.values():
 		velocity += val * delta
+	if is_on_wall() and velocity.y > 0:
+		# wall sliding, slow down player if falling down wall
+		velocity.y -= wall_friction * delta
 
 
 func reset_state():
@@ -204,6 +164,6 @@ func _on_JumpTimer_timeout():
 	print("bhop closed")
 
 func _on_WallTimer_timeout():
-	wjump_interval_open = false
+	whop_interval_open = false
 	print("wjump closed")
 
