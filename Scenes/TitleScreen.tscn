@@ -44,7 +44,7 @@ margin_top = 128.0
 margin_right = 576.0
 margin_bottom = 168.0
 rect_min_size = Vector2( 200, 40 )
-text = "Level 1"
+text = "Chaos Level"
 
 [node name="TestLevel" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 172.0

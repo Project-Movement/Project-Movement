@@ -1,12 +1,103 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/KillZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/EndZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/StartZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/PlayerSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Stopwatch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/PlayerSpawner.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Checkpoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scripts/Checkpoint.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/Checkpoint.gd" type="Script" id=11]
 
 [node name="TestScene" type="Node2D"]
 
+[node name="Stopwatch" parent="." instance=ExtResource( 7 )]
+
+[node name="PlayerSpawner" parent="." instance=ExtResource( 6 )]
+script = ExtResource( 8 )
+spawn_position = Vector2( 120, 464 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 258, 187 )
+position = Vector2( 120, 472 )
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="KillZone" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( -1312, 1432 )
+scale = Vector2( 136.286, 4.01769 )
+
+[node name="EndZone" parent="Zones" instance=ExtResource( 4 )]
+position = Vector2( 4328, -2352 )
+scale = Vector2( 3.84623, 2.61985 )
+
+[node name="StartZone" parent="Zones" instance=ExtResource( 5 )]
+position = Vector2( 120, 480 )
+scale = Vector2( 9.87788, 6.2459 )
+
+[node name="Checkpoint" parent="Zones" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 120, 456 )
+scale = Vector2( 12.2686, 0.590302 )
+script = ExtResource( 11 )
+
+[node name="KillZone2" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3552, 408 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone3" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3264, 88 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone4" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3568, -632 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone8" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( -3160, -1504 )
+scale = Vector2( 13.2073, 1.09478 )
+
+[node name="KillZone9" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( -4248, -648 )
+scale = Vector2( 13.2073, 1.09478 )
+
+[node name="KillZone5" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3280, -1048 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone6" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3584, -1568 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone7" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3272, -2072 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="Checkpoint2" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( -48, -1176 )
+script = ExtResource( 10 )
+
+[node name="Checkpoint3" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( 104, 1296 )
+script = ExtResource( 10 )
+
+[node name="Checkpoint4" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( -2824, 1280 )
+script = ExtResource( 10 )
+
+[node name="Checkpoint5" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( 3008, 864 )
+script = ExtResource( 10 )
+
+[node name="Checkpoint6" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( 3776, -312 )
+script = ExtResource( 10 )
+
+[node name="Checkpoint7" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( 1960, 112 )
+script = ExtResource( 10 )
 
 [node name="Stage" type="Node2D" parent="."]
 
@@ -40,15 +131,27 @@ rotation = -1.57079
 scale = Vector2( 120, 2.36 )
 
 [node name="Ground4" parent="Stage" instance=ExtResource( 2 )]
-position = Vector2( 904, 296 )
+position = Vector2( 904, 344 )
 scale = Vector2( 14.7697, 2.21431 )
 
 [node name="Ground5" parent="Stage" instance=ExtResource( 2 )]
-position = Vector2( 904, 128 )
+position = Vector2( 2536, -32 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground52" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2152, -168 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground51" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2928, 96 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground50" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1328, 288 )
 scale = Vector2( 14.7697, 2.21431 )
 
 [node name="Ground11" parent="Stage" instance=ExtResource( 2 )]
-position = Vector2( 2336, 432 )
+position = Vector2( 2344, 416 )
 scale = Vector2( 14.7697, 2.21431 )
 
 [node name="Ground12" parent="Stage" instance=ExtResource( 2 )]
@@ -139,16 +242,16 @@ position = Vector2( -608, -2448 )
 scale = Vector2( 380, 2.214 )
 
 [node name="Ground21" parent="Stage" instance=ExtResource( 2 )]
-position = Vector2( -4052, -1591 )
-scale = Vector2( 30, 2.214 )
+position = Vector2( -4072, -1600 )
+scale = Vector2( 31.08, 2.214 )
 
 [node name="Ground23" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( -4108, 66 )
-scale = Vector2( 25, 2.214 )
+scale = Vector2( 26.44, 2.214 )
 
 [node name="Ground24" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( -3293, 61 )
-scale = Vector2( 25, 2.214 )
+scale = Vector2( 25.76, 2.214 )
 
 [node name="Ground40" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 3066, 961 )
@@ -217,3 +320,22 @@ scale = Vector2( 20, 2.214 )
 [node name="Ground32" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( -2801, -391 )
 scale = Vector2( 20, 2.214 )
+
+[connection signal="body_entered" from="Zones/KillZone" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
+[connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
+[connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
+[connection signal="body_entered" from="Zones/KillZone2" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/KillZone3" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/KillZone4" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/KillZone8" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/KillZone9" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/KillZone5" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/KillZone6" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/KillZone7" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/Checkpoint2" to="Zones/Checkpoint2" method="_on_Checkpoint_body_entered"]
+[connection signal="body_entered" from="Zones/Checkpoint3" to="Zones/Checkpoint3" method="_on_Checkpoint_body_entered"]
+[connection signal="body_entered" from="Zones/Checkpoint4" to="Zones/Checkpoint4" method="_on_Checkpoint_body_entered"]
+[connection signal="body_entered" from="Zones/Checkpoint5" to="Zones/Checkpoint5" method="_on_Checkpoint_body_entered"]
+[connection signal="body_entered" from="Zones/Checkpoint6" to="Zones/Checkpoint6" method="_on_Checkpoint_body_entered"]
+[connection signal="body_entered" from="Zones/Checkpoint7" to="Zones/Checkpoint7" method="_on_Checkpoint_body_entered"]
