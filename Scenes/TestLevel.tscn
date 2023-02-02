@@ -104,7 +104,13 @@ scale = Vector2( 3.23217, -3.2639 )
 position = Vector2( 472, 376 )
 
 [node name="Checkpoint" parent="Zones" instance=ExtResource( 9 )]
-position = Vector2( -64, -1184 )
+position = Vector2( -57.0442, -1183.6 )
+script = ExtResource( 10 )
+
+[node name="Checkpoint2" parent="Zones" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 472, 368 )
+scale = Vector2( 10.12, 0.4 )
 script = ExtResource( 10 )
 
 [node name="EndZone" parent="Zones" instance=ExtResource( 8 )]
@@ -115,4 +121,5 @@ position = Vector2( 3032, -880 )
 [connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
 [connection signal="body_entered" from="Zones/Checkpoint" to="Zones/Checkpoint" method="_on_Checkpoint_body_entered"]
+[connection signal="body_entered" from="Zones/Checkpoint2" to="Zones/Checkpoint2" method="_on_Checkpoint_body_entered"]
 [connection signal="body_entered" from="Zones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]

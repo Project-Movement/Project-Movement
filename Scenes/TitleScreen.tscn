@@ -60,7 +60,17 @@ margin_bottom = 256.0
 rect_min_size = Vector2( 0, 40 )
 text = "Quit"
 
+[node name="DevSettings" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 8.0
+margin_top = 544.0
+margin_right = 128.0
+margin_bottom = 592.0
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Tutorial" to="." method="go_tutorial"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Level1" to="." method="go_level1"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/TestLevel" to="." method="go_testlevel"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="quit"]
+[connection signal="button_down" from="DevSettings" to="." method="_on_DevSettings_button_down"]
+[connection signal="pressed" from="DevSettings" to="." method="_on_DevSettings_pressed"]
+[connection signal="toggled" from="DevSettings" to="." method="_on_DevSettings_toggled"]

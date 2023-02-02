@@ -41,6 +41,12 @@ scale = Vector2( 1, 1.64 )
 position = Vector2( 2696, 200 )
 script = ExtResource( 11 )
 
+[node name="Checkpoint2" parent="SpecialZones" instance=ExtResource( 10 )]
+visible = false
+position = Vector2( 168, 512 )
+scale = Vector2( 9.96, 1 )
+script = ExtResource( 11 )
+
 [node name="LevelText" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -221,6 +227,7 @@ scale = Vector2( 0.56, 14.04 )
 [connection signal="body_exited" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
 [connection signal="body_entered" from="SpecialZones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
 [connection signal="body_entered" from="SpecialZones/Checkpoint" to="SpecialZones/Checkpoint" method="_on_Checkpoint_body_entered"]
+[connection signal="body_entered" from="SpecialZones/Checkpoint2" to="SpecialZones/Checkpoint2" method="_on_Checkpoint_body_entered"]
 [connection signal="body_entered" from="Level/KillZone" to="PlayerSpawner" method="_on_KillZone_body_entered"]
 [connection signal="body_entered" from="Level/KillZone2" to="PlayerSpawner" method="_on_KillZone_body_entered"]
 [connection signal="body_entered" from="Level/KillZone3" to="PlayerSpawner" method="_on_KillZone_body_entered"]

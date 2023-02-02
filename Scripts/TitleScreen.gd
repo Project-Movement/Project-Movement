@@ -16,3 +16,8 @@ func go_testlevel():
 
 func quit():
 	get_tree().quit()
+
+
+func _on_DevSettings_pressed():
+
+	var _a = get_tree().change_scene("res://Scenes/DevSettings.tscn")
