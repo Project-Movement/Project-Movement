@@ -86,30 +86,33 @@ scale = Vector2( 26.3422, 16.5692 )
 position = Vector2( 472, 464 )
 scale = Vector2( 11.4521, 5.95382 )
 
-[node name="KillZone" parent="." instance=ExtResource( 3 )]
+[node name="KillZone" parent="Stage" instance=ExtResource( 3 )]
 position = Vector2( 904, 496 )
-scale = Vector2( -17.029, -0.827618 )
+rotation = 3.14159
+scale = Vector2( 17.029, 0.827618 )
 
-[node name="KillZone2" parent="." instance=ExtResource( 3 )]
+[node name="KillZone2" parent="Stage" instance=ExtResource( 3 )]
 position = Vector2( 1648, 472 )
 rotation = 1.57079
 scale = Vector2( 3.23217, -3.2639 )
 
 [node name="Stopwatch" parent="." instance=ExtResource( 6 )]
 
-[node name="StartZone" parent="." instance=ExtResource( 7 )]
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="StartZone" parent="Zones" instance=ExtResource( 7 )]
 position = Vector2( 472, 376 )
 
-[node name="EndZone" parent="." instance=ExtResource( 8 )]
-position = Vector2( 3032, -880 )
-
-[node name="Checkpoint" parent="." instance=ExtResource( 9 )]
+[node name="Checkpoint" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( -64, -1184 )
 script = ExtResource( 10 )
 
-[connection signal="body_entered" from="KillZone" to="PlayerSpawner" method="_on_KillZone_body_entered"]
-[connection signal="body_entered" from="KillZone2" to="PlayerSpawner" method="_on_KillZone_body_entered"]
-[connection signal="body_entered" from="StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
-[connection signal="body_exited" from="StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
-[connection signal="body_entered" from="EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
-[connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="_on_Checkpoint_body_entered"]
+[node name="EndZone" parent="Zones" instance=ExtResource( 8 )]
+position = Vector2( 3032, -880 )
+
+[connection signal="body_entered" from="Stage/KillZone" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Stage/KillZone2" to="PlayerSpawner" method="_on_KillZone_body_entered"]
+[connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
+[connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
+[connection signal="body_entered" from="Zones/Checkpoint" to="Zones/Checkpoint" method="_on_Checkpoint_body_entered"]
+[connection signal="body_entered" from="Zones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]

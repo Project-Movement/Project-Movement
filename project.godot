@@ -14,6 +14,10 @@ config/name="ProjectMovement"
 run/main_scene="res://Scenes/TitleScreen.tscn"
 config/icon="res://icon.png"
 
+[gdnative]
+
+singletons=[  ]
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
