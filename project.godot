@@ -89,6 +89,10 @@ return_title={
 
 project/assembly_name="ProjectMovement"
 
+[mono]
+
+project/assembly_name="ProjectMovement"
+
 [physics]
 
 common/enable_pause_aware_picking=true
