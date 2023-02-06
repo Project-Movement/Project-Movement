@@ -1,8 +1,8 @@
 extends Node2D
 
 
-export var max_dashes = 1
-export var max_airjumps = 1
+var max_dashes: int = Globals.max_dashes
+var max_airjumps: int = Globals.max_airjumps
 
 var ability_timers = {}
 var ability_uses = {}
@@ -16,8 +16,8 @@ func _ready():
 	# ability_timers[ABILITIES.AIRJUMP] =
 	# ability_timers[ABILITIES.GRAPPLEHOOK] =
 
-	ability_uses["airjump"] = 1
-	ability_uses["dash"] = 1
+	ability_uses["airjump"] = max_airjumps
+	ability_uses["dash"] = max_dashes
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,8 +28,8 @@ func _physics_process(_delta):
 
 
 func reset_state():
-	ability_uses["airjump"] = 1
-	ability_uses["dash"] = 1
+	ability_uses["airjump"] = max_airjumps
+	ability_uses["dash"] = max_dashes
 	$DashTimer.stop()
 	# $DashTimer.time_left = 0
 

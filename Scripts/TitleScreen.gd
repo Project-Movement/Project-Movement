@@ -7,7 +7,7 @@ func go_tutorial():
 
 
 func go_level1():
-	var _a = get_tree().change_scene("res://Scenes/FirstLevel.tscn")
+	var _a = get_tree().change_scene("res://Scenes/ChaosLevel.tscn")
 
 
 func go_testlevel():
@@ -16,3 +16,8 @@ func go_testlevel():
 
 func quit():
 	get_tree().quit()
+
+
+func _on_DevSettings_pressed():
+
+	var _a = get_tree().change_scene("res://Scenes/DevSettings.tscn")

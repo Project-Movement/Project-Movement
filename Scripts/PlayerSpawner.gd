@@ -16,6 +16,7 @@ func respawn_player():
 
 
 func set_spawn_position(point: Vector2):
+	print("set spawn")
 	spawn_position = point
 
 

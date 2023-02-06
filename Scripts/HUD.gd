@@ -10,7 +10,7 @@ func _process(_delta):
 	var vel = player_body.velocity
 
 	xlabel.text = "X Speed: %.f" % abs(vel.x)
-	ylabel.text = "Y Speed: %.f" % abs(vel.y)
+	ylabel.text = "Y Speed: %.f" % (0.0 if player_body.is_on_floor() else abs(vel.y))
 
 	$Dash.text = "Dash: yes" if abilities.is_ability_available("dash") else "Dash: no"
 	$Airjump.text = "Airjump: yes" if abilities.is_ability_available("airjump") else "Airjump: no"
