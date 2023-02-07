@@ -40,6 +40,8 @@ const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 
 
 func _ready():
+	PlayerSpawner.player_body = self  # register self with PlayerSpawner
+
 	$JumpTimer.wait_time = bhop_interval
 	$JumpTimer.one_shot = true
 

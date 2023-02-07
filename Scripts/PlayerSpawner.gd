@@ -1,8 +1,8 @@
-extends Node2D
+extends Node
 
 export var spawn_position = Vector2()
 
-onready var player_body = $"../Player/PlayerBody"
+var player_body
 
 
 func _input(event):
@@ -18,8 +18,3 @@ func respawn_player():
 func set_spawn_position(point: Vector2):
 	print("set spawn")
 	spawn_position = point
-
-
-func _on_KillZone_body_entered(_body:Node):
-	if _body.name == "PlayerBody":
-		respawn_player()
