@@ -146,7 +146,7 @@ text = "STICK TO WALL AND
 JUMP TO WALLJUMP"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 6976, 528 )
+position = Vector2( 168, 560 )
 
 [node name="Level" type="Node2D" parent="."]
 
