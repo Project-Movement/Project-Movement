@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/white.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="StartZone" type="Area2D"]
+scale = Vector2( 8.48002, 3.64 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3.8147e-06, -2.1978 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+modulate = Color( 0.321569, 1, 0.490196, 0.423529 )
+position = Vector2( -3.8147e-06, 0 )
+scale = Vector2( 20.7547, 20.4341 )
+texture = ExtResource( 1 )

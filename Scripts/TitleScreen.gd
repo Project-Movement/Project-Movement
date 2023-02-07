@@ -1,9 +1,23 @@
 extends Node2D
 
-onready var scene = preload("res://Scenes/PlayerTest.tscn")
 
-func _on_Button_pressed():
-	var instance = scene.instance()
-	get_parent().add_child(instance)
-	queue_free()
 
+func go_tutorial():
+	var _a = get_tree().change_scene("res://Scenes/TutorialLevel.tscn")
+
+
+func go_level1():
+	var _a = get_tree().change_scene("res://Scenes/ChaosLevel.tscn")
+
+
+func go_testlevel():
+	var _a = get_tree().change_scene("res://Scenes/TestLevel.tscn")
+
+
+func quit():
+	get_tree().quit()
+
+
+func _on_DevSettings_pressed():
+
+	var _a = get_tree().change_scene("res://Scenes/DevSettings.tscn")
