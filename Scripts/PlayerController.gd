@@ -18,6 +18,7 @@ export var walljump_speed = 350  # x speed after walljump
 export var bhop_bonus = 100
 export var wallhop_bonus_factor = 0.4
 export var bhop_interval = 0.1  # interval to be able to do a bhop, in seconds
+export var wallslide_leniency_time = 0.2
 
 
 # abilities
@@ -35,6 +36,8 @@ var last_tick_vel = Vector2()  # save what the engine thinks should be the new v
 var last_time_on_floor = 0
 
 var has_jumped_in_bhop_interval = false
+var player_is_wallsliding = false  # set to true when player touches a wall, set to false after an interval after player is no longer touching wall
+var last_collider_normal_x = 0
 
 const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 
@@ -44,6 +47,9 @@ func _ready():
 
 	$JumpTimer.wait_time = bhop_interval
 	$JumpTimer.one_shot = true
+
+	$WallJumpLeniencyTimer.wait_time = wallslide_leniency_time
+	$WallJumpLeniencyTimer.one_shot = true
 
 
 func _physics_process(delta):
@@ -57,6 +63,19 @@ func _input(event):
 
 
 func player_move(delta):
+	# check if player is on wall or was just on wall
+	# if player_is_wallsliding and not is_on_wall():
+	# 	$WallJumpLeniencyTimer.start()
+	# else:
+	# 	player_is_wallsliding = is_on_wall()
+
+	if is_on_wall():
+		player_is_wallsliding = true
+		last_collider_normal_x = get_last_slide_collision().normal.x
+		$WallJumpLeniencyTimer.stop()
+	elif player_is_wallsliding and not is_on_wall() and $WallJumpLeniencyTimer.is_stopped():
+		$WallJumpLeniencyTimer.start()
+
 	var grounded = is_on_floor()
 	var time = Time.get_ticks_msec()
 	if grounded:
@@ -74,10 +93,10 @@ func player_move(delta):
 		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
 			velocity.y = -jump_vel
 
-		elif is_on_wall():  # walljump
+		elif player_is_wallsliding:  # walljump
+			print("walljump" + str(Time.get_ticks_msec()))
 			velocity.y = -jump_vel
-			var wall_collider = get_last_slide_collision()
-			velocity.x = walljump_speed if wall_collider.normal.x > 0 else -walljump_speed
+			velocity.x = walljump_speed if last_collider_normal_x > 0 else -walljump_speed
 
 		else:
 			# if we didn't jump from the ground, record that we pressed jump
@@ -129,22 +148,22 @@ func player_move(delta):
 func do_any_bounce() -> bool:
 	var has_bounced = false
 	# handle bouncing off walls, jump up, perfect reflection of x vel
-	if is_on_wall():
-		if Input.is_action_pressed("jump") and abs(velocity.x) > walljump_speed:
-			velocity.x = -velocity.x
-			has_bounced = true
-		elif has_jumped_in_bhop_interval:
-			print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
-			# if they time the jump, player goes up instead of just reflecting
-			# and keep some horizontal velocity but not all of it, so like
-			# a more powerful walljump
-			velocity.y = -jump_vel
-			if velocity.x > 0:
-				velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
-			elif velocity.x < 0:
-				velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
+	# if player_is_wallsliding:
+	# 	if Input.is_action_pressed("jump") and abs(velocity.x) > walljump_speed:
+	# 		velocity.x = -velocity.x
+	# 		has_bounced = true
+	# 	elif has_jumped_in_bhop_interval:
+	# 		print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
+	# 		# if they time the jump, player goes up instead of just reflecting
+	# 		# and keep some horizontal velocity but not all of it, so like
+	# 		# a more powerful walljump
+	# 		velocity.y = -jump_vel
+	# 		if velocity.x > 0:
+	# 			velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
+	# 		elif velocity.x < 0:
+	# 			velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
 
-			has_bounced = true
+	# 		has_bounced = true
 
 
 	# bouncing off ground, bhopping, perfect preservation of x vel
@@ -180,7 +199,7 @@ func apply_frictions(delta, bounced):
 		if velocity.x < 0:
 			velocity.x = min(0, velocity.x + friction * delta)
 
-	elif is_on_wall() and velocity.y > 0:
+	elif player_is_wallsliding and velocity.y > 0:
 		# wall sliding, slow down player if falling down wall
 		velocity.y -= wall_friction * delta
 
@@ -198,3 +217,8 @@ func reset_state():
 func _on_JumpTimer_timeout():
 	has_jumped_in_bhop_interval = false
 
+
+
+func _on_WallJumpLeniencyTimer_timeout():
+	print("no longer on wall")
+	player_is_wallsliding = false

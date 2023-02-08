@@ -34,6 +34,9 @@ smoothing_speed = 8.0
 
 [node name="JumpTimer" type="Timer" parent="PlayerBody"]
 
+[node name="WallJumpLeniencyTimer" type="Timer" parent="PlayerBody"]
+
 [node name="AbilitySystem" parent="PlayerBody" instance=ExtResource( 5 )]
 
 [connection signal="timeout" from="PlayerBody/JumpTimer" to="PlayerBody" method="_on_JumpTimer_timeout"]
+[connection signal="timeout" from="PlayerBody/WallJumpLeniencyTimer" to="PlayerBody" method="_on_WallJumpLeniencyTimer_timeout"]
