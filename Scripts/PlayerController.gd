@@ -17,7 +17,7 @@ export var coyote_time_ms = 80  # coyote time, where player can jump despite not
 export var walljump_speed = 350  # x speed after walljump
 export var bhop_bonus = 100
 export var wallhop_bonus_factor = 0.4
-export var bhop_interval = 0.1  # interval to be able to do a bhop, in seconds
+export var jump_buffer_interval = 0.1  # interval to buffer jumps for, in seconds
 export var wallslide_leniency_time = 0.2
 
 
@@ -35,9 +35,11 @@ var velocity = Vector2()
 var last_tick_vel = Vector2()  # save what the engine thinks should be the new velocity after moving and sliding
 var last_time_on_floor = 0
 
-var has_jumped_in_bhop_interval = false
+var has_jumped_in_buffer_interval = false
 var player_is_wallsliding = false  # set to true when player touches a wall, set to false after an interval after player is no longer touching wall
 var last_collider_normal_x = 0
+
+var last_direction = 0
 
 const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 
@@ -45,7 +47,7 @@ const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 func _ready():
 	PlayerSpawner.player_body = self  # register self with PlayerSpawner
 
-	$JumpTimer.wait_time = bhop_interval
+	$JumpTimer.wait_time = jump_buffer_interval
 	$JumpTimer.one_shot = true
 
 	$WallJumpLeniencyTimer.wait_time = wallslide_leniency_time
@@ -63,17 +65,14 @@ func _input(event):
 
 
 func player_move(delta):
-	# check if player is on wall or was just on wall
-	# if player_is_wallsliding and not is_on_wall():
-	# 	$WallJumpLeniencyTimer.start()
-	# else:
-	# 	player_is_wallsliding = is_on_wall()
+	last_direction = Input.get_axis("left", "right")
 
-	if is_on_wall():
+	# check if player is on wall or was just on wall
+	if raycast_is_on_wall():
 		player_is_wallsliding = true
-		last_collider_normal_x = get_last_slide_collision().normal.x
+		last_collider_normal_x = -1 if $RightWallRay.is_colliding() else 1 if $LeftWallRay.is_colliding() else 0
 		$WallJumpLeniencyTimer.stop()
-	elif player_is_wallsliding and not is_on_wall() and $WallJumpLeniencyTimer.is_stopped():
+	elif player_is_wallsliding and not raycast_is_on_wall() and $WallJumpLeniencyTimer.is_stopped():
 		$WallJumpLeniencyTimer.start()
 
 	var grounded = is_on_floor()
@@ -89,19 +88,23 @@ func player_move(delta):
 
 	# handle jump and double jump (midair jump)
 	if Input.is_action_just_pressed("jump"):
+		has_jumped_in_buffer_interval = true
+		$JumpTimer.start()
 
+	# custom way of buffering jumps
+	if has_jumped_in_buffer_interval:
 		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
-			velocity.y = -jump_vel
+			if not bounced:
+				velocity.y = -jump_vel
+				has_jumped_in_buffer_interval = false
 
 		elif player_is_wallsliding:  # walljump
 			print("walljump" + str(Time.get_ticks_msec()))
 			velocity.y = -jump_vel
 			velocity.x = walljump_speed if last_collider_normal_x > 0 else -walljump_speed
+			player_is_wallsliding = false
+			has_jumped_in_buffer_interval = false
 
-		else:
-			# if we didn't jump from the ground, record that we pressed jump
-			has_jumped_in_bhop_interval = true
-			$JumpTimer.start()
 
 	if Input.is_action_just_pressed("airjump") and not grounded:  # try airjump if in air
 		$AbilitySystem.use_ability("airjump")
@@ -169,10 +172,10 @@ func do_any_bounce() -> bool:
 	# bouncing off ground, bhopping, perfect preservation of x vel
 	# if the player presses jump within the interval in time, they get bonus velocity as well
 	if is_on_floor():
-		if Input.is_action_pressed("jump"):
+		if Input.is_action_pressed("bounce"):
 			velocity.y = -jump_vel
 			has_bounced = true
-		if has_jumped_in_bhop_interval:
+		if has_jumped_in_buffer_interval:
 			velocity.y = -jump_vel
 			if velocity.x < 0:
 				velocity.x -= bhop_bonus
@@ -214,9 +217,13 @@ func reset_state():
 	$AbilitySystem.reset_state()
 
 
-func _on_JumpTimer_timeout():
-	has_jumped_in_bhop_interval = false
+# cast a ray to check if the player body is on a wall or not
+func raycast_is_on_wall():
+	return $LeftWallRay.is_colliding() or $RightWallRay.is_colliding()
 
+
+func _on_JumpTimer_timeout():
+	has_jumped_in_buffer_interval = false
 
 
 func _on_WallJumpLeniencyTimer_timeout():
