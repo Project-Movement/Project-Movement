@@ -1,24 +1,17 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/KillZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/EndZone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/StartZone.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/PlayerSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Stopwatch.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scripts/PlayerSpawner.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Checkpoint.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scripts/Checkpoint.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/Checkpoint.gd" type="Script" id=11]
 
 [node name="TestScene" type="Node2D"]
 
 [node name="Stopwatch" parent="." instance=ExtResource( 7 )]
-
-[node name="PlayerSpawner" parent="." instance=ExtResource( 6 )]
-script = ExtResource( 8 )
-spawn_position = Vector2( 120, 464 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 120, 472 )
@@ -77,27 +70,27 @@ scale = Vector2( 10.2873, 1.09478 )
 
 [node name="Checkpoint2" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( -48, -1176 )
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Checkpoint3" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( 104, 1296 )
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Checkpoint4" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( -2824, 1280 )
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Checkpoint5" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( 3008, 864 )
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Checkpoint6" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( 3776, -312 )
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Checkpoint7" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( 1960, 112 )
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Stage" type="Node2D" parent="."]
 
@@ -321,18 +314,9 @@ scale = Vector2( 20, 2.214 )
 position = Vector2( -2801, -391 )
 scale = Vector2( 20, 2.214 )
 
-[connection signal="body_entered" from="Zones/KillZone" to="PlayerSpawner" method="_on_KillZone_body_entered"]
 [connection signal="body_entered" from="Zones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
 [connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
-[connection signal="body_entered" from="Zones/KillZone2" to="PlayerSpawner" method="_on_KillZone_body_entered"]
-[connection signal="body_entered" from="Zones/KillZone3" to="PlayerSpawner" method="_on_KillZone_body_entered"]
-[connection signal="body_entered" from="Zones/KillZone4" to="PlayerSpawner" method="_on_KillZone_body_entered"]
-[connection signal="body_entered" from="Zones/KillZone8" to="PlayerSpawner" method="_on_KillZone_body_entered"]
-[connection signal="body_entered" from="Zones/KillZone9" to="PlayerSpawner" method="_on_KillZone_body_entered"]
-[connection signal="body_entered" from="Zones/KillZone5" to="PlayerSpawner" method="_on_KillZone_body_entered"]
-[connection signal="body_entered" from="Zones/KillZone6" to="PlayerSpawner" method="_on_KillZone_body_entered"]
-[connection signal="body_entered" from="Zones/KillZone7" to="PlayerSpawner" method="_on_KillZone_body_entered"]
 [connection signal="body_entered" from="Zones/Checkpoint2" to="Zones/Checkpoint2" method="_on_Checkpoint_body_entered"]
 [connection signal="body_entered" from="Zones/Checkpoint3" to="Zones/Checkpoint3" method="_on_Checkpoint_body_entered"]
 [connection signal="body_entered" from="Zones/Checkpoint4" to="Zones/Checkpoint4" method="_on_Checkpoint_body_entered"]
