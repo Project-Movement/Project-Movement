@@ -11,6 +11,7 @@ export var max_grounded_speed = 300  # maximum speed on ground
 export var gravity = 750  # gravitational acceleration
 export var jump_vel = 400  # instantaneous velocity on jump
 export var wall_friction = 300  # wall friction
+export var max_wallslide_fallingspeed = 400
 export var coyote_time_ms = 80  # coyote time, where player can jump despite not being grounded if they were just grounded
 
 # bhopping and walljumping
@@ -205,6 +206,8 @@ func apply_frictions(delta, bounced):
 	elif player_is_wallsliding and velocity.y > 0:
 		# wall sliding, slow down player if falling down wall
 		velocity.y -= wall_friction * delta
+		velocity.y = min(velocity.y, max_wallslide_fallingspeed)
+
 
 func apply_constant_forces(delta):
 	for val in constant_forces.values():
