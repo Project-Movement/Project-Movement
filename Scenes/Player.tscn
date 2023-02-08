@@ -4,15 +4,18 @@
 [ext_resource path="res://Resources/white.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/AbilitySystem.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 31.5 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15, 31.5 )
 
 [node name="Player" type="Node2D"]
 
-[node name="HUD" parent="." instance=ExtResource( 3 )]
-script = ExtResource( 4 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -0.5 )
+shape = SubResource( 2 )
 
 [node name="PlayerBody" type="KinematicBody2D" parent="."]
 script = ExtResource( 1 )
@@ -26,14 +29,15 @@ texture = ExtResource( 2 )
 position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
+[node name="Sprite" type="Sprite" parent="PlayerBody"]
+scale = Vector2( 0.5, 1 )
+texture = ExtResource( 2 )
+
 [node name="Camera2D" type="Camera2D" parent="PlayerBody"]
 current = true
 zoom = Vector2( 1.3, 1.3 )
 smoothing_enabled = true
 smoothing_speed = 8.0
 
-[node name="JumpTimer" type="Timer" parent="PlayerBody"]
-
-[node name="AbilitySystem" parent="PlayerBody" instance=ExtResource( 5 )]
-
-[connection signal="timeout" from="PlayerBody/JumpTimer" to="PlayerBody" method="_on_JumpTimer_timeout"]
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 4 )

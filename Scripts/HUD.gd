@@ -1,13 +1,17 @@
 extends CanvasLayer
 
-onready var xlabel = $XSpeedLabel
-onready var ylabel = $YSpeedLabel
-onready var player_body = get_parent().get_node("PlayerBody")
-onready var abilities = player_body.get_node("AbilitySystem")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	var vel = player_body.velocity
+func _process(delta):
+	var label = $SpeedLabel
+	var healthLabel = $HealthLabel
+	var playerHealth = get_parent().get_node("PlayerBody").health
+	healthLabel.text = "Health: %.f" % playerHealth
+	if playerHealth > 0:
+		var vel = get_parent().get_node("PlayerBody").velocity
+		label.text = "X Speed: %.f" % abs(vel.x)
+	if playerHealth <= 0:
+		label.text = "You died, try again."
 
 	xlabel.text = "X Speed: %.f" % abs(vel.x)
 	ylabel.text = "Y Speed: %.f" % (0.0 if player_body.is_on_floor() else abs(vel.y))
