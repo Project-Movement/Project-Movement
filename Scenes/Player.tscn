@@ -34,6 +34,19 @@ smoothing_speed = 8.0
 
 [node name="JumpTimer" type="Timer" parent="PlayerBody"]
 
+[node name="WallJumpLeniencyTimer" type="Timer" parent="PlayerBody"]
+
 [node name="AbilitySystem" parent="PlayerBody" instance=ExtResource( 5 )]
 
+[node name="LeftWallRay" type="RayCast2D" parent="PlayerBody"]
+position = Vector2( -16, -1 )
+enabled = true
+cast_to = Vector2( 0, 32 )
+
+[node name="RightWallRay" type="RayCast2D" parent="PlayerBody"]
+position = Vector2( 16, -1 )
+enabled = true
+cast_to = Vector2( 0, 32 )
+
 [connection signal="timeout" from="PlayerBody/JumpTimer" to="PlayerBody" method="_on_JumpTimer_timeout"]
+[connection signal="timeout" from="PlayerBody/WallJumpLeniencyTimer" to="PlayerBody" method="_on_WallJumpLeniencyTimer_timeout"]
