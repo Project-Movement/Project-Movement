@@ -96,15 +96,13 @@ func player_move(delta):
 	if has_jumped_in_buffer_interval:
 		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
 			if not bounced:
-				velocity.y = -jump_vel
-				has_jumped_in_buffer_interval = false
+				jump()
 
 		elif player_is_wallsliding:  # walljump
 			print("walljump" + str(Time.get_ticks_msec()))
-			velocity.y = -jump_vel
+			jump()
 			velocity.x = walljump_speed if last_collider_normal_x > 0 else -walljump_speed
 			player_is_wallsliding = false
-			has_jumped_in_buffer_interval = false
 
 
 	if Input.is_action_just_pressed("airjump") and not grounded:  # try airjump if in air
@@ -147,6 +145,12 @@ func player_move(delta):
 	# do other movement kinematics calculations
 	apply_constant_forces(delta)  # like gravity
 	apply_frictions(delta, bounced)  # and friction
+
+
+func jump():
+	velocity.y = -jump_vel
+	has_jumped_in_buffer_interval = false
+	AudioPlayer.play_sound(AudioPlayer.JUMP)
 
 
 func do_any_bounce() -> bool:
