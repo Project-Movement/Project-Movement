@@ -7,8 +7,8 @@ onready var step_timer: = $StepTimer
 export var min_step_interval = 0.15
 
 const base_step_interval = 0.3
-const step_factor = 180
-var step_interval = 0.4
+const step_factor = 260
+var step_interval = 0.8
 
 func _physics_process(_delta):
 

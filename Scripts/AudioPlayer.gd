@@ -2,12 +2,19 @@ extends Node
 
 
 # onready var STEP: = preload("res://Sounds/footstep_carpet_001.ogg")
-onready var STEP: = preload("res://Sounds/footstep_concrete_000.ogg")
+var STEP
 onready var JUMP: = preload("res://Sounds/impactPlank_medium_000.ogg")
 onready var CHECKPOINT: = preload("res://Sounds/impactMining_003.ogg")
 onready var DASH: = preload("res://Sounds/laserSmall_000.ogg")
+onready var STOPWATCH_STOP: = preload("res://Sounds/toggle_002.ogg")
+onready var STOPWATCH_START: = preload("res://Sounds/toggle_001.ogg")
+
 
 onready var stream_players: = $StreamPlayers
+
+func _ready():
+	STEP = AudioStreamRandomPitch.new()
+	STEP.audio_stream = preload("res://Sounds/footstep_carpet_001.ogg")
 
 
 func play_sound(sound):

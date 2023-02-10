@@ -20,11 +20,14 @@ func reset():
 
 
 func stop():
-	active = false
+	if active:
+		active = false
+		AudioPlayer.play_sound(AudioPlayer.STOPWATCH_STOP)
 
 
 func start():
 	print("started stopwatch")
+	AudioPlayer.play_sound(AudioPlayer.STOPWATCH_START)
 	active = true
 
 
