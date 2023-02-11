@@ -8,16 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node",
-"class": "Logger",
-"language": "GDScript",
-"path": "res://Scripts/Logger.gd"
-} ]
-_global_script_class_icons={
-"Logger": ""
-}
-
 [application]
 
 config/name="ProjectMovement"
@@ -27,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://Scripts/Globals.gd"
+Logger="*res://Scripts/Logger.gd"
 
 [gdnative]
 

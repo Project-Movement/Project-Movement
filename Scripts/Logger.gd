@@ -2,9 +2,8 @@ extends Node
 ## You should autoload but make sure to call [method initialize] before
 ## using the logging methods in this class
 
-class_name Logger
-
-const prdUrl: String = "https://integration.centerforgamescience.org/cgs/apps/games/v2/index.php/"
+# const prdUrl: String = "https://integration.centerforgamescience.org/cgs/apps/games/v2/index.php/"
+const prdUrl: String = "http://127.0.0.1:8888/"
 
 # Properties specific to each game
 var gameId: int
@@ -28,6 +27,8 @@ var timestampOfPrevAction: Dictionary = Time.get_datetime_dict_from_system()
 
 var levelActionBuffer: Array
 
+func _init():
+	self.initialize(202304, "group04", "3b45e8ea6b313e516d18679e04be7779", 1)
 
 func initialize(_gameId: int, _gameName: String, _gameKey: String, _categoryId: int):
 	self.gameId = _gameId
@@ -50,7 +51,7 @@ func get_saved_user_id() -> String:
 	file.open("user://user_id.dat", File.READ)
 	var content = file.get_as_text()
 	file.close()
-	print("Retrievign User ID: " + content)
+	print("Retrieving User ID: " + content)
 	return content
 
 
@@ -97,10 +98,12 @@ func start_new_session_with_uuid(userId: String):
 		if parsed_results["tstatus"] == "t":
 			self.currentSessionId = parsed_results["r_data"]["sessionid"]
 	else:
-		print("Error response to session start log " + result[1])
+		print("------- Error response to session start log")
+		print(result)
 
 
 func log_level_start(levelId: int, details: String):
+	print("log level start " + str(levelId))
 	self.flush_buffered_level_actions()
 
 	self.timestampOfPrevLevelStart = Time.get_datetime_dict_from_system()
@@ -118,14 +121,15 @@ func log_level_start(levelId: int, details: String):
 	startData["session_seqid"] = ++self.currentActionSeqInSession
 
 	var requestParams = prepare_params(startData)
-	var result = yield(send_post_request("quest/start/", requestParams), "request_complete")
+	var result = yield(send_post_request("quest/start/", requestParams), "request_completed")
 	if result[0] == HTTPClient.RESULT_SUCCESS:
 		var text = result[3].get_string_from_utf8().substr(5)  # body
 		print(text)
 		var parsed_results = JSON.parse(text).result
 		self.currentDqid = parsed_results["dqid"]
 	else:
-		print("Error response to level start log " + result[1])
+		print("------- Error response to level start log")
+		print(result)
 
 
 func log_level_end(details: String):
@@ -206,8 +210,10 @@ func flush_buffered_level_actions():
 ## result, response_code, headers, body
 func send_post_request(suffix: String, parameters: Dictionary) -> HTTPRequest:
 	var req = HTTPRequest.new()
+	add_child(req)
 	var headers = ["Content-Type: application/json"]
-	req.request(compose_url(suffix), headers, true, HTTPClient.METHOD_POST, parameters)
+	var rescode = req.request(compose_url(suffix), headers, true, HTTPClient.METHOD_POST, JSON.print(parameters))
+	print("LOGGER: request sent to " + compose_url(suffix) + " got godot result code " + str(rescode) + " (0 = OK)")
 	return req
 
 
@@ -275,10 +281,10 @@ static func getRandomInt():
 static func uuidbin():
   # 16 random bytes with the bytes on index 6 and 8 modified
   return [
-    getRandomInt(), getRandomInt(), getRandomInt(), getRandomInt(),
-    getRandomInt(), getRandomInt(), ((getRandomInt()) & 0x0f) | 0x40, getRandomInt(),
-    ((getRandomInt()) & 0x3f) | 0x80, getRandomInt(), getRandomInt(), getRandomInt(),
-    getRandomInt(), getRandomInt(), getRandomInt(), getRandomInt(),
+	getRandomInt(), getRandomInt(), getRandomInt(), getRandomInt(),
+	getRandomInt(), getRandomInt(), ((getRandomInt()) & 0x0f) | 0x40, getRandomInt(),
+	((getRandomInt()) & 0x3f) | 0x80, getRandomInt(), getRandomInt(), getRandomInt(),
+	getRandomInt(), getRandomInt(), getRandomInt(), getRandomInt(),
   ]
 
 static func v4():
@@ -286,18 +292,18 @@ static func v4():
   var b = uuidbin()
 
   return '%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x' % [
-    # low
-    b[0], b[1], b[2], b[3],
+	# low
+	b[0], b[1], b[2], b[3],
 
-    # mid
-    b[4], b[5],
+	# mid
+	b[4], b[5],
 
-    # hi
-    b[6], b[7],
+	# hi
+	b[6], b[7],
 
-    # clock
-    b[8], b[9],
+	# clock
+	b[8], b[9],
 
-    # clock
-    b[10], b[11], b[12], b[13], b[14], b[15]
+	# clock
+	b[10], b[11], b[12], b[13], b[14], b[15]
   ]
