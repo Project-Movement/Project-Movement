@@ -29,9 +29,6 @@ var timestampOfPrevAction: Dictionary = Time.get_datetime_dict_from_system()
 var levelActionBuffer: Array
 
 
-const uuid_util = preload('res://Scripts/uuid.gd')
-
-
 func initialize(_gameId: int, _gameName: String, _gameKey: String, _categoryId: int):
 	self.gameId = _gameId
 	self.gameName = _gameName
