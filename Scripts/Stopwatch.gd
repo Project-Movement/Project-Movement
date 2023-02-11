@@ -12,6 +12,7 @@ func _process(delta):
 
 	# $Time.text = "%02d:%05.2f" % [minutes, time]
 	$Time.text = "%02d:%05.2f" % [minutes, fmod(time, 60.0)]
+	Globals.time = $Time.text
 
 
 func reset():
@@ -39,3 +40,4 @@ func _on_StartZone_body_exited(_body:Node):
 
 func _on_EndZone_body_entered(_body:Node):
 	stop()
+	
