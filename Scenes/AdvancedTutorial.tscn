@@ -49,32 +49,6 @@ script = ExtResource( 11 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Label" type="Label" parent="LevelText"]
-margin_left = 40.0
-margin_top = 328.0
-margin_right = 477.0
-margin_bottom = 407.0
-theme = SubResource( 1 )
-text = "REACH THE BLUE END ZONE
-'A' AND 'D' TO MOVE"
-
-[node name="Label2" type="Label" parent="LevelText"]
-margin_left = 528.0
-margin_top = 384.0
-margin_right = 965.0
-margin_bottom = 427.0
-theme = SubResource( 1 )
-text = "'SPACE' TO JUMP"
-
-[node name="Label3" type="Label" parent="LevelText"]
-margin_left = 1080.0
-margin_top = 344.0
-margin_right = 1517.0
-margin_bottom = 423.0
-theme = SubResource( 1 )
-text = "DONT TOUCH
-RED"
-
 [node name="Label4" type="Label" parent="LevelText"]
 margin_left = 2008.0
 margin_top = 472.0
