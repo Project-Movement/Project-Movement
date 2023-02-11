@@ -20,6 +20,7 @@ default_font = SubResource( 2 )
 [node name="TutorialLevel" type="Node2D"]
 
 [node name="Stopwatch" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="SpecialZones" type="Node2D" parent="."]
 
