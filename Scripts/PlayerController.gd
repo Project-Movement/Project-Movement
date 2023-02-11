@@ -77,10 +77,6 @@ func player_move(delta):
 	elif player_is_wallsliding and not raycast_is_on_wall() and $WallJumpLeniencyTimer.is_stopped():
 		$WallJumpLeniencyTimer.start()
 
-	# landing sound
-	# this is getting messy
-	if is_on_floor() and not grounded and velocity.y >= jump_vel:
-		AudioPlayer.play_sound(AudioPlayer.LANDING)
 
 	grounded = is_on_floor()
 	var time = Time.get_ticks_msec()
@@ -90,6 +86,13 @@ func player_move(delta):
 	# if we don't bounce, accept the engine's default move and slide velocity change
 	# (like if we ran up against a wall we get stopped)
 	var bounced = do_any_bounce()
+
+	# landing sound
+	# this is getting messy
+	if is_on_floor() and not grounded and velocity.y >= jump_vel and not bounced:
+		AudioPlayer.play_sound(AudioPlayer.LANDING)
+
+	# if we didn't bounce, accept the default move and slide velocity change
 	if not bounced:
 		velocity = last_tick_vel
 

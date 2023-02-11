@@ -34,12 +34,16 @@ func start():
 
 
 func _on_StartZone_body_entered(_body:Node):
-	reset()
-	stop(false)
+	if _body.name == "PlayerBody":
+		reset()
+		stop(false)
 
 
 func _on_StartZone_body_exited(_body:Node):
-	start()
+	if _body.name == "PlayerBody":
+		print("exited start zone")
+		start()
 
 func _on_EndZone_body_entered(_body:Node):
-	stop(true)
+	if _body.name == "PlayerBody":
+		stop(true)
