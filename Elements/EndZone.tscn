@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Resources/white.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/EndZone.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 80, 56 )
 
 [node name="EndZone" type="Area2D"]
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -15,3 +17,5 @@ modulate = Color( 0.290196, 0.439216, 0.945098, 0.282353 )
 position = Vector2( 9.72748e-05, -1.90735e-06 )
 scale = Vector2( 160, 112 )
 texture = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_EndZone_body_entered"]
