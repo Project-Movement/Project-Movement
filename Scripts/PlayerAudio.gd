@@ -2,7 +2,6 @@ extends Node2D
 
 
 onready var player_body: = get_parent()
-onready var step_timer: = $StepTimer
 
 export var min_step_interval = 210
 

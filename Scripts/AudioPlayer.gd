@@ -10,10 +10,11 @@ onready var DASH: = preload("res://Sounds/laserSmall_000.ogg")
 onready var STOPWATCH_STOP: = preload("res://Sounds/toggle_001.ogg")
 onready var STOPWATCH_START: = preload("res://Sounds/toggle_002.ogg")
 onready var DIE: = preload("res://Sounds/die.wav")
-onready var LANDING: = preload("res://Sounds/impactplank_medium_004.ogg")
+onready var LANDING: = preload("res://Sounds/impactPlank_medium_004.ogg")
 
 
-onready var stream_players: = $StreamPlayers
+onready var sfx_players: = $SFXPlayers
+onready var ui_sfx_players: = $UISFX
 
 func _ready():
 	STEP = AudioStreamRandomPitch.new()
@@ -21,9 +22,19 @@ func _ready():
 
 
 func play_sound(sound):
-	for stream_player in stream_players.get_children():
+	for stream_player in sfx_players.get_children():
 		if not stream_player.playing:
-			print(stream_player.name)
+			# print(stream_player.name)
+			stream_player.stream = sound
+			stream_player.play()
+			break
+
+
+# non-diegetic sounds, play to different channel
+func play_ui_sound(sound):
+	for stream_player in ui_sfx_players.get_children():
+		if not stream_player.playing:
+			# print(stream_player.name)
 			stream_player.stream = sound
 			stream_player.play()
 			break

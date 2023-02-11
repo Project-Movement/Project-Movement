@@ -23,12 +23,12 @@ func stop(play_noise:bool = false):
 	if active:
 		active = false
 		if play_noise:
-			AudioPlayer.play_sound(AudioPlayer.STOPWATCH_STOP)
+			AudioPlayer.play_ui_sound(AudioPlayer.STOPWATCH_STOP)
 
 
 func start():
 	print("started stopwatch")
-	AudioPlayer.play_sound(AudioPlayer.STOPWATCH_START)
+	AudioPlayer.play_ui_sound(AudioPlayer.STOPWATCH_START)
 	active = true
 
 
