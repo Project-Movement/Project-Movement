@@ -91,7 +91,7 @@ func start_new_session_with_uuid(userId: String):
 	}
 
 	var result = yield(send_post_request("loggingpageload/set/", sessionParams), "request_completed")
-	if result[0] == HTTPClient.RESULT_SUCCESS:
+	if result[0] == HTTPRequest.RESULT_SUCCESS:
 		var text = result[3].get_string_from_utf8().substr(5)  # body
 		print(text)
 		var parsed_results = JSON.parse(text).result
@@ -122,7 +122,7 @@ func log_level_start(levelId: int, details: String):
 
 	var requestParams = prepare_params(startData)
 	var result = yield(send_post_request("quest/start/", requestParams), "request_completed")
-	if result[0] == HTTPClient.RESULT_SUCCESS:
+	if result[0] == HTTPRequest.RESULT_SUCCESS:
 		var text = result[3].get_string_from_utf8().substr(5)  # body
 		print(text)
 		var parsed_results = JSON.parse(text).result
@@ -211,7 +211,7 @@ func flush_buffered_level_actions():
 func send_post_request(suffix: String, parameters: Dictionary) -> HTTPRequest:
 	var req = HTTPRequest.new()
 	add_child(req)
-	var headers = ["Content-Type: application/json"]
+	var headers = ["Content-Type: application/x-www-form-urlencoded"]
 	var rescode = req.request(compose_url(suffix), headers, true, HTTPClient.METHOD_POST, JSON.print(parameters))
 	print("LOGGER: request sent to " + compose_url(suffix) + " got godot result code " + str(rescode) + " (0 = OK)")
 	return req
