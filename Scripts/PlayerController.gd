@@ -41,6 +41,7 @@ var player_is_wallsliding = false  # set to true when player touches a wall, set
 var last_collider_normal_x = 0
 
 var last_direction = 0
+var grounded: bool = false
 
 const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 
@@ -76,7 +77,12 @@ func player_move(delta):
 	elif player_is_wallsliding and not raycast_is_on_wall() and $WallJumpLeniencyTimer.is_stopped():
 		$WallJumpLeniencyTimer.start()
 
-	var grounded = is_on_floor()
+	# landing sound
+	# this is getting messy
+	if is_on_floor() and not grounded and velocity.y >= jump_vel:
+		AudioPlayer.play_sound(AudioPlayer.LANDING)
+
+	grounded = is_on_floor()
 	var time = Time.get_ticks_msec()
 	if grounded:
 		last_time_on_floor = time

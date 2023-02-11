@@ -10,6 +10,7 @@ onready var DASH: = preload("res://Sounds/laserSmall_000.ogg")
 onready var STOPWATCH_STOP: = preload("res://Sounds/toggle_001.ogg")
 onready var STOPWATCH_START: = preload("res://Sounds/toggle_002.ogg")
 onready var DIE: = preload("res://Sounds/die.wav")
+onready var LANDING: = preload("res://Sounds/impactplank_medium_004.ogg")
 
 
 onready var stream_players: = $StreamPlayers

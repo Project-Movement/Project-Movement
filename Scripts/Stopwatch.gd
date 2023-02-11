@@ -19,10 +19,11 @@ func reset():
 	time = 0
 
 
-func stop():
+func stop(play_noise:bool = false):
 	if active:
 		active = false
-		AudioPlayer.play_sound(AudioPlayer.STOPWATCH_STOP)
+		if play_noise:
+			AudioPlayer.play_sound(AudioPlayer.STOPWATCH_STOP)
 
 
 func start():
@@ -34,11 +35,11 @@ func start():
 
 func _on_StartZone_body_entered(_body:Node):
 	reset()
-	stop()
+	stop(false)
 
 
 func _on_StartZone_body_exited(_body:Node):
 	start()
 
 func _on_EndZone_body_entered(_body:Node):
-	stop()
+	stop(true)
