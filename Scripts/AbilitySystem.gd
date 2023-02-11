@@ -39,6 +39,10 @@ func is_ability_available(ability: String) -> bool:
 	return ability_uses[ability] > 0
 
 
+func get_ability_time_left(ability: String) -> float:
+	return ability_timers[ability].time_left
+
+
 func use_ability(ability: String) -> bool:
 	var was_available = is_ability_available(ability)
 	if was_available:
