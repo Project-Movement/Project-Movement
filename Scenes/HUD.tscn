@@ -29,20 +29,21 @@ custom_fonts/font = SubResource( 1 )
 text = "Speed: 0"
 
 [node name="AbilityIndicator" type="Control" parent="."]
-margin_left = 8.0
-margin_right = 48.0
-margin_bottom = 40.0
+anchor_left = 0.02
+anchor_top = 0.8
+anchor_right = 0.05
+anchor_bottom = 0.9
+margin_left = -9.6
+margin_top = 32.0
+margin_right = 30.4
+margin_bottom = 72.0
 
 [node name="Dash" type="Label" parent="AbilityIndicator"]
-margin_top = 488.0
-margin_right = 129.0
-margin_bottom = 537.0
 custom_fonts/font = SubResource( 1 )
 text = "Dash"
 
 [node name="Airjump" type="Label" parent="AbilityIndicator"]
-margin_top = 528.0
-margin_right = 133.0
-margin_bottom = 577.0
+anchor_top = 0.4
+anchor_bottom = 0.4
 custom_fonts/font = SubResource( 1 )
 text = "Airjump"
