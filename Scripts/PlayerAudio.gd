@@ -4,28 +4,23 @@ extends Node2D
 onready var player_body: = get_parent()
 onready var step_timer: = $StepTimer
 
-export var min_step_interval = 0.15
+export var min_step_interval = 210
 
-const base_step_interval = 0.3
-const step_factor = 260
-var step_interval = 0.8
+const base_step_interval = 100
+const step_factor = 500
+var step_interval
+
+onready var time_of_last_step = Time.get_ticks_msec()
 
 func _physics_process(_delta):
-
-	# AudioPlayer.play_sound(AudioPlayer.STEP)
-	if player_body.is_on_floor() and abs(player_body.velocity.x) > 20:
+	if player_body.is_on_floor() and abs(player_body.velocity.x) > 0 and not player_body.is_on_wall():
 		step_interval = (base_step_interval / abs(player_body.velocity.x)) * step_factor
 		step_interval = max(min_step_interval, step_interval)
-		# print("step_interval " + str(step_interval))
-		if step_timer.is_stopped() or step_timer.time_left > step_interval:
-			# print("jgao222 + starting timer")
-			# step_timer.stop()
-			step_timer.start(step_interval)
 
-	else:
-		step_timer.stop()
+		if Time.get_ticks_msec() - time_of_last_step >= step_interval:
+			play_step_sound()
+			time_of_last_step = Time.get_ticks_msec()
 
 
-func _on_StepTimer_timeout():
+func play_step_sound():
 	AudioPlayer.play_sound(AudioPlayer.STEP)
-
