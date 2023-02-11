@@ -9,4 +9,4 @@ func _ready():
 # have more than one body moving
 func _on_Checkpoint_body_entered(_body:Node):
 	if _body.name == "PlayerBody":
-		$"../../PlayerSpawner".set_spawn_position($CollisionShape2D/SpawnPos.global_position)
+		PlayerSpawner.set_spawn_position($CollisionShape2D/SpawnPos.global_position)
