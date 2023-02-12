@@ -22,9 +22,13 @@ func _process(_delta):
 
 		if not lookaround_enabled:
 			self.position = Vector2.ZERO
-			HUD.visible = true
+			HUD.get_node("SpeedIndicator").visible = true
+			HUD.get_node("AbilityIndicator").visible = true
+			HUD.get_node("LookaroundIndicator").visible = false
 		else:
-			HUD.visible = false
+			HUD.get_node("SpeedIndicator").visible = false
+			HUD.get_node("AbilityIndicator").visible = false
+			HUD.get_node("LookaroundIndicator").visible = true
 
 	if lookaround_enabled:
 		var diff = get_viewport().get_mouse_position() - SCREEN_CENTER
