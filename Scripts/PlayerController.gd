@@ -104,11 +104,10 @@ func player_move(delta):
 		$JumpTimer.start()
 
 	# custom way of buffering jumps
-	if has_jumped_in_buffer_interval:
+	if has_jumped_in_buffer_interval and not bounced:
 		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
-			if not bounced:
-				Logger.log_level_action(Logger.ACTIONS.JUMP, "")
-				jump()
+			Logger.log_level_action(Logger.ACTIONS.JUMP, "")
+			jump()
 
 		elif player_is_wallsliding:  # walljump
 			print("walljump" + str(Time.get_ticks_msec()))
@@ -169,22 +168,29 @@ func jump():
 func do_any_bounce() -> bool:
 	var has_bounced = false
 	# handle bouncing off walls, jump up, perfect reflection of x vel
-	# if player_is_wallsliding:
-	# 	if Input.is_action_pressed("jump") and abs(velocity.x) > walljump_speed:
-	# 		velocity.x = -velocity.x
-	# 		has_bounced = true
-	# 	elif has_jumped_in_bhop_interval:
-	# 		print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
-	# 		# if they time the jump, player goes up instead of just reflecting
-	# 		# and keep some horizontal velocity but not all of it, so like
-	# 		# a more powerful walljump
-	# 		velocity.y = -jump_vel
-	# 		if velocity.x > 0:
-	# 			velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
-	# 		elif velocity.x < 0:
-	# 			velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
+	if player_is_wallsliding:
+		if has_jumped_in_buffer_interval:
+			print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
+			# if they time the jump, player goes up instead of just reflecting
+			velocity.y = -jump_vel
+			velocity.x = abs(velocity.x) * last_collider_normal_x
 
-	# 		has_bounced = true
+			if velocity.x > 0:
+				# velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
+				velocity.x = max(velocity.x, walljump_speed)
+			elif velocity.x < 0:
+				# velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
+				velocity.x = min(velocity.x, -walljump_speed)
+
+			has_bounced = true
+			# $LeftWallRay.enabled = false
+			# $RightWallRay.enabled = false
+			# print("rays disabled")
+			# yield(get_tree().create_timer(0.2), "timeout")
+			# print("rays enabled")
+			# $LeftWallRay.enabled = true
+			# $RightWallRay.enabled = true
+			has_jumped_in_buffer_interval = false  # consume the buffered jump
 
 
 	# bouncing off ground, bhopping, perfect preservation of x vel
@@ -203,6 +209,7 @@ func do_any_bounce() -> bool:
 
 			has_bounced = true
 			Logger.log_level_action(Logger.ACTIONS.BOUNCE, "")
+			has_jumped_in_buffer_interval = false  # consume the buffered jump
 
 	return has_bounced
 
