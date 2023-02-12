@@ -63,6 +63,8 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action("return_title"):
+		Logger.log_level_action(Logger.ACTIONS.QUIT_LEVEL, "")
+		Logger.log_level_end("")
 		var _a = get_tree().change_scene("res://Scenes/TitleScreen.tscn")
 
 
