@@ -2,8 +2,34 @@ extends Node
 ## You should autoload but make sure to call [method initialize] before
 ## using the logging methods in this class
 
-# const prdUrl: String = "https://integration.centerforgamescience.org/cgs/apps/games/v2/index.php/"
-const prdUrl: String = "http://127.0.0.1:8888/"
+# these enums are important and should be updated when stuff changes
+enum ACTIONS {
+	JUMP = 1,
+	AIRJUMP = 2,
+	DASH = 3,
+	WALLJUMP = 4,
+
+	LEAVE_START = 40,
+	ENTER_START = 41,
+	ENTER_END = 42,
+	ENTER_CHECKPOINT = 43,
+
+	PLAYER_DIE = 60,
+
+	QUIT = 400,
+	ENTER_DEV_SETTINGS = 500
+}
+
+enum LEVELS {
+	TUTORIAL_BASIC = 900,
+	TUTORIAL_ADVANCED = 901,
+	TESTLEVEL = 902,
+	LEVEL1 = 1,
+}
+
+
+const prdUrl: String = "https://integration.centerforgamescience.org/cgs/apps/games/v2/index.php/"
+# const prdUrl: String = "http://127.0.0.1:8888/"
 
 # Properties specific to each game
 var gameId: int
@@ -29,11 +55,22 @@ var levelActionBuffer: Array
 
 var session_started = false
 
-func _init():
+func _ready():
 	self.initialize(202304, "group04", "3b45e8ea6b313e516d18679e04be7779", 1)
 	start_new_session()
-	while not session_started:
-		OS.delay_msec(25)
+	# if not OS.is_debug_build():  # don't pause and wait cause we don't really care about session ids for testing builds
+	# 	while not session_started:
+	# 		OS.delay_msec(25)  # pause until response received from database
+	# while not session_started:
+	# 	print("still waiting for response")
+	# 	OS.delay_msec(25)  # pause until response received from database
+
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		log_action_with_no_level(ACTIONS.QUIT, JSON.print({"time": Time.get_ticks_msec()}))
+		get_tree().quit()
+
 
 func initialize(_gameId: int, _gameName: String, _gameKey: String, _categoryId: int):
 	self.gameId = _gameId
@@ -70,6 +107,7 @@ func set_saved_user_id(value: String):
 
 
 func start_new_session():
+	print("starting new session")
 	var uuid = get_saved_user_id()
 	if uuid == "":
 		uuid = generate_uuid()
@@ -95,7 +133,8 @@ func start_new_session_with_uuid(userId: String):
 		"vid": self.versionNumber
 	}
 
-	var result = yield(send_post_request("loggingpageload/set/", sessionParams), "request_completed")
+	var req = send_post_request("loggingpageload/set/", sessionParams)
+	var result = yield(req, "request_completed")
 	if result[0] == HTTPRequest.RESULT_SUCCESS:
 		var text = result[3].get_string_from_utf8().substr(5)  # body
 		print(text)

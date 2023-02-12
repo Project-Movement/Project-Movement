@@ -15,7 +15,7 @@ func go_testlevel():
 
 
 func quit():
-	get_tree().quit()
+	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
 
 
 func _on_DevSettings_pressed():
