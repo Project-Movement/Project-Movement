@@ -21,6 +21,7 @@ default_font = SubResource( 2 )
 script = ExtResource( 4 )
 
 [node name="Stopwatch" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="SpecialZones" type="Node2D" parent="."]
 
@@ -73,15 +74,16 @@ text = "'W' TO AIRJUMP
 'LEFTCLICK' TO DASH TOWARDS MOUSE"
 
 [node name="Label9" type="Label" parent="LevelText"]
-margin_left = 7008.0
-margin_top = 248.0
-margin_right = 7360.0
-margin_bottom = 409.0
+margin_left = 6992.0
+margin_top = 208.0
+margin_right = 7723.0
+margin_bottom = 410.0
 theme = SubResource( 1 )
-text = "BUILD UP SOME SPEED
-HOLD SPACE TO BOUNCE
+text = "HOLD 'SHIFT' TO BOUNCE
+YOU DONT LOSE SPEED WHEN BOUNCING
 
-SEND IT"
+BUILD UP SOME SPEED BY DASHING AND
+BOUNCING TO MAKE IT ACROSS THIS GAP"
 
 [node name="Label10" type="Label" parent="LevelText"]
 margin_left = 7912.0
@@ -100,7 +102,7 @@ margin_right = 11025.0
 margin_bottom = 567.0
 theme = SubResource( 1 )
 text = "END OF TUTORIAL
-'ESC' TO GO BACK TO TITLE"
+'ESC' TO RETURN TO TITLE"
 
 [node name="Label7" type="Label" parent="LevelText"]
 margin_left = 1536.0
