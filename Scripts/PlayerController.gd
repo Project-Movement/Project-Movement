@@ -136,20 +136,6 @@ func player_move(delta):
 		if Input.is_action_pressed("left") and velocity.x > -max_h_air_influence_speed:
 			velocity.x -= h_accel_air * delta
 
-		# elif Input.is_action_pressed("down"):  # can't do both up and down
-		# 	# this one only works when falling
-		# 	if velocity.y > 0:
-		# 		var y_speed_lost = glider_y_rate * velocity.y * delta
-		# 		velocity.y -= y_speed_lost
-		# 		if velocity.x > 0:
-		# 			velocity.x += y_speed_lost * glider_y_conversion_efficiency
-		# 		elif velocity.x < 0:
-		# 			velocity.x -= y_speed_lost * glider_y_conversion_efficiency
-		# 		# TODO: how to handle when player is falling straight down?
-		# 		# 		i assume that for animation/sprite purposes we may eventually
-		# 		#		have to store the last direction the player character was
-		# 		#		facing when they stopped moving, so it could be used here?
-
 	# dash
 	if Input.is_action_just_pressed("dash"):
 		$AbilitySystem.use_ability("dash")
@@ -183,14 +169,8 @@ func do_any_bounce() -> bool:
 				velocity.x = min(velocity.x, -walljump_speed)
 
 			has_bounced = true
-			# $LeftWallRay.enabled = false
-			# $RightWallRay.enabled = false
-			# print("rays disabled")
-			# yield(get_tree().create_timer(0.2), "timeout")
-			# print("rays enabled")
-			# $LeftWallRay.enabled = true
-			# $RightWallRay.enabled = true
 			has_jumped_in_buffer_interval = false  # consume the buffered jump
+			Logger.log_level_action(Logger.ACTIONS.WALLBOUNCE, "")
 
 
 	# bouncing off ground, bhopping, perfect preservation of x vel
