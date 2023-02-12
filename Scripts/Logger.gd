@@ -62,6 +62,7 @@ var levelActionBuffer: Array
 var session_started = false
 
 func _ready():
+	Globals.LOGGING_ENABLED = false if OS.is_debug_build() else true  # comment this out for logging in debug builds
 	var cid = 1 if OS.is_debug_build() else VERSION
 	self.initialize(202304, "group04", "3b45e8ea6b313e516d18679e04be7779", cid)
 	start_new_session()
@@ -115,6 +116,8 @@ func set_saved_user_id(value: String):
 
 
 func start_new_session():
+	if not Globals.LOGGING_ENABLED:
+		return
 	print("starting new session")
 	var uuid = get_saved_user_id()
 	if uuid == "":
@@ -125,6 +128,8 @@ func start_new_session():
 
 
 func start_new_session_with_uuid(userId: String):
+	if not Globals.LOGGING_ENABLED:
+		return
 	self.currentUserId = userId
 	self.currentLevelSeqInSession = 0
 	self.currentActionSeqInLevel = 0
@@ -163,6 +168,8 @@ func start_new_session_with_uuid(userId: String):
 
 
 func log_level_start(levelId: int, details: String):
+	if not Globals.LOGGING_ENABLED:
+		return
 	print("log level start " + str(levelId))
 	self.flush_buffered_level_actions()
 
@@ -197,6 +204,8 @@ func log_level_start(levelId: int, details: String):
 
 
 func log_level_end(details: String):
+	if not Globals.LOGGING_ENABLED:
+		return
 	self.flush_buffered_level_actions()
 
 	var endData = get_common_data()
@@ -215,6 +224,8 @@ func log_level_end(details: String):
 
 
 func log_level_action(actionId: int, details: String):
+	if not Globals.LOGGING_ENABLED:
+		return
 	var timestampOfAction = Time.get_unix_time_from_datetime_dict(Time.get_datetime_dict_from_system())
 	var relativeTime = timestampOfAction - Time.get_unix_time_from_datetime_dict(self.timestampOfPrevLevelStart)
 
@@ -237,6 +248,8 @@ func log_level_action(actionId: int, details: String):
 
 
 func log_action_with_no_level(actionId: int, details: String):
+	if not Globals.LOGGING_ENABLED:
+		return
 	var actionNoLevelData = {
 		"session_seqid": ++self.currentActionSeqInSession,
 		"cid": self.categoryId,
