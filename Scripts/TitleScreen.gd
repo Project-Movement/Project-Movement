@@ -7,11 +7,11 @@ func go_tutorial():
 
 
 func go_level1():
-	var _a = get_tree().change_scene("res://Scenes/AdvancedTutorial.tscn")
+	var _a = get_tree().change_scene("res://Scenes/AdvancedTutorial2.tscn")
 
 
 func go_testlevel():
-	var _a = get_tree().change_scene("res://Scenes/Level1.tscn")
+	var _a = get_tree().change_scene("res://Scenes/Circus.tscn")
 
 
 func quit():
