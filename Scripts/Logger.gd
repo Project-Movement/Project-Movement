@@ -8,8 +8,10 @@ var VERSION = 2
 enum ACTIONS {
 	JUMP = 1,
 	AIRJUMP = 2,
-	DASH = 3,
-	WALLJUMP = 4,
+	DASH = 4,
+	WALLJUMP = 6,
+	BOUNCE = 7,
+	ON_COOLDOWN = 8,
 
 	LEAVE_START = 40,
 	ENTER_START = 41,

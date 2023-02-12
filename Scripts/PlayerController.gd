@@ -105,10 +105,12 @@ func player_move(delta):
 	if has_jumped_in_buffer_interval:
 		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
 			if not bounced:
+				Logger.log_level_action(Logger.ACTIONS.JUMP, "")
 				jump()
 
 		elif player_is_wallsliding:  # walljump
 			print("walljump" + str(Time.get_ticks_msec()))
+			Logger.log_level_action(Logger.ACTIONS.WALLJUMP, "")
 			jump()
 			velocity.x = walljump_speed if last_collider_normal_x > 0 else -walljump_speed
 			player_is_wallsliding = false
@@ -189,6 +191,7 @@ func do_any_bounce() -> bool:
 		if Input.is_action_pressed("bounce"):
 			velocity.y = -jump_vel
 			has_bounced = true
+			Logger.log_level_action(Logger.ACTIONS.BOUNCE, "")
 		if has_jumped_in_buffer_interval:
 			velocity.y = -jump_vel
 			if velocity.x < 0:
@@ -197,6 +200,8 @@ func do_any_bounce() -> bool:
 				velocity.x += bhop_bonus
 
 			has_bounced = true
+			Logger.log_level_action(Logger.ACTIONS.BOUNCE, "")
+
 	return has_bounced
 
 
