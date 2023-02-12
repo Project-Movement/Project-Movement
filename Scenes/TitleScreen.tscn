@@ -17,9 +17,9 @@ margin_bottom = 600.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 224.0
-margin_top = 150.0
+margin_top = 128.0
 margin_right = 800.0
-margin_bottom = 450.0
+margin_bottom = 472.0
 alignment = 1
 script = ExtResource( 3 )
 
@@ -32,38 +32,45 @@ text = "PROJECT MOVEMENT"
 align = 1
 valign = 1
 
-[node name="Tutorial" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Tutorial(Basic)" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 84.0
 margin_right = 576.0
 margin_bottom = 124.0
 rect_min_size = Vector2( 0, 40 )
-text = "Tutorial"
+text = "Tutorial (Basic)"
 
-[node name="Level1" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Tutorial(Advance)" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 128.0
 margin_right = 576.0
 margin_bottom = 168.0
-rect_min_size = Vector2( 200, 40 )
-text = "Adv. Tutorial"
+rect_min_size = Vector2( 0, 40 )
+text = "Tutorial (Advance)"
 
-[node name="TestLevel" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="DearYouWallJump" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 172.0
 margin_right = 576.0
 margin_bottom = 212.0
-rect_min_size = Vector2( 0, 40 )
-text = "Chaos Level"
+rect_min_size = Vector2( 200, 40 )
+text = "Dear You Wall Jump"
 
-[node name="TestLevel2" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Circus" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 216.0
 margin_right = 576.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 0, 40 )
-text = "TestLevel"
+text = "Circus"
 
-[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="ChaosLevel" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 260.0
 margin_right = 576.0
 margin_bottom = 300.0
+rect_min_size = Vector2( 0, 40 )
+text = "Level3"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 304.0
+margin_right = 576.0
+margin_bottom = 344.0
 rect_min_size = Vector2( 0, 40 )
 text = "Quit"
 
@@ -74,10 +81,11 @@ margin_right = 128.0
 margin_bottom = 592.0
 text = "dev setting"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Tutorial" to="." method="go_tutorial"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Level1" to="." method="go_tutorial2"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/TestLevel" to="." method="go_level1"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/TestLevel2" to="." method="go_testlevel"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Tutorial(Basic)" to="." method="go_tutorial"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Tutorial(Advance)" to="." method="go_tutorial2"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/DearYouWallJump" to="." method="go_dearYouWallJump"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Circus" to="." method="go_circus"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ChaosLevel" to="." method="go_level3"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="quit"]
 [connection signal="button_down" from="DevSettings" to="." method="_on_DevSettings_button_down"]
 [connection signal="pressed" from="DevSettings" to="." method="_on_DevSettings_pressed"]
