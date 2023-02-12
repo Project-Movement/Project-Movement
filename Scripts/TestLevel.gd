@@ -5,4 +5,4 @@ extends Node2D
 func _ready():
 	# Logger.start_new_session()
 	# Logger.log_action_with_no_level(41, JSON.print({"gabba": "gook", "tenthy": 3}))
-	Logger.log_level_start(Logger.LEVELS.TESTLEVEL, JSON.print({"time": Time.get_ticks_msec()}))
+	Logger.log_level_start(Logger.LEVELS.TESTLEVEL, str(Logger.cur_time_millis()))
