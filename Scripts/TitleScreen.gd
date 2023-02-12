@@ -6,12 +6,16 @@ func go_tutorial():
 	var _a = get_tree().change_scene("res://Scenes/Tutorial.tscn")
 
 
-func go_level1():
+func go_tutorial2():
 	var _a = get_tree().change_scene("res://Scenes/AdvancedTutorial.tscn")
 
 
-func go_testlevel():
+func go_level1():
 	var _a = get_tree().change_scene("res://Scenes/Level1.tscn")
+
+
+func go_testlevel():
+	var _a = get_tree().change_scene("res://Scenes/TestLevel.tscn")
 
 
 func quit():
