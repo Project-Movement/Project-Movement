@@ -2,6 +2,8 @@ extends Node
 ## You should autoload but make sure to call [method initialize] before
 ## using the logging methods in this class
 
+var VERSION = 2
+
 # these enums are important and should be updated when stuff changes
 enum ACTIONS {
 	JUMP = 1,
@@ -56,8 +58,10 @@ var levelActionBuffer: Array
 var session_started = false
 
 func _ready():
-	self.initialize(202304, "group04", "3b45e8ea6b313e516d18679e04be7779", 1)
+	var cid = 1 if OS.is_debug_build() else VERSION
+	self.initialize(202304, "group04", "3b45e8ea6b313e516d18679e04be7779", cid)
 	start_new_session()
+	# actually blocking like this seems to not give the request a chance to be sent
 	# if not OS.is_debug_build():  # don't pause and wait cause we don't really care about session ids for testing builds
 	# 	while not session_started:
 	# 		OS.delay_msec(25)  # pause until response received from database
@@ -132,19 +136,25 @@ func start_new_session_with_uuid(userId: String):
 		"svid": 2,
 		"vid": self.versionNumber
 	}
+	var requestParams = prepare_params(sessionParams)
 
-	var req = send_post_request("loggingpageload/set/", sessionParams)
+	var req = send_post_request("loggingpageload/set/", requestParams)
 	var result = yield(req, "request_completed")
-	if result[0] == HTTPRequest.RESULT_SUCCESS:
-		var text = result[3].get_string_from_utf8().substr(5)  # body
-		print(text)
+	if result[0] == HTTPRequest.RESULT_SUCCESS and result[1] == 200:
+		# print(result)
+		var text = result[3].get_string_from_utf8()
+		print("LOGGER: session start response body text: " +text)
+		text = text.substr(5)  # get just the body
 		var parsed_results = JSON.parse(text).result
 		if parsed_results["tstatus"] == "t":
 			self.currentSessionId = parsed_results["r_data"]["sessionid"]
-	else:
-		print("------- Error response to session start log")
-		print(result)
 
+	else:
+		printerr("------- Error response to session start log")
+		printerr(result)
+		printerr("body: " + result[3].get_string_from_utf8())
+
+	# let the player play even if session fails to start
 	session_started = true
 
 
@@ -168,14 +178,18 @@ func log_level_start(levelId: int, details: String):
 
 	var requestParams = prepare_params(startData)
 	var result = yield(send_post_request("quest/start/", requestParams), "request_completed")
-	if result[0] == HTTPRequest.RESULT_SUCCESS:
-		var text = result[3].get_string_from_utf8().substr(5)  # body
-		print(text)
+	if result[0] == HTTPRequest.RESULT_SUCCESS and result[1] == 200:
+		# print(result)
+		var text = result[3].get_string_from_utf8()
+		print("LOGGER: level start response body text: " + text)
+		text = text.substr(5)  # get just the body
 		var parsed_results = JSON.parse(text).result
-		self.currentDqid = parsed_results["dqid"]
+		if parsed_results["tstatus"] == "t":
+			self.currentDqid = parsed_results["dqid"]
 	else:
-		print("------- Error response to level start log")
-		print(result)
+		printerr("------- Error response to level start log")
+		printerr(result)
+		printerr("body: " + result[3].get_string_from_utf8())
 
 
 func log_level_end(details: String):
@@ -255,10 +269,15 @@ func flush_buffered_level_actions():
 ## by the yield function, where httprequest signal handler args are in order:
 ## result, response_code, headers, body
 func send_post_request(suffix: String, parameters: Dictionary) -> HTTPRequest:
+	# for some reason the `query_string_from_dict` method is only available on instances!
+	# guess the devs didn't think anyone would try to make application/x-www-form-urlencoded requests from HTTPRequest nodes
+	var dummyclient: = HTTPClient.new()
+
 	var req = HTTPRequest.new()
 	add_child(req)
-	var headers = ["Content-Type: application/x-www-form-urlencoded"]
-	var rescode = req.request(compose_url(suffix), headers, true, HTTPClient.METHOD_POST, JSON.print(parameters))
+	var query_string = dummyclient.query_string_from_dict(parameters)
+	var headers = ["Accept: */*","Content-Type: application/x-www-form-urlencoded"]
+	var rescode = req.request(compose_url(suffix), headers, false, HTTPClient.METHOD_POST, query_string)
 	print("LOGGER: request sent to " + compose_url(suffix) + " got godot result code " + str(rescode) + " (0 = OK)")
 	return req
 
