@@ -27,8 +27,13 @@ var timestampOfPrevAction: Dictionary = Time.get_datetime_dict_from_system()
 
 var levelActionBuffer: Array
 
+var session_started = false
+
 func _init():
 	self.initialize(202304, "group04", "3b45e8ea6b313e516d18679e04be7779", 1)
+	start_new_session()
+	while not session_started:
+		OS.delay_msec(25)
 
 func initialize(_gameId: int, _gameName: String, _gameKey: String, _categoryId: int):
 	self.gameId = _gameId
@@ -100,6 +105,8 @@ func start_new_session_with_uuid(userId: String):
 	else:
 		print("------- Error response to session start log")
 		print(result)
+
+	session_started = true
 
 
 func log_level_start(levelId: int, details: String):
