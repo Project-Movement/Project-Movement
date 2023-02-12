@@ -41,6 +41,7 @@ var player_is_wallsliding = false  # set to true when player touches a wall, set
 var last_collider_normal_x = 0
 
 var last_direction = 0
+var grounded: bool = false
 
 const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
 
@@ -76,7 +77,8 @@ func player_move(delta):
 	elif player_is_wallsliding and not raycast_is_on_wall() and $WallJumpLeniencyTimer.is_stopped():
 		$WallJumpLeniencyTimer.start()
 
-	var grounded = is_on_floor()
+
+	grounded = is_on_floor()
 	var time = Time.get_ticks_msec()
 	if grounded:
 		last_time_on_floor = time
@@ -84,6 +86,13 @@ func player_move(delta):
 	# if we don't bounce, accept the engine's default move and slide velocity change
 	# (like if we ran up against a wall we get stopped)
 	var bounced = do_any_bounce()
+
+	# landing sound
+	# this is getting messy
+	if is_on_floor() and not grounded and velocity.y >= jump_vel and not bounced:
+		AudioPlayer.play_sound(AudioPlayer.LANDING)
+
+	# if we didn't bounce, accept the default move and slide velocity change
 	if not bounced:
 		velocity = last_tick_vel
 
@@ -96,15 +105,13 @@ func player_move(delta):
 	if has_jumped_in_buffer_interval:
 		if grounded or ((time - last_time_on_floor) <= coyote_time_ms):
 			if not bounced:
-				velocity.y = -jump_vel
-				has_jumped_in_buffer_interval = false
+				jump()
 
 		elif player_is_wallsliding:  # walljump
 			print("walljump" + str(Time.get_ticks_msec()))
-			velocity.y = -jump_vel
+			jump()
 			velocity.x = walljump_speed if last_collider_normal_x > 0 else -walljump_speed
 			player_is_wallsliding = false
-			has_jumped_in_buffer_interval = false
 
 
 	if Input.is_action_just_pressed("airjump") and not grounded:  # try airjump if in air
@@ -147,6 +154,12 @@ func player_move(delta):
 	# do other movement kinematics calculations
 	apply_constant_forces(delta)  # like gravity
 	apply_frictions(delta, bounced)  # and friction
+
+
+func jump():
+	velocity.y = -jump_vel
+	has_jumped_in_buffer_interval = false
+	AudioPlayer.play_sound(AudioPlayer.JUMP)
 
 
 func do_any_bounce() -> bool:

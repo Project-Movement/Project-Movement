@@ -229,6 +229,3 @@ scale = Vector2( 0.56, 14.04 )
 [connection signal="body_entered" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
 [connection signal="body_entered" from="SpecialZones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
-[connection signal="body_entered" from="SpecialZones/Checkpoint" to="SpecialZones/Checkpoint" method="_on_Checkpoint_body_entered"]
-[connection signal="body_entered" from="SpecialZones/Checkpoint3" to="SpecialZones/Checkpoint3" method="_on_Checkpoint_body_entered"]
-[connection signal="body_entered" from="SpecialZones/Checkpoint2" to="SpecialZones/Checkpoint2" method="_on_Checkpoint_body_entered"]
