@@ -11,4 +11,5 @@ func _on_Checkpoint_body_entered(_body:Node):
 			return  # do nothing if this checkpoint is already active
 		if self.visible:
 			AudioPlayer.play_sound(AudioPlayer.CHECKPOINT)
+			Logger.log_level_action(Logger.ACTIONS.ENTER_CHECKPOINT, "")
 		PlayerSpawner.set_spawn_position(pos)

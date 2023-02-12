@@ -18,10 +18,11 @@ func go_level3():
 	var _a = get_tree().change_scene("res://Scenes/Level1.tscn")
 
 func quit():
-	get_tree().quit()
+	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
 
 
 func _on_DevSettings_pressed():
+	Logger.log_action_with_no_level(Logger.ACTIONS.ENTER_DEV_SETTINGS, "")
 	var _a = get_tree().change_scene("res://Scenes/DevSettings.tscn")
 
 

@@ -52,11 +52,14 @@ func use_ability(ability: String) -> bool:
 				ability_timers["dash"].start()
 			"airjump":
 				do_airjump()
+	else:
+		Logger.log_level_action(Logger.ACTIONS.ON_COOLDOWN, JSON.print({"ability": ability}))
 
 	return was_available
 
 
 func do_dash():
+	Logger.log_level_action(Logger.ACTIONS.DASH, "")
 	var target = get_global_mouse_position()
 	var diff = (target - self.global_position).normalized()
 	var dash_magnitude = parent_body.dash_magnitude
@@ -77,6 +80,7 @@ func do_dash():
 
 
 func do_airjump():
+	Logger.log_level_action(Logger.ACTIONS.AIRJUMP, "")
 	parent_body.jump()
 	ability_uses["airjump"] -= 1
 
