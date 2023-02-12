@@ -93,7 +93,7 @@ func do_airjump():
 	ability_uses["airjump"] -= 1
 
 func do_superjump():
-	# Logger.log_level_action(Logger.ACTIONS.SUPERJUMP, "")
+	Logger.log_level_action(Logger.ACTIONS.SUPERJUMP, "")
 	parent_body.superjump()
 	ability_uses["superjump"] -= 1
 
