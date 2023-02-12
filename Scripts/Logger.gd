@@ -1,6 +1,5 @@
 extends Node
-## You should autoload but make sure to call [method initialize] before
-## using the logging methods in this class
+## You should autoload this class, and fill in _ready with your information
 
 var VERSION = 2
 
