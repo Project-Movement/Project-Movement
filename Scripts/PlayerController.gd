@@ -24,9 +24,7 @@ export var wallslide_leniency_time = 0.2
 
 # abilities
 export var dash_magnitude: int = 400  # how much the dash moves
-
-export var glider_y_conversion_efficiency = 0.8  # efficiency of conversion between down and x
-export var glider_y_rate = 2.7  # how fast down is converted to horizontal in glider
+export var superjump_factor: float = 2  # how much greater in magnitude the superjump is
 
 
 # other variables
@@ -85,6 +83,11 @@ func player_move(delta):
 	if grounded:
 		last_time_on_floor = time
 
+	# handle jump and double jump (midair jump)
+	if Input.is_action_just_pressed("jump"):
+		has_jumped_in_buffer_interval = true
+		$JumpTimer.start()
+
 	# if we don't bounce, accept the engine's default move and slide velocity change
 	# (like if we ran up against a wall we get stopped)
 	var bounced = do_any_bounce()
@@ -98,10 +101,8 @@ func player_move(delta):
 	if not bounced:
 		velocity = last_tick_vel
 
-	# handle jump and double jump (midair jump)
-	if Input.is_action_just_pressed("jump"):
-		has_jumped_in_buffer_interval = true
-		$JumpTimer.start()
+	if is_on_floor() and not grounded and velocity.y >= jump_vel and not bounced:
+		AudioPlayer.play_sound(AudioPlayer.LANDING)
 
 	# custom way of buffering jumps
 	if has_jumped_in_buffer_interval and not bounced:
@@ -116,9 +117,11 @@ func player_move(delta):
 			velocity.x = walljump_speed if last_collider_normal_x > 0 else -walljump_speed
 			player_is_wallsliding = false
 
+		elif not grounded:  # try airjump if in air
+			$AbilitySystem.use_ability("airjump")
 
-	if Input.is_action_just_pressed("airjump") and not grounded:  # try airjump if in air
-		$AbilitySystem.use_ability("airjump")
+	if Input.is_action_just_pressed("superjump"):
+		$AbilitySystem.use_ability("superjump")
 
 
 	# grounded character movement
@@ -151,35 +154,42 @@ func jump():
 	AudioPlayer.play_sound(AudioPlayer.JUMP)
 
 
+func superjump():
+	velocity.y = -jump_vel * superjump_factor
+	AudioPlayer.play_sound(AudioPlayer.SUPERJUMP)
+
+
 func do_any_bounce() -> bool:
 	var has_bounced = false
 	# handle bouncing off walls, jump up, perfect reflection of x vel
-	if player_is_wallsliding:
+	if player_is_wallsliding and abs(velocity.x) > walljump_speed:
 		if has_jumped_in_buffer_interval:
 			print("jump was pressed in the last interval, doing a wallhop " + str(Time.get_ticks_msec()))
 			# if they time the jump, player goes up instead of just reflecting
 			velocity.y = -jump_vel
 			velocity.x = abs(velocity.x) * last_collider_normal_x
 
-			if velocity.x > 0:
-				# velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
-				velocity.x = max(velocity.x, walljump_speed)
-			elif velocity.x < 0:
-				# velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
-				velocity.x = min(velocity.x, -walljump_speed)
+			# if velocity.x > 0:
+			# 	# velocity.x = -velocity.x * wallhop_bonus_factor - walljump_speed
+			# 	velocity.x = max(velocity.x, walljump_speed)
+			# elif velocity.x < 0:
+			# 	# velocity.x = -velocity.x * wallhop_bonus_factor + walljump_speed
+			# 	velocity.x = min(velocity.x, -walljump_speed)
 
 			has_bounced = true
 			has_jumped_in_buffer_interval = false  # consume the buffered jump
+			AudioPlayer.play_sound(AudioPlayer.WALLBOUNCE)
 			Logger.log_level_action(Logger.ACTIONS.WALLBOUNCE, "")
 
 
 	# bouncing off ground, bhopping, perfect preservation of x vel
 	# if the player presses jump within the interval in time, they get bonus velocity as well
-	if is_on_floor():
-		if Input.is_action_pressed("bounce"):
-			velocity.y = -jump_vel
-			has_bounced = true
-			Logger.log_level_action(Logger.ACTIONS.BOUNCE, "")
+	# if is_on_floor():
+	if raycast_is_on_floor() and not is_on_floor():
+		# if Input.is_action_pressed("bounce"):
+		# 	velocity.y = -jump_vel
+		# 	has_bounced = true
+		# 	Logger.log_level_action(Logger.ACTIONS.BOUNCE, "")
 		if has_jumped_in_buffer_interval:
 			velocity.y = -jump_vel
 			if velocity.x < 0:
@@ -188,6 +198,7 @@ func do_any_bounce() -> bool:
 				velocity.x += bhop_bonus
 
 			has_bounced = true
+			AudioPlayer.play_sound(AudioPlayer.WALLBOUNCE)
 			Logger.log_level_action(Logger.ACTIONS.BOUNCE, "")
 			has_jumped_in_buffer_interval = false  # consume the buffered jump
 
@@ -230,6 +241,10 @@ func reset_state():
 # cast a ray to check if the player body is on a wall or not
 func raycast_is_on_wall():
 	return $LeftWallRay.is_colliding() or $RightWallRay.is_colliding()
+
+
+func raycast_is_on_floor():
+	return $BottomRay.is_colliding()
 
 
 func _on_JumpTimer_timeout():

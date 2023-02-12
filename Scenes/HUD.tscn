@@ -53,8 +53,8 @@ margin_bottom = 72.0
 custom_fonts/font = SubResource( 1 )
 text = "Dash"
 
-[node name="Airjump" type="Label" parent="AbilityIndicator"]
+[node name="SuperJump" type="Label" parent="AbilityIndicator"]
 anchor_top = 0.4
 anchor_bottom = 0.4
 custom_fonts/font = SubResource( 1 )
-text = "Airjump"
+text = "SuperJump"
