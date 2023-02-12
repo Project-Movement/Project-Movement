@@ -3,14 +3,15 @@
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/StartZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Circus.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/EndZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Stopwatch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/KillZone.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Checkpoint.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scripts/Checkpoint.gd" type="Script" id=11]
 
 [node name="TutorialLevel" type="Node2D"]
 position = Vector2( -1324, 188 )
+script = ExtResource( 4 )
 
 [node name="Stopwatch" parent="." instance=ExtResource( 6 )]
 
@@ -26,21 +27,17 @@ scale = Vector2( 2.12002, 1.64 )
 
 [node name="Checkpoint" parent="SpecialZones" instance=ExtResource( 10 )]
 position = Vector2( 2013, 505 )
-script = ExtResource( 11 )
 
 [node name="Checkpoint3" parent="SpecialZones" instance=ExtResource( 10 )]
 position = Vector2( 4542, 185 )
-script = ExtResource( 11 )
 
 [node name="Checkpoint4" parent="SpecialZones" instance=ExtResource( 10 )]
 position = Vector2( 7439, 504 )
-script = ExtResource( 11 )
 
 [node name="Checkpoint2" parent="SpecialZones" instance=ExtResource( 10 )]
 visible = false
 position = Vector2( 168, 512 )
 scale = Vector2( 9.96, 1 )
-script = ExtResource( 11 )
 
 [node name="LevelText" type="Control" parent="."]
 margin_right = 40.0
@@ -225,7 +222,3 @@ scale = Vector2( 28.9, 20 )
 [connection signal="body_entered" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
 [connection signal="body_entered" from="SpecialZones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
-[connection signal="body_entered" from="SpecialZones/Checkpoint" to="SpecialZones/Checkpoint" method="_on_Checkpoint_body_entered"]
-[connection signal="body_entered" from="SpecialZones/Checkpoint3" to="SpecialZones/Checkpoint3" method="_on_Checkpoint_body_entered"]
-[connection signal="body_entered" from="SpecialZones/Checkpoint4" to="SpecialZones/Checkpoint4" method="_on_Checkpoint_body_entered"]
-[connection signal="body_entered" from="SpecialZones/Checkpoint2" to="SpecialZones/Checkpoint2" method="_on_Checkpoint_body_entered"]

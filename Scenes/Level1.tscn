@@ -5,11 +5,12 @@
 [ext_resource path="res://Scenes/KillZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/EndZone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/StartZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Level1.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Stopwatch.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Checkpoint.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scripts/Checkpoint.gd" type="Script" id=11]
 
 [node name="TestScene" type="Node2D"]
+script = ExtResource( 6 )
 
 [node name="Stopwatch" parent="." instance=ExtResource( 7 )]
 
@@ -34,7 +35,6 @@ scale = Vector2( 9.87788, 6.2459 )
 visible = false
 position = Vector2( 120, 456 )
 scale = Vector2( 12.2686, 0.590302 )
-script = ExtResource( 11 )
 
 [node name="KillZone2" parent="Zones" instance=ExtResource( 3 )]
 position = Vector2( 3552, 408 )
@@ -70,27 +70,21 @@ scale = Vector2( 10.2873, 1.09478 )
 
 [node name="Checkpoint2" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( -48, -1176 )
-script = ExtResource( 11 )
 
 [node name="Checkpoint3" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( 104, 1296 )
-script = ExtResource( 11 )
 
 [node name="Checkpoint4" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( -2824, 1280 )
-script = ExtResource( 11 )
 
 [node name="Checkpoint5" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( 3008, 864 )
-script = ExtResource( 11 )
 
 [node name="Checkpoint6" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( 3776, -312 )
-script = ExtResource( 11 )
 
 [node name="Checkpoint7" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( 1960, 112 )
-script = ExtResource( 11 )
 
 [node name="Stage" type="Node2D" parent="."]
 

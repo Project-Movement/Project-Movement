@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://Scripts/Globals.gd"
+Logger="*res://Scripts/Logger.gd"
 PlayerSpawner="*res://Scripts/PlayerSpawner.gd"
 AudioPlayer="*res://Scenes/AudioPlayer.tscn"
 
