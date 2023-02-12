@@ -63,6 +63,7 @@ rect_min_size = Vector2( 0, 40 )
 text = "Quit"
 
 [node name="DevSettings" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 8.0
 margin_top = 664.0
 margin_right = 128.0
