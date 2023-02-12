@@ -71,11 +71,13 @@ func do_dash():
 	if diff.x * parent_body.velocity.x < abs(diff.x * dash_magnitude):
 		parent_body.velocity.x = diff.x * dash_magnitude
 
+	AudioPlayer.play_sound(AudioPlayer.DASH)
+
 	ability_uses["dash"] -= 1
 
 
 func do_airjump():
-	parent_body.velocity.y = -parent_body.jump_vel
+	parent_body.jump()
 	ability_uses["airjump"] -= 1
 
 

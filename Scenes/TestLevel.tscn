@@ -112,6 +112,4 @@ position = Vector2( 3032, -880 )
 
 [connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
-[connection signal="body_entered" from="Zones/Checkpoint" to="Zones/Checkpoint" method="_on_Checkpoint_body_entered"]
-[connection signal="body_entered" from="Zones/Checkpoint2" to="Zones/Checkpoint2" method="_on_Checkpoint_body_entered"]
 [connection signal="body_entered" from="Zones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
