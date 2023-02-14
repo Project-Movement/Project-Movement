@@ -1,0 +1,224 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Elements/Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Level/Circus.gd" type="Script" id=4]
+[ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=10]
+
+[node name="TutorialLevel" type="Node2D"]
+position = Vector2( -1324, 188 )
+script = ExtResource( 4 )
+
+[node name="Stopwatch" parent="." instance=ExtResource( 6 )]
+
+[node name="SpecialZones" type="Node2D" parent="."]
+
+[node name="StartZone" parent="SpecialZones" instance=ExtResource( 3 )]
+position = Vector2( 167, 526 )
+scale = Vector2( 8.48002, 9 )
+
+[node name="EndZone" parent="SpecialZones" instance=ExtResource( 5 )]
+position = Vector2( 19935, 778 )
+scale = Vector2( 2.12002, 1.64 )
+
+[node name="Checkpoint" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 2013, 505 )
+
+[node name="Checkpoint3" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 4542, 185 )
+
+[node name="Checkpoint4" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 7439, 504 )
+
+[node name="Checkpoint2" parent="SpecialZones" instance=ExtResource( 10 )]
+visible = false
+position = Vector2( 168, 512 )
+scale = Vector2( 9.96, 1 )
+
+[node name="LevelText" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 168, 560 )
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="KillZone" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 632, 622 )
+rotation = 1.5708
+scale = Vector2( 10, -1 )
+
+[node name="KillZone6" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 632, -108 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone7" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 1046, 560 )
+rotation = 1.5708
+scale = Vector2( 10, -1 )
+
+[node name="KillZone8" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 1046, -204 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone9" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 1559, 476 )
+rotation = 1.5708
+scale = Vector2( 13, -1 )
+
+[node name="KillZone10" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 1558, -370 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone13" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 2626, -1142 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone14" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 3279, -847 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone11" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 2623, 101 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone12" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 3278, 412 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone15" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 3923, -651 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone16" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 3928, 605 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone17" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 6504, 444 )
+rotation = 1.5708
+scale = Vector2( 50, -1 )
+
+[node name="KillZone3" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 4816, 584 )
+scale = Vector2( 43.7029, -4.1655 )
+
+[node name="KillZone5" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 13706, 1075 )
+scale = Vector2( 600, -20 )
+
+[node name="KillZone4" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 5672, 7.27596e-12 )
+scale = Vector2( 43.7029, -4.1655 )
+
+[node name="Ground" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 2000, 896 )
+scale = Vector2( 200.523, 30 )
+
+[node name="Ground9" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 9926, -3104 )
+scale = Vector2( 1050, 30 )
+
+[node name="Ground3" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5864, 896 )
+scale = Vector2( 200.523, 30 )
+
+[node name="Ground4" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 10959, 1051 )
+scale = Vector2( 30, 30 )
+
+[node name="Ground6" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 13800, 1062 )
+scale = Vector2( 30, 30 )
+
+[node name="Ground8" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 20202, 1173 )
+scale = Vector2( 50, 30 )
+
+[node name="Ground7" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 16637, 1075 )
+scale = Vector2( 30, 30 )
+
+[node name="Ground2" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( -288, -808 )
+rotation = 1.57079
+scale = Vector2( 200.523, 30 )
+
+[node name="Ground5" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 20405, -1203 )
+rotation = 1.57079
+scale = Vector2( 210, 30 )
+
+[node name="Ground10" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 2219, -133 )
+scale = Vector2( 1.84, 50 )
+
+[node name="Ground17" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 4576, 472 )
+scale = Vector2( 28.9, 20 )
+
+[node name="Ground19" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5520, 168 )
+scale = Vector2( 28.9, 19.32 )
+
+[node name="Ground21" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5824, 168 )
+scale = Vector2( 28.9, 19.32 )
+
+[node name="KillZone18" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 9880, -1227 )
+scale = Vector2( 43.7029, -4.1655 )
+
+[node name="Ground22" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 9728, -1059 )
+scale = Vector2( 28.9, 19.32 )
+
+[node name="Ground23" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 10032, -1059 )
+scale = Vector2( 28.9, 19.32 )
+
+[node name="KillZone19" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 13339, -1848 )
+scale = Vector2( 43.7029, -4.1655 )
+
+[node name="Ground24" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 13187, -1680 )
+scale = Vector2( 28.9, 19.32 )
+
+[node name="Ground25" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 13491, -1680 )
+scale = Vector2( 28.9, 19.32 )
+
+[node name="KillZone20" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 17247, -1063 )
+scale = Vector2( 43.7029, -4.1655 )
+
+[node name="Ground26" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 17095, -895 )
+scale = Vector2( 28.9, 19.32 )
+
+[node name="Ground27" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 17399, -895 )
+scale = Vector2( 28.9, 19.32 )
+
+[node name="Ground20" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5528, 720 )
+scale = Vector2( 28.9, 20 )
+
+[connection signal="body_entered" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
+[connection signal="body_exited" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
+[connection signal="body_entered" from="SpecialZones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]

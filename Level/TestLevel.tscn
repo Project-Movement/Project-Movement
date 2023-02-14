@@ -1,0 +1,117 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Elements/Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Elements/Checkpoint.gd" type="Script" id=10]
+[ext_resource path="res://Level/TestLevel.gd" type="Script" id=11]
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource( 11 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 440, 368 )
+
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="Ground" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1544, 528 )
+scale = Vector2( 160.953, 2.36 )
+
+[node name="Ground2" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 3136, -272 )
+rotation = -1.57079
+scale = Vector2( 81.96, 2.36 )
+
+[node name="Ground3" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -48, -272 )
+rotation = -1.57079
+scale = Vector2( 81.96, 2.36 )
+
+[node name="Ground15" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -3008, -728 )
+rotation = -1.57079
+scale = Vector2( 81.96, 2.36 )
+
+[node name="Ground4" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 904, 296 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground5" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 904, 128 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground11" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2336, 432 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground12" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2864, 280 )
+scale = Vector2( 29.1972, 2.26442 )
+
+[node name="Ground10" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1864, -176 )
+rotation = 1.57079
+scale = Vector2( 14.9297, 2.21431 )
+
+[node name="Ground6" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1376, -48 )
+scale = Vector2( 50.2097, 2.21431 )
+
+[node name="Ground7" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 440, -288 )
+scale = Vector2( 50.2097, 2.21431 )
+
+[node name="Ground14" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -1528, -1064 )
+scale = Vector2( 150, 2.214 )
+
+[node name="Ground9" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2656, -800 )
+scale = Vector2( 50.2097, 2.37431 )
+
+[node name="Ground8" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1944, 344 )
+scale = Vector2( 26.3422, 16.5692 )
+
+[node name="Ground13" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 472, 464 )
+scale = Vector2( 11.4521, 5.95382 )
+
+[node name="KillZone" parent="Stage" instance=ExtResource( 3 )]
+position = Vector2( 904, 496 )
+rotation = 3.14159
+scale = Vector2( 17.029, 0.827618 )
+
+[node name="KillZone2" parent="Stage" instance=ExtResource( 3 )]
+position = Vector2( 1648, 472 )
+rotation = 1.57079
+scale = Vector2( 3.23217, -3.2639 )
+
+[node name="Stopwatch" parent="." instance=ExtResource( 6 )]
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="StartZone" parent="Zones" instance=ExtResource( 7 )]
+position = Vector2( 472, 376 )
+
+[node name="Checkpoint" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( -57.0442, -1183.6 )
+script = ExtResource( 10 )
+
+[node name="Checkpoint2" parent="Zones" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 472, 368 )
+scale = Vector2( 10.12, 0.4 )
+script = ExtResource( 10 )
+
+[node name="EndZone" parent="Zones" instance=ExtResource( 8 )]
+position = Vector2( 3032, -880 )
+
+[connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
+[connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
+[connection signal="body_entered" from="Zones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
