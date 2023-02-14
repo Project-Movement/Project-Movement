@@ -3,6 +3,7 @@ extends Node2D
 
 var max_dashes: int = Globals.max_dashes
 var max_airjumps: int = Globals.max_airjumps
+var max_superjumps: int = Globals.max_superjumps
 
 var ability_timers = {}
 var ability_uses = {}
@@ -13,24 +14,28 @@ onready var parent_body = get_parent()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ability_timers["dash"] = $DashTimer
+	ability_timers["superjump"] = $SuperJumpTimer
 	# ability_timers[ABILITIES.AIRJUMP] =
 	# ability_timers[ABILITIES.GRAPPLEHOOK] =
 
 	ability_uses["airjump"] = max_airjumps
 	ability_uses["dash"] = max_dashes
+	ability_uses["superjump"] = max_superjumps
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	# for checking abilities that are dependent on the world, like double jump
-	if parent_body.is_on_floor():
+	if parent_body.is_on_floor() or parent_body.raycast_is_on_floor():
 		ability_uses["airjump"] = max_airjumps
 
 
 func reset_state():
 	ability_uses["airjump"] = max_airjumps
 	ability_uses["dash"] = max_dashes
+	ability_uses["superjump"] = max_superjumps
 	$DashTimer.stop()
+	$SuperJumpTimer.stop()
 	# $DashTimer.time_left = 0
 
 
@@ -52,6 +57,9 @@ func use_ability(ability: String) -> bool:
 				ability_timers["dash"].start()
 			"airjump":
 				do_airjump()
+			"superjump":
+				do_superjump()
+				ability_timers["superjump"].start()
 	else:
 		Logger.log_level_action(Logger.ACTIONS.ON_COOLDOWN, JSON.print({"ability": ability}))
 
@@ -84,6 +92,13 @@ func do_airjump():
 	parent_body.jump()
 	ability_uses["airjump"] -= 1
 
+func do_superjump():
+	Logger.log_level_action(Logger.ACTIONS.SUPERJUMP, "")
+	parent_body.superjump()
+	ability_uses["superjump"] -= 1
 
 func _on_DashTimer_timeout():
 	ability_uses["dash"] = max_dashes
+
+func _on_SuperJumpTimer_timeout():
+	ability_uses["superjump"] = max_superjumps

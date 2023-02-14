@@ -42,14 +42,20 @@ script = ExtResource( 6 )
 [node name="WallJumpLeniencyTimer" type="Timer" parent="PlayerBody"]
 
 [node name="LeftWallRay" type="RayCast2D" parent="PlayerBody"]
-position = Vector2( -16, -1 )
+position = Vector2( -20, -1 )
 enabled = true
 cast_to = Vector2( 0, 32 )
 
 [node name="RightWallRay" type="RayCast2D" parent="PlayerBody"]
-position = Vector2( 16, -1 )
+position = Vector2( 20, -1 )
 enabled = true
 cast_to = Vector2( 0, 32 )
+
+[node name="BottomRay" type="RayCast2D" parent="PlayerBody"]
+position = Vector2( -14, 37 )
+rotation = -1.57079
+enabled = true
+cast_to = Vector2( 0, 28 )
 
 [node name="PlayerAudio" parent="PlayerBody" instance=ExtResource( 7 )]
 
