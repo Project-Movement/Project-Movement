@@ -1,6 +1,5 @@
 extends Node
-## You should autoload but make sure to call [method initialize] before
-## using the logging methods in this class
+## You should autoload this class, and fill in _ready with your information
 
 var VERSION = 2
 
@@ -12,6 +11,8 @@ enum ACTIONS {
 	WALLJUMP = 6,
 	BOUNCE = 7,
 	ON_COOLDOWN = 8,
+	WALLBOUNCE = 9,
+	SUPERJUMP = 10,
 
 	LEAVE_START = 40,
 	ENTER_START = 41,
@@ -47,8 +48,8 @@ var currentLevelSeqInSession: int
 var currentActionSeqInSession: int
 var currentActionSeqInLevel: int
 
-var timestampOfPrevLevelStart: Dictionary
-var timestampOfPrevAction: Dictionary = Time.get_datetime_dict_from_system()
+var timestampOfPrevLevelStart: int
+var timestampOfPrevAction: int = cur_time_millis()
 
 var levelActionBuffer: Array
 
@@ -131,7 +132,7 @@ func start_new_session_with_uuid(userId: String):
 		"eid": 0,
 		"cid": self.categoryId,
 		"pl_detail": {},
-		"client_ts": OS.get_unix_time(),
+		"client_ts": cur_time_millis(),
 		"uid": self.currentUserId,
 		"g_name": self.gameName,
 		"gid": self.gameId,
@@ -166,7 +167,7 @@ func log_level_start(levelId: int, details: String):
 	print("log level start " + str(levelId))
 	self.flush_buffered_level_actions()
 
-	self.timestampOfPrevLevelStart = Time.get_datetime_dict_from_system()
+	self.timestampOfPrevLevelStart = cur_time_millis()
 	self.currentActionSeqInLevel = 0
 	self.currentLevelId = levelId
 	self.currentDqid = ""
@@ -219,8 +220,8 @@ func log_level_end(details: String):
 func log_level_action(actionId: int, details: String):
 	if not Globals.LOGGING_ENABLED:
 		return
-	var timestampOfAction = Time.get_unix_time_from_datetime_dict(Time.get_datetime_dict_from_system())
-	var relativeTime = timestampOfAction - Time.get_unix_time_from_datetime_dict(self.timestampOfPrevLevelStart)
+	var timestampOfAction = cur_time_millis()
+	var relativeTime = timestampOfAction - self.timestampOfPrevLevelStart
 
 	var individualAction = {
 		"detail": details,
@@ -233,11 +234,11 @@ func log_level_action(actionId: int, details: String):
 	}
 	self.levelActionBuffer.append(individualAction)
 
-	var timeSinceLastAction = timestampOfAction - Time.get_unix_time_from_datetime_dict(self.timestampOfPrevAction)
+	var timeSinceLastAction = timestampOfAction - cur_time_millis()
 	if levelActionBuffer.size() >= 5 or timeSinceLastAction > 2000:
 		self.flush_buffered_level_actions()
 
-	self.timestampOfPrevAction = Time.get_datetime_dict_from_system()
+	self.timestampOfPrevAction = cur_time_millis()
 
 
 func log_action_with_no_level(actionId: int, details: String):
@@ -246,7 +247,7 @@ func log_action_with_no_level(actionId: int, details: String):
 	var actionNoLevelData = {
 		"session_seqid": ++self.currentActionSeqInSession,
 		"cid": self.categoryId,
-		"client_ts": OS.get_unix_time(),
+		"client_ts": cur_time_millis(),
 		"aid": actionId,
 		"vid": self.versionNumber,
 		"uid": self.currentUserId,
@@ -299,7 +300,7 @@ func compose_url(suffix: String) -> String:
 
 func get_common_data() -> Dictionary:
 	return {
-		"client_ts": OS.get_unix_time(),
+		"client_ts": cur_time_millis(),
 		"cid": self.categoryId,
 		"svid": 2,
 		"lid": 0,
@@ -340,6 +341,14 @@ func encoded_data(value: String):
 
 func in_session() -> bool:
 	return self.currentSessionId != null
+
+
+func cur_time_millis() -> int:
+	return int(total_milliseconds(Time.get_unix_time_from_system()))
+
+
+func total_milliseconds(unix_timestamp: float):
+	return unix_timestamp * 1000
 
 # Code from https://github.com/binogure-studio/godot-uuid
 
