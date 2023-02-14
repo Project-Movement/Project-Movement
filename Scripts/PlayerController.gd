@@ -65,7 +65,7 @@ func _input(event):
 	if event.is_action("return_title"):
 		Logger.log_level_action(Logger.ACTIONS.QUIT_LEVEL, "")
 		Logger.log_level_end("")
-		var _a = get_tree().change_scene("res://Scenes/TitleScreen.tscn")
+		SceneChanger.change_to_nonlevel("res://Scenes/TitleScreen.tscn")
 
 
 func player_move(delta):

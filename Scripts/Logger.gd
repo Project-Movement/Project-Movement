@@ -26,16 +26,6 @@ enum ACTIONS {
 	ENTER_DEV_SETTINGS = 500
 }
 
-enum LEVELS {
-	TUTORIAL_BASIC = 900,
-	TUTORIAL_ADVANCED = 901,
-	TESTLEVEL = 902,
-	TUTORAL_ADVANCED2 = 903,
-	LEVEL1 = 1,
-	DEARYOU_WALLJUMP = 2,
-	CIRCUS = 3,
-}
-
 
 const prdUrl: String = "https://integration.centerforgamescience.org/cgs/apps/games/v2/index.php/"
 # const prdUrl: String = "http://127.0.0.1:8888/"
