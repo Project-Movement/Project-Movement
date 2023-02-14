@@ -5,7 +5,7 @@
 [ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Level/Level1.gd" type="Script" id=6]
+[ext_resource path="res://Levels/Level1.gd" type="Script" id=6]
 [ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=9]
 

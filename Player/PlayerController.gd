@@ -41,7 +41,7 @@ var last_collider_normal_x = 0
 var last_direction = 0
 var grounded: bool = false
 
-const AbilitySystem = preload("res://Scripts/AbilitySystem.gd")
+const AbilitySystem = preload("res://Player/AbilitySystem.gd")
 
 
 func _ready():
@@ -63,7 +63,7 @@ func _input(event):
 	if event.is_action("return_title"):
 		Logger.log_level_action(Logger.ACTIONS.QUIT_LEVEL, "")
 		Logger.log_level_end(str(Logger.cur_time_millis()))
-		var _a = get_tree().change_scene("res://Scenes/TitleScreen.tscn")
+		var _a = get_tree().change_scene("res://Interface/TitleScreen.tscn")
 
 
 func player_move(delta):

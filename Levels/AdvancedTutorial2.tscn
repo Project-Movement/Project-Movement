@@ -3,7 +3,7 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Elements/Ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Level/AdvancedTutorial.gd" type="Script" id=4]
+[ext_resource path="res://Levels/AdvancedTutorial2.gd" type="Script" id=4]
 [ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-Bold.ttf" type="DynamicFontData" id=8]
@@ -21,7 +21,6 @@ default_font = SubResource( 2 )
 script = ExtResource( 4 )
 
 [node name="Stopwatch" parent="." instance=ExtResource( 6 )]
-visible = false
 
 [node name="SpecialZones" type="Node2D" parent="."]
 
@@ -34,10 +33,13 @@ position = Vector2( 10952, 720 )
 scale = Vector2( 2.12002, 1.64 )
 
 [node name="Checkpoint" parent="SpecialZones" instance=ExtResource( 10 )]
-position = Vector2( 2696, 200 )
+position = Vector2( 1806, 504 )
+
+[node name="Checkpoint4" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 3052, 503 )
 
 [node name="Checkpoint3" parent="SpecialZones" instance=ExtResource( 10 )]
-position = Vector2( 6888, 512 )
+position = Vector2( 6236, 504 )
 
 [node name="Checkpoint2" parent="SpecialZones" instance=ExtResource( 10 )]
 visible = false
@@ -48,48 +50,21 @@ scale = Vector2( 9.96, 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Label4" type="Label" parent="LevelText"]
-margin_left = 2008.0
-margin_top = 472.0
-margin_right = 2445.0
-margin_bottom = 551.0
-theme = SubResource( 1 )
-text = "'R' TO RESTART"
-
-[node name="Label5" type="Label" parent="LevelText"]
-margin_left = 2624.0
-margin_top = 48.0
-margin_right = 2800.0
-margin_bottom = 127.0
-theme = SubResource( 1 )
-text = "CHECKPOINT"
-
-[node name="Label6" type="Label" parent="LevelText"]
-margin_left = 3104.0
-margin_top = 112.0
-margin_right = 3359.0
-margin_bottom = 191.0
-theme = SubResource( 1 )
-text = "'W' TO AIRJUMP
-'LEFTCLICK' TO DASH TOWARDS MOUSE"
-
 [node name="Label9" type="Label" parent="LevelText"]
-margin_left = 6992.0
-margin_top = 208.0
-margin_right = 7723.0
-margin_bottom = 410.0
+margin_left = 7008.0
+margin_top = 248.0
+margin_right = 7360.0
+margin_bottom = 409.0
 theme = SubResource( 1 )
-text = "HOLD 'SHIFT' TO BOUNCE
-YOU DONT LOSE SPEED WHEN BOUNCING
-
-BUILD UP SOME SPEED BY DASHING AND
-BOUNCING TO MAKE IT ACROSS THIS GAP"
+text = "BUILD UP SPEED:
+JUMP AND DASH
+TO BOUNCE FORWARD"
 
 [node name="Label10" type="Label" parent="LevelText"]
-margin_left = 7912.0
-margin_top = 616.0
-margin_right = 8337.0
-margin_bottom = 777.0
+margin_left = 8031.0
+margin_top = 242.0
+margin_right = 8456.0
+margin_bottom = 403.0
 theme = SubResource( 1 )
 text = "TIP: IT IS BETTER TO DASH
   AT AN UPWARD ANGLE FOR
@@ -102,53 +77,66 @@ margin_right = 11025.0
 margin_bottom = 567.0
 theme = SubResource( 1 )
 text = "END OF TUTORIAL
-'ESC' TO RETURN TO TITLE"
+'ESC' TO GO BACK TO TITLE"
 
 [node name="Label7" type="Label" parent="LevelText"]
-margin_left = 1536.0
-margin_top = 464.0
-margin_right = 1825.0
-margin_bottom = 543.0
+margin_left = 1312.0
+margin_top = 315.0
+margin_right = 1618.0
+margin_bottom = 435.0
 theme = SubResource( 1 )
-text = "STICK TO WALL AND
-JUMP TO WALLJUMP"
+text = "TO WALL JUMP:
+STICK TO THE WALL 
+AND PRESS SPACE"
+
+[node name="Label11" type="Label" parent="LevelText"]
+margin_left = 2559.0
+margin_top = 294.0
+margin_right = 2882.0
+margin_bottom = 455.0
+theme = SubResource( 1 )
+text = "SINGLE WALL JUMP:
+CLICK SPACE AND
+CLICK DASH TO STICK
+BACK TO THE WALL"
+
+[node name="Label12" type="Label" parent="LevelText"]
+margin_left = 3569.0
+margin_top = 36.0
+margin_right = 3977.0
+margin_bottom = 197.0
+theme = SubResource( 1 )
+text = "JUMP + DASH TO LONG JUMP
+"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 168, 560 )
 
 [node name="Level" type="Node2D" parent="."]
 
-[node name="KillZone" parent="Level" instance=ExtResource( 9 )]
-position = Vector2( 1184, 592 )
-scale = Vector2( 13.7083, -1 )
-
 [node name="KillZone2" parent="Level" instance=ExtResource( 9 )]
-position = Vector2( 3648, 584 )
+position = Vector2( 4548, 551 )
 scale = Vector2( 64.8683, -4.56 )
-
-[node name="KillZone3" parent="Level" instance=ExtResource( 9 )]
-position = Vector2( 4816, 584 )
-scale = Vector2( 43.7029, -4.1655 )
 
 [node name="KillZone5" parent="Level" instance=ExtResource( 9 )]
 position = Vector2( 8664, 1264 )
 scale = Vector2( 256.517, -14.5437 )
 
-[node name="KillZone4" parent="Level" instance=ExtResource( 9 )]
-position = Vector2( 5672, 7.27596e-12 )
-scale = Vector2( 43.7029, -4.1655 )
-
 [node name="Ground" parent="Level" instance=ExtResource( 2 )]
 position = Vector2( 2000, 896 )
 scale = Vector2( 200.523, 30 )
+
+[node name="Ground6" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5512, -3075 )
+scale = Vector2( 610, 30 )
 
 [node name="Ground3" parent="Level" instance=ExtResource( 2 )]
 position = Vector2( 5864, 896 )
 scale = Vector2( 200.523, 30 )
 
 [node name="Ground4" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 12520, 1112 )
-scale = Vector2( 200.523, 30 )
+position = Vector2( 11119, 1114 )
+scale = Vector2( 60, 30 )
 
 [node name="Ground2" parent="Level" instance=ExtResource( 2 )]
 position = Vector2( -288, -808 )
@@ -156,73 +144,32 @@ rotation = 1.57079
 scale = Vector2( 200.523, 30 )
 
 [node name="Ground5" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 11416, -808 )
+position = Vector2( 11419, -1285 )
 rotation = 1.57079
-scale = Vector2( 200.523, 30 )
-
-[node name="Ground6" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 656, 568 )
-
-[node name="Ground7" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 928, 568 )
-
-[node name="Ground8" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 1056, 568 )
-scale = Vector2( 3, 10 )
-
-[node name="Ground9" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 1296, 568 )
-scale = Vector2( 3, 10 )
+scale = Vector2( 210, 30 )
 
 [node name="Ground10" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 1928, 424 )
-scale = Vector2( 1.84, 29 )
-
-[node name="Ground12" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 6632, 384 )
-scale = Vector2( 1.59106, 27.6006 )
-
-[node name="Ground13" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 1600, 152 )
-scale = Vector2( 1.84, 28.56 )
-
-[node name="Ground16" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 2752, 472 )
-scale = Vector2( 28.9, 20 )
-
-[node name="Ground17" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 4576, 472 )
-scale = Vector2( 28.9, 20 )
-
-[node name="Ground19" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 5520, 168 )
-scale = Vector2( 28.9, 19.32 )
-
-[node name="Ground21" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 5824, 168 )
-scale = Vector2( 28.9, 19.32 )
-
-[node name="Ground20" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 5528, 720 )
-scale = Vector2( 28.9, 20 )
+position = Vector2( 1269, 200 )
+scale = Vector2( 1.84, 40 )
 
 [node name="Ground11" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 1704, 432 )
-rotation = -1.57079
-scale = Vector2( 0.56, 9.44 )
+position = Vector2( 2510, 195 )
+scale = Vector2( 1.84, 40 )
 
-[node name="Ground14" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 1704, 264 )
-rotation = -1.57079
-scale = Vector2( 0.56, 9.44 )
+[node name="Ground13" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 1052, 39 )
+scale = Vector2( 1.84, 40 )
 
-[node name="Ground15" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 2088, 336 )
-rotation = -1.57079
-scale = Vector2( 0.56, 9.44 )
+[node name="Ground16" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 3640, 425 )
+scale = Vector2( 28.9, 20 )
+
+[node name="Ground20" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5482, 355 )
+scale = Vector2( 28.9, 25 )
 
 [node name="Ground18" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 3648, 376 )
+position = Vector2( 4565, 164 )
 rotation = -1.57079
 scale = Vector2( 0.56, 14.04 )
 
