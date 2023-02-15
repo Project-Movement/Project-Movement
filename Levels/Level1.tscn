@@ -1,0 +1,313 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Elements/Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Levels/Level1.gd" type="Script" id=6]
+[ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=9]
+
+[node name="TestScene" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Stopwatch" parent="." instance=ExtResource( 7 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 120, 472 )
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="KillZone" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( -1312, 1432 )
+scale = Vector2( 136.286, 4.01769 )
+
+[node name="EndZone" parent="Zones" instance=ExtResource( 4 )]
+position = Vector2( 4328, -2352 )
+scale = Vector2( 3.84623, 2.61985 )
+
+[node name="StartZone" parent="Zones" instance=ExtResource( 5 )]
+position = Vector2( 120, 480 )
+scale = Vector2( 9.87788, 6.2459 )
+
+[node name="Checkpoint" parent="Zones" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 120, 456 )
+scale = Vector2( 12.2686, 0.590302 )
+
+[node name="KillZone2" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3552, 408 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone3" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3264, 88 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone4" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3568, -632 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone8" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( -3160, -1504 )
+scale = Vector2( 13.2073, 1.09478 )
+
+[node name="KillZone9" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( -4248, -648 )
+scale = Vector2( 13.2073, 1.09478 )
+
+[node name="KillZone5" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3280, -1048 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone6" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3584, -1568 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="KillZone7" parent="Zones" instance=ExtResource( 3 )]
+position = Vector2( 3272, -2072 )
+scale = Vector2( 10.2873, 1.09478 )
+
+[node name="Checkpoint2" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( -48, -1176 )
+
+[node name="Checkpoint3" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( 104, 1296 )
+
+[node name="Checkpoint4" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( -2824, 1280 )
+
+[node name="Checkpoint5" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( 3008, 864 )
+
+[node name="Checkpoint6" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( 3776, -312 )
+
+[node name="Checkpoint7" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( 1960, 112 )
+
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="Ground" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1544, 528 )
+scale = Vector2( 160.953, 2.36 )
+
+[node name="Ground2" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 3172, -944 )
+rotation = -1.57079
+scale = Vector2( 150, 2.36 )
+
+[node name="Ground3" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -48, -272 )
+rotation = -1.57079
+scale = Vector2( 81.96, 2.36 )
+
+[node name="Ground39" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 3642, 607 )
+rotation = -1.57079
+scale = Vector2( 81.96, 2.36 )
+
+[node name="Ground44" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 3674, -1393 )
+rotation = -1.57079
+scale = Vector2( 80, 2.36 )
+
+[node name="Ground15" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -3014, -459 )
+rotation = -1.57079
+scale = Vector2( 120, 2.36 )
+
+[node name="Ground4" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 904, 344 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground5" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2536, -32 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground52" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2152, -168 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground51" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2928, 96 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground50" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1328, 288 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground11" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2344, 416 )
+scale = Vector2( 14.7697, 2.21431 )
+
+[node name="Ground12" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2864, 280 )
+scale = Vector2( 29.1972, 2.26442 )
+
+[node name="Ground10" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1864, -176 )
+rotation = 1.57079
+scale = Vector2( 14.9297, 2.21431 )
+
+[node name="Ground42" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 4228, -392 )
+rotation = 1.57079
+scale = Vector2( 20, 2.214 )
+
+[node name="Ground46" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 4654, -2587 )
+rotation = 1.57079
+scale = Vector2( 40, 2.214 )
+
+[node name="Ground48" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 3170, -2700 )
+rotation = 1.57079
+scale = Vector2( 25, 2.214 )
+
+[node name="Ground6" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1376, -48 )
+scale = Vector2( 50.2097, 2.21431 )
+
+[node name="Ground7" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 440, -288 )
+scale = Vector2( 50.2097, 2.21431 )
+
+[node name="Ground14" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -1528, -1064 )
+scale = Vector2( 150, 2.214 )
+
+[node name="Ground9" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2656, -800 )
+scale = Vector2( 50.2097, 2.21431 )
+
+[node name="Ground8" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1944, 344 )
+scale = Vector2( 26.3422, 16.5692 )
+
+[node name="Ground36" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 722, 1238 )
+scale = Vector2( 10, 16.569 )
+
+[node name="Ground38" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 2059, 1222 )
+scale = Vector2( 10, 16.569 )
+
+[node name="Ground37" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1375, 1095 )
+scale = Vector2( 10, 30 )
+
+[node name="Ground13" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 472, 464 )
+scale = Vector2( 11.4521, 6.15382 )
+
+[node name="Ground16" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1352, -1296 )
+scale = Vector2( 50.2097, 2.21431 )
+
+[node name="Ground17" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -1530, -1246 )
+scale = Vector2( 26.3422, 16.5692 )
+
+[node name="Ground18" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -3013, -2206 )
+rotation = 1.57079
+scale = Vector2( 25, 2.36 )
+
+[node name="Ground19" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -4393, -859 )
+rotation = -1.57079
+scale = Vector2( 160, 2.36 )
+
+[node name="Ground25" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -4032, 1062 )
+rotation = 0.724312
+scale = Vector2( 50, 2.36 )
+
+[node name="Ground20" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -608, -2448 )
+scale = Vector2( 380, 2.214 )
+
+[node name="Ground21" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -4072, -1600 )
+scale = Vector2( 31.08, 2.214 )
+
+[node name="Ground23" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -4108, 66 )
+scale = Vector2( 26.44, 2.214 )
+
+[node name="Ground24" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -3293, 61 )
+scale = Vector2( 25.76, 2.214 )
+
+[node name="Ground40" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 3066, 961 )
+scale = Vector2( 25, 2.214 )
+
+[node name="Ground22" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -3418, -858 )
+scale = Vector2( 40, 2.214 )
+
+[node name="Ground41" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 3952, -200 )
+scale = Vector2( 30, 2.214 )
+
+[node name="Ground45" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 4173, -2184 )
+scale = Vector2( 50, 2.214 )
+
+[node name="Ground43" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 3952, -600 )
+scale = Vector2( 30, 2.214 )
+
+[node name="Ground47" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 3899, -2968 )
+scale = Vector2( 75, 2.214 )
+
+[node name="Ground26" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -3170, 1382 )
+scale = Vector2( 50, 2.214 )
+
+[node name="Ground35" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 1827, 1409 )
+scale = Vector2( 180, 2.214 )
+
+[node name="Ground27" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -2375, 1123 )
+scale = Vector2( 20, 2.214 )
+
+[node name="Ground28" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -2820, 731 )
+scale = Vector2( 20, 2.214 )
+
+[node name="Ground29" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -2381, 421 )
+scale = Vector2( 20, 2.214 )
+
+[node name="Ground30" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -2148, -39 )
+scale = Vector2( 20, 2.214 )
+
+[node name="Ground31" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -1180, -289 )
+scale = Vector2( 20, 2.214 )
+
+[node name="Ground49" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( 525, -764 )
+scale = Vector2( 20, 2.214 )
+
+[node name="Ground33" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -266, -1 )
+scale = Vector2( 20, 2.214 )
+
+[node name="Ground34" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -1032, 693 )
+scale = Vector2( 20, 2.214 )
+
+[node name="Ground32" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -2801, -391 )
+scale = Vector2( 20, 2.214 )
+
+[connection signal="body_entered" from="Zones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
+[connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
+[connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
