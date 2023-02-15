@@ -62,8 +62,7 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action("return_title"):
 		Logger.log_level_action(Logger.ACTIONS.QUIT_LEVEL, "")
-		Logger.log_level_end(str(Logger.cur_time_millis()))
-		var _a = get_tree().change_scene("res://Interface/TitleScreen.tscn")
+		SceneChanger.change_to_nonlevel("res://Interface/TitleScreen.tscn")
 
 
 func player_move(delta):

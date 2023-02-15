@@ -17,9 +17,11 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://AutoloadScripts/Globals.gd"
+Levels="*res://AutoloadScripts/Levels.gd"
 Logger="*res://AutoloadScripts/Logger.gd"
 PlayerSpawner="*res://AutoloadScripts/PlayerSpawner.gd"
 AudioPlayer="*res://Audio/AudioPlayer.tscn"
+SceneChanger="*res://AutoloadScripts/SceneChanger.gd"
 
 [display]
 
