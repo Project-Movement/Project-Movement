@@ -20,4 +20,4 @@ func _on_TextEditDash_text_changed():
 
 
 func _on_Back_pressed():
-	SceneChanger.change_to_nonlevel("res://Scenes/TitleScreen.tscn")
+	SceneChanger.change_to_nonlevel("res://Interface/TitleScreen.tscn")

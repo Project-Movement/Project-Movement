@@ -7,7 +7,6 @@
 [ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Elements/Checkpoint.gd" type="Script" id=10]
 
 [node name="TestLevel" type="Node2D"]
 
