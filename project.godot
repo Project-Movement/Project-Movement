@@ -11,17 +11,17 @@ config_version=4
 [application]
 
 config/name="ProjectMovement"
-run/main_scene="res://Scenes/TitleScreen.tscn"
+run/main_scene="res://Interface/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Globals="*res://Scripts/Globals.gd"
-Levels="*res://Scripts/Levels.gd"
-Logger="*res://Scripts/Logger.gd"
-PlayerSpawner="*res://Scripts/PlayerSpawner.gd"
-AudioPlayer="*res://Scenes/AudioPlayer.tscn"
-SceneChanger="*res://Scripts/SceneChanger.gd"
+Globals="*res://AutoloadScripts/Globals.gd"
+Levels="*res://AutoloadScripts/Levels.gd"
+Logger="*res://AutoloadScripts/Logger.gd"
+PlayerSpawner="*res://AutoloadScripts/PlayerSpawner.gd"
+AudioPlayer="*res://Audio/AudioPlayer.tscn"
+SceneChanger="*res://AutoloadScripts/SceneChanger.gd"
 
 [display]
 
