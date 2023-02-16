@@ -9,14 +9,13 @@ var ability_timers = {}
 var ability_uses = {}
 
 onready var parent_body = get_parent()
+onready var dash_ability = $Dash
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ability_timers["dash"] = $DashTimer
+	ability_timers["dash"] = $Dash/DashCooldownTimer
 	ability_timers["superjump"] = $SuperJumpTimer
-	# ability_timers[ABILITIES.AIRJUMP] =
-	# ability_timers[ABILITIES.GRAPPLEHOOK] =
 
 	ability_uses["airjump"] = max_airjumps
 	ability_uses["dash"] = max_dashes
@@ -34,14 +33,21 @@ func reset_state():
 	ability_uses["airjump"] = max_airjumps
 	ability_uses["dash"] = max_dashes
 	ability_uses["superjump"] = max_superjumps
-	$DashTimer.stop()
-	$SuperJumpTimer.stop()
-	# $DashTimer.time_left = 0
+
+	$Dash.o_velocity = Vector2.ZERO
+	$Dash.end_dash()
+
+	for timer in ability_timers.values():
+		timer.stop()
 
 
 func is_ability_available(ability: String) -> bool:
 	# print("tried to use ability " + ability + " with " + str(ability_uses[ability]) + " uses left")
-	return ability_uses[ability] > 0
+	match ability:
+		"dash":
+			return ability_uses[ability] > 0 and not dash_ability.is_dashing()
+		_:
+			return ability_uses[ability] > 0
 
 
 func get_ability_time_left(ability: String) -> float:
@@ -73,14 +79,22 @@ func do_dash():
 	var dash_magnitude = parent_body.dash_magnitude
 
 	# apply impulse for dash
-	parent_body.velocity += diff * dash_magnitude
+	# var t_velocity = parent_body.velocity + diff * dash_magnitude
+	var t_velocity = diff * dash_magnitude
+	var cur_vel_alignment: float = max(0, parent_body.velocity.dot(diff))
+	var cur_vel_in_direction_of_dash: Vector2 = cur_vel_alignment * diff
+	var dash_vel = t_velocity + cur_vel_in_direction_of_dash
+	print(cur_vel_in_direction_of_dash)
 	# dash minimums - if result after adding isn't as high as base magnitude
 	# force it to be the base magnitude
 	# so the dash will enfore minimum speed after using it
-	if diff.y * parent_body.velocity.y < abs(diff.y * dash_magnitude):
-		parent_body.velocity.y = diff.y * dash_magnitude
-	if diff.x * parent_body.velocity.x < abs(diff.x * dash_magnitude):
-		parent_body.velocity.x = diff.x * dash_magnitude
+	# if diff.y * t_velocity.y < abs(diff.y * dash_magnitude):
+	# 	t_velocity.y = diff.y * dash_magnitude
+	# if diff.x * t_velocity.x < abs(diff.x * dash_magnitude):
+	# 	t_velocity.x = diff.x * dash_magnitude
+
+	$Dash.start_dash(parent_body.dash_duration, parent_body.get_node("Sprite"), dash_vel, cur_vel_in_direction_of_dash + (t_velocity * parent_body.dash_magnitude_leftover))
+	# $Dash.start_dash(parent_body.dash_duration, parent_body.get_node("Sprite"), t_velocity, t_velocity * parent_body.dash_magnitude_leftover)
 
 	AudioPlayer.play_sound(AudioPlayer.DASH)
 
