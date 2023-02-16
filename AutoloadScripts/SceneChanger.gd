@@ -1,6 +1,7 @@
 extends Node
 
 var cur_level = -1
+var prev_level = -1
 
 
 ## Handles changing to a level scene, setting cur_level to one of the consts in
@@ -18,6 +19,7 @@ func change_to_level(level: int):
 ## Handles changing to a non-level scene, automatically logging level end
 ## if we were in a level
 func change_to_nonlevel(scene: String):
+	prev_level = cur_level
 	if cur_level != -1:
 		Logger.log_level_end(str(Time.get_ticks_msec()))
 		cur_level = -1

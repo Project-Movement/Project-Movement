@@ -12,6 +12,7 @@ func _process(delta):
 
 	# $Time.text = "%02d:%05.2f" % [minutes, time]
 	$Time.text = "%02d:%05.2f" % [minutes, fmod(time, 60.0)]
+	Globals.time = "%02d:%05.2f" % [minutes, fmod(time, 60.0)]
 
 
 func reset():
