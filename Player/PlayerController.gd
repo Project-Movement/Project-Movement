@@ -60,6 +60,19 @@ func _ready():
 	$WallJumpLeniencyTimer.one_shot = true
 
 
+func _process(delta):
+	play_animation()
+
+func play_animation():
+	var dir = Input.get_axis("left", "right")
+	if (dir == 0):
+		$AnimationPlayer.play("idle")
+	else:
+		$Sprite.flip_h = dir < 0
+		$AnimationPlayer.play("walk")
+	if (not is_on_floor()):
+		$AnimationPlayer.play("jump")
+
 func _physics_process(delta):
 	player_move(delta)
 	last_tick_vel = move_and_slide(velocity, Vector2.UP)

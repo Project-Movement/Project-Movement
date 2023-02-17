@@ -17,6 +17,7 @@ one_shot = true
 one_shot = true
 
 [node name="DashGhostTimer" type="Timer" parent="Dash"]
+wait_time = 0.01
 
 [node name="SuperJumpTimer" type="Timer" parent="."]
 wait_time = 4.0
