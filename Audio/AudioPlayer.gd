@@ -1,5 +1,6 @@
 extends Node
 
+var enabled = true
 
 # onready var STEP: = preload("res://Sounds/footstep_carpet_001.ogg")
 var STEP
@@ -31,6 +32,8 @@ func _ready():
 
 
 func play_sound(sound):
+	if not enabled:
+		return
 	for stream_player in sfx_players.get_children():
 		if not stream_player.playing:
 			# print(stream_player.name)
@@ -41,6 +44,8 @@ func play_sound(sound):
 
 # non-diegetic sounds, play to different channel
 func play_ui_sound(sound):
+	if not enabled:
+		return
 	for stream_player in ui_sfx_players.get_children():
 		if not stream_player.playing:
 			# print(stream_player.name)

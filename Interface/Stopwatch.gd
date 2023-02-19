@@ -46,6 +46,7 @@ func _on_StartZone_body_exited(_body:Node):
 		print("exited start zone")
 		start()
 
+
 func _on_EndZone_body_entered(_body:Node):
 	if _body.name == "PlayerBody":
 		Logger.log_level_action(Logger.ACTIONS.ENTER_END, "")
