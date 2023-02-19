@@ -13,10 +13,38 @@
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 440, 368 )
 
+[node name="Stopwatch" parent="." instance=ExtResource( 6 )]
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="Checkpoint3" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( -160, 424 )
+
+[node name="Checkpoint4" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( -512, 424 )
+
+[node name="StartZone" parent="Zones" instance=ExtResource( 7 )]
+position = Vector2( 472, 376 )
+
+[node name="Checkpoint" parent="Zones" instance=ExtResource( 9 )]
+position = Vector2( -57.0442, -1183.6 )
+
+[node name="Checkpoint2" parent="Zones" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 472, 368 )
+scale = Vector2( 10.12, 0.4 )
+
+[node name="EndZone" parent="Zones" instance=ExtResource( 8 )]
+position = Vector2( 3032, -880 )
+
 [node name="Stage" type="Node2D" parent="."]
 
 [node name="Ground" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( 1544, 528 )
+scale = Vector2( 160.953, 2.36 )
+
+[node name="Ground16" parent="Stage" instance=ExtResource( 2 )]
+position = Vector2( -1632, 528 )
 scale = Vector2( 160.953, 2.36 )
 
 [node name="Ground2" parent="Stage" instance=ExtResource( 2 )]
@@ -25,9 +53,9 @@ rotation = -1.57079
 scale = Vector2( 81.96, 2.36 )
 
 [node name="Ground3" parent="Stage" instance=ExtResource( 2 )]
-position = Vector2( -48, -272 )
+position = Vector2( -48, -624 )
 rotation = -1.57079
-scale = Vector2( 81.96, 2.36 )
+scale = Vector2( 46.68, 2.36 )
 
 [node name="Ground15" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( -3008, -728 )
@@ -88,24 +116,6 @@ scale = Vector2( 17.029, 0.827618 )
 position = Vector2( 1648, 472 )
 rotation = 1.57079
 scale = Vector2( 3.23217, -3.2639 )
-
-[node name="Stopwatch" parent="." instance=ExtResource( 6 )]
-
-[node name="Zones" type="Node2D" parent="."]
-
-[node name="StartZone" parent="Zones" instance=ExtResource( 7 )]
-position = Vector2( 472, 376 )
-
-[node name="Checkpoint" parent="Zones" instance=ExtResource( 9 )]
-position = Vector2( -57.0442, -1183.6 )
-
-[node name="Checkpoint2" parent="Zones" instance=ExtResource( 9 )]
-visible = false
-position = Vector2( 472, 368 )
-scale = Vector2( 10.12, 0.4 )
-
-[node name="EndZone" parent="Zones" instance=ExtResource( 8 )]
-position = Vector2( 3032, -880 )
 
 [connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
