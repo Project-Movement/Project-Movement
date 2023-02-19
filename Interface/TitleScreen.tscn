@@ -103,7 +103,7 @@ margin_bottom = 712.0
 text = "dev setting"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Tutorial" to="." method="go_tutorial"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Tutorial(Advanced)" to="." method="go_tutorial_2"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Tutorial(Advanced)" to="." method="go_tutorial2"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/DearYouWalljump" to="." method="go_dearYouWallJump"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Circus" to="." method="go_circus"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Level3" to="." method="go_level3"]
