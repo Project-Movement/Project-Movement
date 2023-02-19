@@ -85,16 +85,9 @@ func do_dash():
 	var cur_vel_in_direction_of_dash: Vector2 = cur_vel_alignment * diff
 	var dash_vel = t_velocity + cur_vel_in_direction_of_dash
 	print(cur_vel_in_direction_of_dash)
-	# dash minimums - if result after adding isn't as high as base magnitude
-	# force it to be the base magnitude
-	# so the dash will enfore minimum speed after using it
-	# if diff.y * t_velocity.y < abs(diff.y * dash_magnitude):
-	# 	t_velocity.y = diff.y * dash_magnitude
-	# if diff.x * t_velocity.x < abs(diff.x * dash_magnitude):
-	# 	t_velocity.x = diff.x * dash_magnitude
+	var dash_residue = t_velocity * parent_body.dash_magnitude_leftover
 
-	$Dash.start_dash(parent_body.dash_duration, parent_body.get_node("Sprite"), dash_vel, cur_vel_in_direction_of_dash + (t_velocity * parent_body.dash_magnitude_leftover))
-	# $Dash.start_dash(parent_body.dash_duration, parent_body.get_node("Sprite"), t_velocity, t_velocity * parent_body.dash_magnitude_leftover)
+	$Dash.start_dash(parent_body.dash_duration, parent_body.get_node("Sprite"), dash_vel, cur_vel_in_direction_of_dash + dash_residue)
 
 	AudioPlayer.play_sound(AudioPlayer.DASH)
 

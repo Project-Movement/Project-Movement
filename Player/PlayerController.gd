@@ -23,9 +23,9 @@ export var wallslide_leniency_time = 0.2
 
 
 # abilities
-export var dash_magnitude: int = 600  # how much the dash moves
+export var dash_magnitude: int = 900  # how much the dash moves
 export var dash_duration: float = 0.1  # how long the dash lasts for
-export var dash_magnitude_leftover: float = 0.4
+export var dash_magnitude_leftover: float = 0.3
 export var superjump_factor: float = 2  # how much greater in magnitude the superjump is
 
 
