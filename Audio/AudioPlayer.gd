@@ -14,6 +14,13 @@ onready var LANDING: = preload("Sounds/impactPlank_medium_004.ogg")
 onready var SUPERJUMP: = preload("Sounds/laserLarge_001.ogg")
 onready var WALLBOUNCE: = preload("Sounds/bounce.wav")
 
+onready var CLICK1: = preload("Sounds/click_001.ogg")
+onready var CLICK2: = preload("Sounds/click_002.ogg")
+onready var DROP1: = preload("Sounds/drop_001.ogg")
+onready var DROP2: = preload("Sounds/drop_002.ogg")
+onready var DROP3: = preload("Sounds/drop_003.ogg")
+onready var DROP4: = preload("Sounds/drop_004.ogg")
+
 
 onready var sfx_players: = $SFXPlayers
 onready var ui_sfx_players: = $UISFX

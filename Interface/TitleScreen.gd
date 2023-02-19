@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 
 
@@ -27,4 +27,8 @@ func _on_DevSettings_pressed():
 
 
 func _on_TutorialAdvance_pressed():
+	pass # Replace with function body.
+
+
+func go_tutorial_2():
 	pass # Replace with function body.
