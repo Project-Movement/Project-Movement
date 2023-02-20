@@ -20,11 +20,11 @@ func _on_Checkpoint_body_entered(_body:Node):
 			particles.global_position = _body.global_position
 			particles.restart()
 			enable()
-			var checkpoints = get_tree().get_nodes_in_group("Checkpoint")
-			# print(checkpoints)
-			for ckpt in checkpoints:
-				if not ckpt == self:
-					ckpt.disable()
+		var checkpoints = get_tree().get_nodes_in_group("Checkpoint")
+		# print(checkpoints)
+		for ckpt in checkpoints:
+			if not ckpt == self:
+				ckpt.disable()
 		PlayerSpawner.set_spawn_position(pos)
 
 

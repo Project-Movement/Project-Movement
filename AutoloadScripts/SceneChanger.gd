@@ -40,7 +40,7 @@ func change_to_nonlevel(scene: String):
 
 	# TODO changing scene can err, might need to be handled
 	var _a = get_tree().change_scene(scene);
-	disable_audio_1tick()
+	# disable_audio_1tick()
 	if _a == ERR_CANT_OPEN:
 		printerr("scene changing failed: couldn't open scene")
 	elif _a == ERR_CANT_CREATE:
