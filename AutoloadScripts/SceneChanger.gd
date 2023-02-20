@@ -15,12 +15,23 @@ func change_to_level(level: int):
 	# TODO changing scene can err, might need to be handled
 	var _a = get_tree().change_scene(Levels.get_scene_name(level));
 
+	if _a == ERR_CANT_OPEN:
+		printerr("scene changing failed: couldn't open scene")
+	elif _a == ERR_CANT_CREATE:
+		printerr("scene changing failed: couldn't create scene")
+
 ## Handles changing to a non-level scene, automatically logging level end
 ## if we were in a level
 func change_to_nonlevel(scene: String):
 	if cur_level != -1:
 		Logger.log_level_end(str(Time.get_ticks_msec()))
 		cur_level = -1
+	print("changing to " + scene)
 
 	# TODO changing scene can err, might need to be handled
 	var _a = get_tree().change_scene(scene);
+
+	if _a == ERR_CANT_OPEN:
+		printerr("scene changing failed: couldn't open scene")
+	elif _a == ERR_CANT_CREATE:
+		printerr("scene changing failed: couldn't create scene")
