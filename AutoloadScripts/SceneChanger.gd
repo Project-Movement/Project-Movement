@@ -14,6 +14,7 @@ func change_to_level(level: int):
 	cur_level = level
 	# TODO changing scene can err, might need to be handled
 	var _a = get_tree().change_scene(Levels.get_scene_name(level));
+	# disable_audio_1tick()
 
 ## Handles changing to a non-level scene, automatically logging level end
 ## if we were in a level
@@ -24,3 +25,10 @@ func change_to_nonlevel(scene: String):
 
 	# TODO changing scene can err, might need to be handled
 	var _a = get_tree().change_scene(scene);
+	disable_audio_1tick()
+
+
+func disable_audio_1tick():
+	AudioPlayer.enabled = false
+	yield(get_tree().create_timer(0), "timeout")
+	AudioPlayer.enabled = true

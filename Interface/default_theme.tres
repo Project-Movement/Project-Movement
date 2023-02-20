@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=6 format=2]
+
+[ext_resource path="res://Interface/TitleScreen_buttonhover.tres" type="StyleBox" id=1]
+[ext_resource path="res://Interface/TitleScreen_buttonpressed.tres" type="StyleBox" id=2]
+[ext_resource path="res://Interface/TitleScreen_button.tres" type="StyleBox" id=3]
+[ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-Light.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 36
+font_data = ExtResource( 4 )
+
+[resource]
+default_font = SubResource( 1 )
+Button/styles/hover = ExtResource( 1 )
+Button/styles/normal = ExtResource( 3 )
+Button/styles/pressed = ExtResource( 2 )
