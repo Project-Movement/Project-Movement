@@ -89,12 +89,13 @@ theme = SubResource( 1 )
 text = "CHECKPOINT"
 
 [node name="W" type="Label" parent="LevelText"]
-margin_left = 2147.0
-margin_top = 370.0
-margin_right = 2589.0
-margin_bottom = 449.0
+margin_left = 2112.0
+margin_top = 336.0
+margin_right = 2894.0
+margin_bottom = 456.0
 theme = SubResource( 1 )
-text = "'SPACE' + 'W' TO AIRJUMP
+text = "'SPACE' TWICE TO DOUBLE JUMP
+DOUBLE JUMP REFRESHES WHEN TOUCHING THE GROUND
 "
 
 [node name="Dash" type="Label" parent="LevelText"]

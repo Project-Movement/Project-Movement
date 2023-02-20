@@ -55,8 +55,18 @@ margin_right = 7360.0
 margin_bottom = 409.0
 theme = SubResource( 1 )
 text = "BUILD UP SPEED:
-JUMP AND DASH
-TO BOUNCE FORWARD"
+TIME YOUR JUMPS TO BOUNCE
+AND KEEP YOUR SPEED FROM
+DASHING"
+
+[node name="Label14" type="Label" parent="LevelText"]
+margin_left = 5184.0
+margin_top = -136.0
+margin_right = 5643.0
+margin_bottom = 25.0
+theme = SubResource( 1 )
+text = "DON'T KNOW WHAT LIES AHEAD?
+PRESS 'C' TO LOOK AROUND"
 
 [node name="Label10" type="Label" parent="LevelText"]
 margin_left = 8031.0
@@ -74,8 +84,7 @@ margin_top = 488.0
 margin_right = 11025.0
 margin_bottom = 567.0
 theme = SubResource( 1 )
-text = "END OF TUTORIAL
-'ESC' TO GO BACK TO TITLE"
+text = "END OF TUTORIAL"
 
 [node name="Label7" type="Label" parent="LevelText"]
 margin_left = 1312.0
@@ -93,10 +102,20 @@ margin_top = 294.0
 margin_right = 2882.0
 margin_bottom = 455.0
 theme = SubResource( 1 )
-text = "SINGLE WALL JUMP:
-CLICK SPACE AND
-CLICK DASH TO STICK
-BACK TO THE WALL"
+text = "WALL CLIMB:
+ATER WALLJUMPING,
+DASH UPWARDS BACK
+TO THE WALL TO
+CLIMB IT"
+
+[node name="Label13" type="Label" parent="LevelText"]
+margin_left = 3080.0
+margin_top = 256.0
+margin_right = 3304.0
+margin_bottom = 384.0
+theme = SubResource( 1 )
+text = "PRESS 'W' TO
+SUPERJUMP"
 
 [node name="Label12" type="Label" parent="LevelText"]
 margin_left = 3569.0
@@ -104,7 +123,7 @@ margin_top = 36.0
 margin_right = 3977.0
 margin_bottom = 197.0
 theme = SubResource( 1 )
-text = "JUMP + DASH TO LONG JUMP
+text = "JUMP + DASH FOR A LONGER JUMP
 "
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
