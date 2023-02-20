@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/AniSpriteSheet.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Player/AbilitySystem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/PlayerCamera.gd" type="Script" id=6]
 [ext_resource path="res://Player/PlayerAudio.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Interface/LevelMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15, 31.5 )
@@ -80,6 +81,9 @@ tracks/0/keys = {
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 script = ExtResource( 4 )
+
+[node name="LevelMenu" parent="HUD" instance=ExtResource( 8 )]
+visible = false
 
 [node name="PlayerBody" type="KinematicBody2D" parent="."]
 script = ExtResource( 1 )
