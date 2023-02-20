@@ -51,7 +51,7 @@ margin_bottom = 600.0
 margin_right = 510.0
 margin_bottom = 400.0
 size_flags_horizontal = 3
-custom_constants/separation = 15
+custom_constants/separation = 5
 
 [node name="Level Select" parent="MarginContainer/VBoxContainer/HBoxContainer/Options" instance=ExtResource( 5 )]
 margin_right = 510.0
@@ -61,26 +61,26 @@ scene_name = "res://Interface/LevelSelect.tscn"
 is_level = false
 
 [node name="Settings" parent="MarginContainer/VBoxContainer/HBoxContainer/Options" instance=ExtResource( 5 )]
-margin_top = 63.0
+margin_top = 53.0
 margin_right = 510.0
-margin_bottom = 111.0
+margin_bottom = 101.0
 text = "Settings"
 align = 0
 scene_name = "res://Interface/Settings.tscn"
 is_level = false
 
 [node name="Credits" parent="MarginContainer/VBoxContainer/HBoxContainer/Options" instance=ExtResource( 5 )]
-margin_top = 126.0
+margin_top = 106.0
 margin_right = 510.0
-margin_bottom = 174.0
+margin_bottom = 154.0
 text = "Credits"
 align = 0
 scene_name = "res://Interface/Credits.tscn"
 is_level = false
 
 [node name="Quit" parent="MarginContainer/VBoxContainer/HBoxContainer/Options" instance=ExtResource( 8 )]
-margin_top = 189.0
-margin_bottom = 237.0
+margin_top = 159.0
+margin_bottom = 207.0
 text = "Quit"
 align = 0
 
