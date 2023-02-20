@@ -12,6 +12,7 @@ func _process(delta):
 
 	# $Time.text = "%02d:%05.2f" % [minutes, time]
 	$Time.text = "%02d:%05.2f" % [minutes, fmod(time, 60.0)]
+	Globals.time = "%02d:%05.2f" % [minutes, fmod(time, 60.0)]
 
 
 func reset():
@@ -45,6 +46,7 @@ func _on_StartZone_body_exited(_body:Node):
 		Logger.log_level_action(Logger.ACTIONS.LEAVE_START, "")
 		print("exited start zone")
 		start()
+
 
 func _on_EndZone_body_entered(_body:Node):
 	if _body.name == "PlayerBody":

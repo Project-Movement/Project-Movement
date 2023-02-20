@@ -23,7 +23,9 @@ export var wallslide_leniency_time = 0.2
 
 
 # abilities
-export var dash_magnitude: int = 400  # how much the dash moves
+export var dash_magnitude: int = 900  # how much the dash moves
+export var dash_duration: float = 0.1  # how long the dash lasts for
+export var dash_magnitude_leftover: float = 0.3
 export var superjump_factor: float = 2  # how much greater in magnitude the superjump is
 
 
@@ -41,6 +43,10 @@ var last_collider_normal_x = 0
 var last_direction = 0
 var grounded: bool = false
 
+var controls_enabled = true
+var constant_forces_enabled = true
+var friction_enabled = true
+
 const AbilitySystem = preload("res://Player/AbilitySystem.gd")
 
 
@@ -53,6 +59,19 @@ func _ready():
 	$WallJumpLeniencyTimer.wait_time = wallslide_leniency_time
 	$WallJumpLeniencyTimer.one_shot = true
 
+
+func _process(delta):
+	play_animation()
+
+func play_animation():
+	var dir = Input.get_axis("left", "right") if controls_enabled else 0.0
+	if (dir == 0):
+		$AnimationPlayer.play("idle")
+	else:
+		$Sprite.flip_h = dir < 0
+		$AnimationPlayer.play("walk")
+	if (not is_on_floor()):
+		$AnimationPlayer.play("jump")
 
 func _physics_process(delta):
 	player_move(delta)
@@ -79,7 +98,7 @@ func player_move(delta):
 
 
 	# handle jump and double jump (midair jump)
-	if Input.is_action_just_pressed("jump"):
+	if c_action_just_pressed("jump"):
 		has_jumped_in_buffer_interval = true
 		$JumpTimer.start()
 
@@ -119,32 +138,34 @@ func player_move(delta):
 		elif not grounded:  # try airjump if in air
 			$AbilitySystem.use_ability("airjump")
 
-	if Input.is_action_just_pressed("superjump"):
+	if c_action_just_pressed("superjump"):
 		$AbilitySystem.use_ability("superjump")
 
 
 	# grounded character movement
 	if grounded and not bounced:
-		if Input.is_action_pressed("right"):
+		if c_action_pressed("right"):
 			velocity.x += h_accel_ground * delta
 			velocity.x = min(velocity.x, 300)
-		if Input.is_action_pressed("left"):
+		if c_action_pressed("left"):
 			velocity.x -= h_accel_ground * delta
 			velocity.x = max(velocity.x, -300)
 
 	else:  # not grounded, in air
-		if Input.is_action_pressed("right") and velocity.x < max_h_air_influence_speed:
+		if c_action_pressed("right") and velocity.x < max_h_air_influence_speed:
 			velocity.x += h_accel_air * delta
-		if Input.is_action_pressed("left") and velocity.x > -max_h_air_influence_speed:
+		if c_action_pressed("left") and velocity.x > -max_h_air_influence_speed:
 			velocity.x -= h_accel_air * delta
 
 	# dash
-	if Input.is_action_just_pressed("dash"):
+	if c_action_just_pressed("dash"):
 		$AbilitySystem.use_ability("dash")
 
 	# do other movement kinematics calculations
-	apply_constant_forces(delta)  # like gravity
-	apply_frictions(delta, bounced)  # and friction
+	if constant_forces_enabled:
+		apply_constant_forces(delta)  # like gravity
+	if friction_enabled:
+		apply_frictions(delta, bounced)  # and friction
 
 
 func jump():
@@ -213,7 +234,7 @@ func apply_frictions(delta, bounced):
 		elif abs(velocity.x) > max_grounded_speed:
 			friction = exceeding_ground_friction
 		else:
-			friction = 0 if Input.is_action_pressed("left") or Input.is_action_pressed("right") else ground_friction
+			friction = 0 if c_action_pressed("left") or c_action_pressed("right") else ground_friction
 
 		if velocity.x > 0:
 			velocity.x = max(0, velocity.x + -friction * delta)
@@ -248,6 +269,34 @@ func raycast_is_on_floor():
 
 func _on_JumpTimer_timeout():
 	has_jumped_in_buffer_interval = false
+
+
+# custom action pressed check
+func c_action_pressed(action: String):
+	if controls_enabled:
+		return Input.is_action_pressed(action)
+
+
+func c_action_just_pressed(action: String):
+	if controls_enabled:
+		return Input.is_action_just_pressed(action)
+
+
+func set_controls_enabled(b: bool):
+	controls_enabled = b
+
+
+func set_constant_forces_enabled(b: bool):
+	constant_forces_enabled = b
+
+
+func set_friction_enabled(b: bool):
+	friction_enabled = b
+
+
+func override_velocity(v: Vector2):
+	self.velocity = v
+	self.last_tick_vel = v
 
 
 func _on_WallJumpLeniencyTimer_timeout():
