@@ -1,6 +1,7 @@
 extends Button
 
-## A button which will upon press change the level
+## A button which will upon press change the level. If the scene is a level
+## you should use the level's name from Levels.gd, otherwise the path to it.
 export var scene_name: String = ""
 export var is_level: bool = true  # IMPORTANT! set this boolean depending on if the text will change to level or not
 
