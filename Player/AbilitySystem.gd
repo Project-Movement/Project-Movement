@@ -81,12 +81,25 @@ func do_dash():
 	# apply impulse for dash
 	# var t_velocity = parent_body.velocity + diff * dash_magnitude
 	var t_velocity = diff * dash_magnitude
-	var cur_vel_alignment: float = max(0, parent_body.velocity.dot(diff))
-	var cur_vel_in_direction_of_dash: Vector2 = cur_vel_alignment * diff
-	var dash_vel = t_velocity + cur_vel_in_direction_of_dash
-	print(cur_vel_in_direction_of_dash)
-	var dash_residue = t_velocity * parent_body.dash_magnitude_leftover
+	# var cur_vel_alignment: float = max(0, parent_body.velocity.dot(diff))
+	# var cur_vel_in_direction_of_dash: Vector2 = cur_vel_alignment * diff
+	# var dash_vel = t_velocity + cur_vel_in_direction_of_dash
+	var existing_x = parent_body.velocity.x if parent_body.velocity.x * diff.x > 0 else 0.0
+	var existing_y = parent_body.velocity.y if parent_body.velocity.y * diff.y > 0 else 0.0
+	# var cur_x = existing_x * diff
+	var cur_vel_in_direction_of_dash = Vector2(existing_x, existing_y)
 
+	var dash_vel = t_velocity + cur_vel_in_direction_of_dash
+	# enforce dash minimums again?
+	if dash_vel.length() < dash_magnitude:
+		dash_vel *= (dash_magnitude / dash_vel.length())
+
+	# print(cur_vel_in_direction_of_dash)
+	var dash_residue = t_velocity * parent_body.dash_magnitude_leftover
+	# var dash_residue = dash_vel * parent_body.dash_magnitude_leftover
+
+
+	# $Dash.start_dash(parent_body.dash_duration, parent_body.get_node("Sprite"), dash_vel, cur_vel_in_direction_of_dash + dash_residue)
 	$Dash.start_dash(parent_body.dash_duration, parent_body.get_node("Sprite"), dash_vel, cur_vel_in_direction_of_dash + dash_residue)
 
 	AudioPlayer.play_sound(AudioPlayer.DASH)

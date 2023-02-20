@@ -56,7 +56,7 @@ var levelActionBuffer: Array
 var session_started = false
 
 func _ready():
-	# Globals.LOGGING_ENABLED = false if OS.is_debug_build() else true  # comment this out for logging in debug builds
+	Globals.LOGGING_ENABLED = false if OS.is_debug_build() else true  # comment this out for logging in debug builds
 	var cid = 1 if OS.is_debug_build() else VERSION
 	self.initialize(202304, "group04", "3b45e8ea6b313e516d18679e04be7779", cid)
 	# start_new_session()
