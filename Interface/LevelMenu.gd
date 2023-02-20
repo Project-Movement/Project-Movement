@@ -1,5 +1,8 @@
 extends Control
 
+export (NodePath) var end_time
+
+
 onready var next_level_button: = $"ColorRect/CenterContainer/VBoxContainer/VBoxContainer/Next level"
 
 
@@ -8,7 +11,8 @@ func _process(_delta):
 		visible = true
 		# get_tree().paused = true
 		$"../../PlayerBody".set_controls_enabled(false)
-		get_node("ColorRect/CenterContainer/VBoxContainer/EndTime").text = "Time: " + Globals.time
+		# get_node("ColorRect/CenterContainer/VBoxContainer/VBoxContainer2/EndTime").text = "Time: " + Globals.time
+		get_node(end_time).text = "Time: " + Globals.time
 		if not SceneChanger.has_next_level():
 			next_level_button.visible = false
 
