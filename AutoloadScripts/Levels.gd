@@ -11,6 +11,8 @@ enum {
 	CIRCUS = 3,
 }
 
+var levels_list: Array = [TUTORIAL_BASIC, TUTORIAL_ADVANCED2, DEARYOU_WALLJUMP, CIRCUS, LEVEL1]
+
 onready var level_to_filename = {
 	TUTORIAL_BASIC:     "res://Levels/Tutorial.tscn",
 	TUTORIAL_ADVANCED:  "res://Levels/AdvancedTutorial.tscn",

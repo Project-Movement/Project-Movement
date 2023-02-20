@@ -64,7 +64,7 @@ func _process(delta):
 	play_animation()
 
 func play_animation():
-	var dir = Input.get_axis("left", "right")
+	var dir = Input.get_axis("left", "right") if controls_enabled else 0.0
 	if (dir == 0):
 		$AnimationPlayer.play("idle")
 	else:

@@ -1,6 +1,6 @@
 extends Node2D
 
-func _process(delta):
+func _process(_delta):
 	get_node("ColorRect/CenterContainer/VBoxContainer/EndTime").text = "Time: " + Globals.time
 
 
