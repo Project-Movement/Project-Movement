@@ -1,80 +1,106 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Interface/TitleScreen.gd" type="Script" id=1]
-[ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-ExtraBold.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Interface/TitleBoxes.gd" type="Script" id=3]
+[ext_resource path="res://Interface/font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Interface/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Resources/Project_Movement_2.png" type="Texture" id=4]
+[ext_resource path="res://Interface/MenuButton.tscn" type="PackedScene" id=8]
 
-[sub_resource type="DynamicFont" id=1]
-size = 60
-font_data = ExtResource( 2 )
-
-[node name="TitleScreen" type="Node2D"]
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
 script = ExtResource( 1 )
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-margin_right = 1280.0
-margin_bottom = 720.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0235294, 0, 0.0666667, 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 352.0
-margin_top = 188.0
-margin_right = 928.0
-margin_bottom = 532.0
-alignment = 1
-script = ExtResource( 3 )
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 80
+custom_constants/margin_top = 40
+custom_constants/margin_left = 80
+custom_constants/margin_bottom = 80
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 80.0
+margin_top = 40.0
+margin_right = 1200.0
+margin_bottom = 640.0
+custom_constants/separation = 30
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 modulate = Color( 0.333333, 0.921569, 0.882353, 1 )
-margin_right = 576.0
-margin_bottom = 80.0
-custom_fonts/font = SubResource( 1 )
+margin_right = 1120.0
+margin_bottom = 170.0
+size_flags_vertical = 7
+custom_fonts/font = ExtResource( 2 )
 text = "PROJECT MOVEMENT"
-align = 1
 valign = 1
 
-[node name="Tutorial(Basic)" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 84.0
-margin_right = 576.0
-margin_bottom = 124.0
-rect_min_size = Vector2( 0, 40 )
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 200.0
+margin_right = 1120.0
+margin_bottom = 600.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 510.0
+margin_bottom = 400.0
+size_flags_horizontal = 3
+
+[node name="Options" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 510.0
+margin_bottom = 338.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="Tutorial" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
 text = "Tutorial (Basic)"
+align = 0
 
-[node name="Tutorial(Advance)" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 128.0
-margin_right = 576.0
-margin_bottom = 168.0
-rect_min_size = Vector2( 0, 40 )
-text = "Tutorial (Advance)"
+[node name="Tutorial(Advanced)" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
+margin_top = 58.0
+margin_bottom = 106.0
+text = "Tutorial (Advanced)"
+align = 0
 
-[node name="DearYouWallJump" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 172.0
-margin_right = 576.0
-margin_bottom = 212.0
-rect_min_size = Vector2( 200, 40 )
+[node name="DearYouWalljump" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
+margin_top = 116.0
+margin_bottom = 164.0
 text = "Dear You Wall Jump"
+align = 0
 
-[node name="Circus" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 216.0
-margin_right = 576.0
-margin_bottom = 256.0
-rect_min_size = Vector2( 0, 40 )
+[node name="Circus" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
+margin_top = 174.0
+margin_bottom = 222.0
 text = "Circus"
+align = 0
 
-[node name="ChaosLevel" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 260.0
-margin_right = 576.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 0, 40 )
+[node name="Level3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
+margin_top = 232.0
+margin_bottom = 280.0
 text = "Level3"
+align = 0
 
-[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 304.0
-margin_right = 576.0
-margin_bottom = 344.0
-rect_min_size = Vector2( 0, 40 )
+[node name="Quit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
+margin_top = 290.0
+margin_bottom = 338.0
 text = "Quit"
+align = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 514.0
+margin_right = 1120.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 606, 400 )
+rect_clip_content = true
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 4 )
+expand = true
 
 [node name="DevSettings" type="Button" parent="."]
 visible = false
@@ -85,12 +111,10 @@ margin_right = 128.0
 margin_bottom = 712.0
 text = "dev setting"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Tutorial(Basic)" to="." method="go_tutorial"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Tutorial(Advance)" to="." method="go_tutorial2"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/DearYouWallJump" to="." method="go_dearYouWallJump"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Circus" to="." method="go_circus"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/ChaosLevel" to="." method="go_level3"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="quit"]
-[connection signal="button_down" from="DevSettings" to="." method="_on_DevSettings_button_down"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Tutorial" to="." method="go_tutorial"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Tutorial(Advanced)" to="." method="go_tutorial2"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/DearYouWalljump" to="." method="go_dearYouWallJump"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Circus" to="." method="go_circus"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Level3" to="." method="go_level3"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Quit" to="." method="quit"]
 [connection signal="pressed" from="DevSettings" to="." method="_on_DevSettings_pressed"]
-[connection signal="toggled" from="DevSettings" to="." method="_on_DevSettings_toggled"]
