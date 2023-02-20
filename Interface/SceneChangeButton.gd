@@ -1,12 +1,16 @@
-extends Button
+extends DefaultButton
+# class_name SceneChangeButton
 
 ## A button which will upon press change the level. If the scene is a level
 ## you should use the level's name from Levels.gd, otherwise the path to it.
+
+### name of scene enum variant in Levels.gd, or path to non-level scene
 export var scene_name: String = ""
+### if the scene this button should take you to is a level or not
 export var is_level: bool = true  # IMPORTANT! set this boolean depending on if the text will change to level or not
 
 
-func _on_LevelButton_pressed():
+func _on_SceneChangeButton_pressed():
 	if scene_name == "":
 		printerr("button pressed with no scene name " + str(self))
 		return

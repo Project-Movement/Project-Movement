@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Interface/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://Interface/font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Interface/default_theme.tres" type="Theme" id=3]
 [ext_resource path="res://Resources/Project_Movement_2.png" type="Texture" id=4]
-[ext_resource path="res://Interface/MenuButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Interface/SceneChangeButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Interface/DefaultButton.tscn" type="PackedScene" id=8]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -46,48 +47,40 @@ margin_top = 200.0
 margin_right = 1120.0
 margin_bottom = 600.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Options" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 510.0
 margin_bottom = 400.0
 size_flags_horizontal = 3
+custom_constants/separation = 15
 
-[node name="Options" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Level Select" parent="MarginContainer/VBoxContainer/HBoxContainer/Options" instance=ExtResource( 5 )]
 margin_right = 510.0
-margin_bottom = 338.0
-size_flags_horizontal = 3
-custom_constants/separation = 10
-
-[node name="Tutorial" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
-text = "Tutorial (Basic)"
+text = "Level Select"
 align = 0
+scene_name = "res://Interface/LevelSelect.tscn"
+is_level = false
 
-[node name="Tutorial(Advanced)" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
-margin_top = 58.0
-margin_bottom = 106.0
-text = "Tutorial (Advanced)"
+[node name="Settings" parent="MarginContainer/VBoxContainer/HBoxContainer/Options" instance=ExtResource( 5 )]
+margin_top = 63.0
+margin_right = 510.0
+margin_bottom = 111.0
+text = "Settings"
 align = 0
+scene_name = "res://Interface/Settings.tscn"
+is_level = false
 
-[node name="DearYouWalljump" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
-margin_top = 116.0
-margin_bottom = 164.0
-text = "Dear You Wall Jump"
+[node name="Credits" parent="MarginContainer/VBoxContainer/HBoxContainer/Options" instance=ExtResource( 5 )]
+margin_top = 126.0
+margin_right = 510.0
+margin_bottom = 174.0
+text = "Credits"
 align = 0
+scene_name = "res://Interface/Credits.tscn"
+is_level = false
 
-[node name="Circus" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
-margin_top = 174.0
-margin_bottom = 222.0
-text = "Circus"
-align = 0
-
-[node name="Level3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
-margin_top = 232.0
-margin_bottom = 280.0
-text = "Level3"
-align = 0
-
-[node name="Quit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options" instance=ExtResource( 8 )]
-margin_top = 290.0
-margin_bottom = 338.0
+[node name="Quit" parent="MarginContainer/VBoxContainer/HBoxContainer/Options" instance=ExtResource( 8 )]
+margin_top = 189.0
+margin_bottom = 237.0
 text = "Quit"
 align = 0
 
@@ -111,10 +104,5 @@ margin_right = 128.0
 margin_bottom = 712.0
 text = "dev setting"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Tutorial" to="." method="go_tutorial"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Tutorial(Advanced)" to="." method="go_tutorial2"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/DearYouWalljump" to="." method="go_dearYouWallJump"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Circus" to="." method="go_circus"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Level3" to="." method="go_level3"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Options/Quit" to="." method="quit"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Options/Quit" to="." method="quit"]
 [connection signal="pressed" from="DevSettings" to="." method="_on_DevSettings_pressed"]

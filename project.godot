@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Button",
+"class": "DefaultButton",
+"language": "GDScript",
+"path": "res://Interface/DefaultButton.gd"
+} ]
+_global_script_class_icons={
+"DefaultButton": ""
+}
+
 [application]
 
 config/name="ProjectMovement"
