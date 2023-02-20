@@ -30,6 +30,24 @@ func change_to_nonlevel(scene: String):
 
 	# TODO changing scene can err, might need to be handled
 	var _a = get_tree().change_scene(scene);
+	disable_audio_1tick()
+
+
+func change_to_next_level():
+	if cur_level_index == -1:
+		printerr("can't change to next level since there is no current level")
+		return
+	if not has_next_level():
+		printerr("there is no next level to change to")
+		return
+
+	cur_level_index += 1
+	change_to_level(Levels.levels_list[cur_level_index])
+
+
+func has_next_level():
+	return cur_level_index + 1 < Levels.levels_list.size()
+
 
 	if _a == ERR_CANT_OPEN:
 		printerr("scene changing failed: couldn't open scene")
