@@ -155,6 +155,7 @@ func start_new_session_with_uuid(userId: String):
 			self.currentSessionId = parsed_results["r_data"]["sessionid"]
 
 	else:
+		Globals.LOGGING_ENABLED = false  # disable logging on error response from server
 		printerr("------- Error response to session start log")
 		printerr(result)
 		printerr("body: " + result[3].get_string_from_utf8())
