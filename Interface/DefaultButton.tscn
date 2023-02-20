@@ -4,7 +4,7 @@
 [ext_resource path="res://Interface/TitleScreen_buttonpressed.tres" type="StyleBox" id=2]
 [ext_resource path="res://Interface/TitleScreen_button.tres" type="StyleBox" id=3]
 [ext_resource path="res://Interface/TitleScreen_buttonhover.tres" type="StyleBox" id=4]
-[ext_resource path="res://Interface/MenuButton.gd" type="Script" id=5]
+[ext_resource path="res://Interface/DefaultButton.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -21,7 +21,7 @@ custom_styles/normal = ExtResource( 3 )
 text = "Button Text"
 script = ExtResource( 5 )
 
-[connection signal="button_down" from="." to="." method="_on_MenuButton_button_down"]
-[connection signal="button_up" from="." to="." method="_on_MenuButton_button_up"]
-[connection signal="mouse_entered" from="." to="." method="_on_MenuButton_mouse_entered"]
-[connection signal="pressed" from="." to="." method="_on_MenuButton_pressed"]
+[connection signal="button_down" from="." to="." method="_on_DefaultButton_button_down"]
+[connection signal="button_up" from="." to="." method="_on_DefaultButton_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_DefaultButton_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_DefaultButton_pressed"]
