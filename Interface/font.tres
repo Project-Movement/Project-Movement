@@ -3,5 +3,5 @@
 [ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-ExtraBold.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 80
+size = 90
 font_data = ExtResource( 1 )
