@@ -1,0 +1,808 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Elements/Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Animation" id=1]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 565, 495 ), Vector2( 563, 345 ), Vector2( 564, 495 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 565, 495 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1263, 312 ), Vector2( 1270, 495 ), Vector2( 1263, 312 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1263, 312 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1805, 313 ), Vector2( 1805, -113 ), Vector2( 1805, 313 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1805, 313 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2419, 496 ), Vector2( 2600, 496 ), Vector2( 2419, 496 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2419, 496 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2903, -7 ), Vector2( 2401, -7 ), Vector2( 2903, -7 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2903, -7 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3148, 497 ), Vector2( 3348, 497 ), Vector2( 3148, 497 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3148, 497 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3663, -7 ), Vector2( 4100, -7 ), Vector2( 3663, -7 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3663, -7 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "New Anim"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16755, -2261 ), Vector2( 15784, -2261 ), Vector2( 16755, -2261 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 16755, -2261 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "New Anim"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 19011, -1134 ), Vector2( 17766, -1134 ), Vector2( 19011, -1134 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 19011, -1134 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "New Anim"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16647, 178 ), Vector2( 17779, 178 ), Vector2( 16647, 178 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 16647, 178 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "New Anim"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 7367, -1821 ), Vector2( 7376, -637 ), Vector2( 7367, -1821 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7367, -1821 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "New Anim"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 8724, -621 ), Vector2( 8724, -1975 ), Vector2( 8724, -621 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 8724, -621 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "New Anim"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10139, -1844 ), Vector2( 10138, -591 ), Vector2( 10139, -1844 ) ]
+}
+
+[sub_resource type="Animation" id=26]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 10139, -1844 ) ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "New Anim"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 11955, -1873 ), Vector2( 11955, -641 ), Vector2( 11955, -1873 ) ]
+}
+
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 11955, -1873 ) ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "New Anim"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 12978, -667 ), Vector2( 12978, -1913 ), Vector2( 12978, -667 ) ]
+}
+
+[sub_resource type="Animation" id=30]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 12978, -667 ) ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "New Anim"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.9, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 13922, -1322 ), Vector2( 13922, -1833 ), Vector2( 13922, -1322 ), Vector2( 13922, -666 ), Vector2( 13922, -1322 ) ]
+}
+
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 13922, -1322 ) ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5145, 634 ), Vector2( 5145, -1500 ), Vector2( 5145, 634 ) ]
+}
+
+[sub_resource type="Animation" id=34]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 5142, 473 ) ]
+}
+
+[node name="TutorialLevel" type="Node2D"]
+position = Vector2( -1324, 188 )
+
+[node name="Stopwatch" parent="." instance=ExtResource( 6 )]
+
+[node name="SpecialZones" type="Node2D" parent="."]
+
+[node name="StartZone" parent="SpecialZones" instance=ExtResource( 3 )]
+position = Vector2( 167, 526 )
+scale = Vector2( 8.48002, 9 )
+
+[node name="EndZone" parent="SpecialZones" instance=ExtResource( 5 )]
+position = Vector2( 19935, 778 )
+scale = Vector2( 2.12002, 1.64 )
+
+[node name="Checkpoint" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 2105, 503 )
+
+[node name="Checkpoint3" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 4542, 185 )
+
+[node name="Checkpoint4" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 10967, -1773 )
+
+[node name="Checkpoint5" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 14877, -1772 )
+
+[node name="Checkpoint2" parent="SpecialZones" instance=ExtResource( 10 )]
+visible = false
+position = Vector2( 168, 512 )
+scale = Vector2( 9.96, 1 )
+
+[node name="LevelText" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 168, 560 )
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="KillZone" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 565, 495 )
+rotation = 1.5708
+scale = Vector2( 10, -1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[node name="KillZone7" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 1263, 312 )
+rotation = 1.5708
+scale = Vector2( 10, -1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone7"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+
+[node name="KillZone9" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 1805, 313 )
+rotation = 1.5708
+scale = Vector2( 25, -1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone9"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 5 )
+anims/RESET = SubResource( 6 )
+
+[node name="KillZone13" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 2419, 496 )
+rotation = 1.5708
+scale = Vector2( 10, 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone13"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 7 )
+anims/RESET = SubResource( 8 )
+
+[node name="KillZone14" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 2903, -7 )
+rotation = 1.5708
+scale = Vector2( 10, 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone14"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 9 )
+anims/RESET = SubResource( 10 )
+
+[node name="KillZone15" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 3148, 497 )
+rotation = 1.5708
+scale = Vector2( 10, 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone15"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 11 )
+anims/RESET = SubResource( 12 )
+
+[node name="KillZone17" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 3663, -7 )
+rotation = 1.5708
+scale = Vector2( 10, 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone17"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 13 )
+anims/RESET = SubResource( 14 )
+
+[node name="KillZone3" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 15146, -156 )
+scale = Vector2( 43.703, 130 )
+
+[node name="KillZone8" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 16755, -2261 )
+scale = Vector2( 10, 50 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone8"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 15 )
+anims/RESET = SubResource( 16 )
+
+[node name="KillZone10" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 19011, -1134 )
+scale = Vector2( 10, 50 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone10"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 17 )
+anims/RESET = SubResource( 18 )
+
+[node name="KillZone11" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 16647, 178 )
+scale = Vector2( 10, 50 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone11"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 19 )
+anims/RESET = SubResource( 20 )
+
+[node name="KillZone6" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 20114, -1445 )
+scale = Vector2( 10, 150 )
+
+[node name="KillZone5" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 16981, 1024 )
+scale = Vector2( 200, -20 )
+
+[node name="KillZone4" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 6030, -346 )
+scale = Vector2( 43.703, 100 )
+
+[node name="Ground" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 2000, 896 )
+scale = Vector2( 200.523, 30 )
+
+[node name="Ground9" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 9926, -3104 )
+scale = Vector2( 1050, 30 )
+
+[node name="Ground3" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5864, 896 )
+scale = Vector2( 200.523, 30 )
+
+[node name="Ground4" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 7367, -1821 )
+scale = Vector2( 30, 100 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Ground4"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 21 )
+anims/RESET = SubResource( 22 )
+
+[node name="Ground6" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 8724, -621 )
+scale = Vector2( 30, 100 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Ground6"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 23 )
+anims/RESET = SubResource( 24 )
+
+[node name="Ground8" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 17707, 1180 )
+scale = Vector2( 300, 30 )
+
+[node name="Ground7" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 10139, -1844 )
+scale = Vector2( 30, 100 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Ground7"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 25 )
+anims/RESET = SubResource( 26 )
+
+[node name="Ground2" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( -267, -811 )
+rotation = 1.57079
+scale = Vector2( 200.523, 30 )
+
+[node name="Ground5" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 20405, -1056 )
+rotation = 1.57079
+scale = Vector2( 210, 30 )
+
+[node name="Ground17" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 4576, 472 )
+scale = Vector2( 28.9, 20 )
+
+[node name="Ground19" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 10590, -1487 )
+scale = Vector2( 500, 19.32 )
+
+[node name="KillZone18" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 11955, -1873 )
+scale = Vector2( 10, 100 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone18"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 27 )
+anims/RESET = SubResource( 28 )
+
+[node name="KillZone19" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 12978, -667 )
+scale = Vector2( 10, 100 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone19"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 29 )
+anims/RESET = SubResource( 30 )
+
+[node name="KillZone20" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 13922, -1322 )
+scale = Vector2( 10, 100 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/KillZone20"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 31 )
+anims/RESET = SubResource( 32 )
+
+[node name="Ground20" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5142, 473 )
+scale = Vector2( 28.9, 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Ground20"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 33 )
+anims/RESET = SubResource( 34 )
+
+[connection signal="body_entered" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
+[connection signal="body_exited" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
+[connection signal="body_entered" from="SpecialZones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
