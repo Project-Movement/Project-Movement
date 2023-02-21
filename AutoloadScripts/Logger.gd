@@ -59,7 +59,7 @@ func _ready():
 	Globals.LOGGING_ENABLED = false if OS.is_debug_build() else true  # comment this out for logging in debug builds
 	var cid = 1 if OS.is_debug_build() else VERSION
 	self.initialize(202304, "group04", "3b45e8ea6b313e516d18679e04be7779", cid)
-	start_new_session()
+	# start_new_session()
 	# actually blocking like this seems to not give the request a chance to be sent
 	# if not OS.is_debug_build():  # don't pause and wait cause we don't really care about session ids for testing builds
 	# 	while not session_started:
@@ -110,7 +110,9 @@ func set_saved_user_id(value: String):
 
 
 func start_new_session():
+	yield(get_tree(), "idle_frame")  # this is so we can yield on the "completed" signal of this function to wait for its completion
 	if not Globals.LOGGING_ENABLED:
+		print("logging not enabled, not starting a session")
 		return
 	print("starting new session")
 	var uuid = get_saved_user_id()
@@ -153,6 +155,7 @@ func start_new_session_with_uuid(userId: String):
 			self.currentSessionId = parsed_results["r_data"]["sessionid"]
 
 	else:
+		Globals.LOGGING_ENABLED = false  # disable logging on error response from server
 		printerr("------- Error response to session start log")
 		printerr(result)
 		printerr("body: " + result[3].get_string_from_utf8())

@@ -70,8 +70,8 @@ position = Vector2( -46, 895 )
 scale = Vector2( 40, 30 )
 
 [node name="Ground6" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 497, -1494 )
-scale = Vector2( 110, 30 )
+position = Vector2( 497.207, -1494 )
+scale = Vector2( 110.28, 30 )
 
 [node name="Ground3" parent="Level" instance=ExtResource( 2 )]
 position = Vector2( 1390, -500 )
@@ -82,7 +82,7 @@ position = Vector2( 1890, -4848 )
 scale = Vector2( 140, 15 )
 
 [node name="Ground9" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 701, -5383 )
+position = Vector2( 698.4, -5383 )
 scale = Vector2( 100, 10 )
 
 [node name="Ground12" parent="Level" instance=ExtResource( 2 )]
@@ -132,7 +132,7 @@ rotation = 1.5708
 scale = Vector2( 1.84, 50 )
 
 [node name="Ground13" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 503, 201 )
+position = Vector2( 503, 200 )
 scale = Vector2( 25, 100 )
 
 [node name="Ground16" parent="Level" instance=ExtResource( 2 )]

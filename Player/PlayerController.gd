@@ -24,7 +24,7 @@ export var wallslide_leniency_time = 0.2
 
 # abilities
 export var dash_magnitude: int = 900  # how much the dash moves
-export var dash_duration: float = 0.1  # how long the dash lasts for
+export var dash_duration: float = 0.15  # how long the dash lasts for
 export var dash_magnitude_leftover: float = 0.3
 export var superjump_factor: float = 2  # how much greater in magnitude the superjump is
 
@@ -96,10 +96,6 @@ func player_move(delta):
 		$WallJumpLeniencyTimer.start()
 
 
-	grounded = is_on_floor()
-	var time = Time.get_ticks_msec()
-	if grounded:
-		last_time_on_floor = time
 
 	# handle jump and double jump (midair jump)
 	if c_action_just_pressed("jump"):
@@ -112,15 +108,19 @@ func player_move(delta):
 
 	# landing sound
 	# this is getting messy
-	if is_on_floor() and not grounded and velocity.y >= jump_vel and not bounced:
+	if is_on_floor() and not grounded and abs(velocity.y) >= jump_vel and not bounced:
 		AudioPlayer.play_sound(AudioPlayer.LANDING)
+
 
 	# if we didn't bounce, accept the default move and slide velocity change
 	if not bounced:
 		velocity = last_tick_vel
 
-	if is_on_floor() and not grounded and velocity.y >= jump_vel and not bounced:
-		AudioPlayer.play_sound(AudioPlayer.LANDING)
+
+	grounded = is_on_floor()
+	var time = Time.get_ticks_msec()
+	if grounded:
+		last_time_on_floor = time
 
 	# custom way of buffering jumps
 	if has_jumped_in_buffer_interval and not bounced:

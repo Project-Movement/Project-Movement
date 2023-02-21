@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ProjectMovement"
-run/main_scene="res://Interface/TitleScreen.tscn"
+run/main_scene="res://Interface/StartupScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
