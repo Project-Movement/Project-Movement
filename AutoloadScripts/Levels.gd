@@ -9,9 +9,10 @@ enum {
 	LEVEL1 = 1,
 	DEARYOU_WALLJUMP = 2,
 	CIRCUS = 3,
+	PILLARS = 20,
 }
 
-var levels_list: Array = [TUTORIAL_BASIC, TUTORIAL_ADVANCED2, DEARYOU_WALLJUMP, CIRCUS, LEVEL1]
+var levels_list: Array = [TUTORIAL_BASIC, TUTORIAL_ADVANCED2, DEARYOU_WALLJUMP, LEVEL1, CIRCUS, PILLARS]
 
 onready var level_to_filename = {
 	TUTORIAL_BASIC:     "res://Levels/Tutorial.tscn",
@@ -21,6 +22,7 @@ onready var level_to_filename = {
 	LEVEL1:             "res://Levels/Level1.tscn",
 	DEARYOU_WALLJUMP:   "res://Levels/DearYouWallJump.tscn",
 	CIRCUS:             "res://Levels/Circus.tscn",
+	PILLARS: 			"res://Levels/Pillars.tscn",
 }
 
 func get_scene_name(scene: int):

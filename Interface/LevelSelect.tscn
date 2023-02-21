@@ -65,19 +65,26 @@ margin_bottom = 152.0
 text = "Dear You Walljump"
 scene_name = "DEARYOU_WALLJUMP"
 
-[node name="SceneChangeButton4" parent="VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+[node name="SceneChangeButton5" parent="VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 156.0
 margin_right = 640.0
 margin_bottom = 204.0
-text = "Circus"
-scene_name = "CIRCUS"
+text = "Level3"
+scene_name = "LEVEL1"
 
-[node name="SceneChangeButton5" parent="VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+[node name="SceneChangeButton4" parent="VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 208.0
 margin_right = 640.0
 margin_bottom = 256.0
-text = "Level3"
-scene_name = "LEVEL1"
+text = "Circus"
+scene_name = "CIRCUS"
+
+[node name="SceneChangeButton6" parent="VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 260.0
+margin_right = 640.0
+margin_bottom = 308.0
+text = "Pillars (HARD)"
+scene_name = "PILLARS"
 
 [node name="BackButton" parent="VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 600.0
