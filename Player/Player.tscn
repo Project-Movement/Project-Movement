@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Player/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/AniSpriteSheet.png" type="Texture" id=2]
@@ -25,6 +25,21 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "armless_wallslide"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 4 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -77,6 +92,60 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ), Vector2( 4, 0 ), Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 7, 0 ), Vector2( 8, 0 ), Vector2( 9, 0 ), Vector2( 10, 0 ), Vector2( 11, 0 ) ]
 }
 
+[sub_resource type="Animation" id=10]
+resource_name = "wallhug"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 3 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "wallslide"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 4 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "walk"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle"
+
+[sub_resource type="AnimationNodeTransition" id=9]
+input_count = 2
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_1/name = "Walk"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=7]
+graph_offset = Vector2( -434.206, 1.86982 )
+nodes/Animation/node = SubResource( 6 )
+nodes/Animation/position = Vector2( 40, 140 )
+"nodes/Animation 2/node" = SubResource( 8 )
+"nodes/Animation 2/position" = Vector2( 40, 260 )
+nodes/movement/node = SubResource( 9 )
+nodes/movement/position = Vector2( 260, 180 )
+nodes/output/position = Vector2( 500, 160 )
+node_connections = [ "movement", 0, "Animation", "movement", 1, "Animation 2", "output", 0, "movement" ]
+
 [node name="Player" type="Node2D"]
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
@@ -125,15 +194,33 @@ cast_to = Vector2( 0, 28 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerBody"]
 anims/RESET = SubResource( 2 )
+anims/armless_wallslide = SubResource( 12 )
 anims/idle = SubResource( 4 )
 anims/jump = SubResource( 5 )
 anims/walk = SubResource( 3 )
+anims/wallhug = SubResource( 10 )
+anims/wallslide = SubResource( 11 )
 
 [node name="Sprite" type="Sprite" parent="PlayerBody"]
 scale = Vector2( 1.35, 1.35 )
 texture = ExtResource( 2 )
 hframes = 12
-vframes = 4
+vframes = 8
+
+[node name="AnimationTree" type="AnimationTree" parent="PlayerBody"]
+tree_root = SubResource( 7 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/movement/current = 0
+
+[node name="LArmRay" type="RayCast2D" parent="PlayerBody"]
+position = Vector2( 0, -18 )
+enabled = true
+cast_to = Vector2( -28, 0 )
+
+[node name="RArmRay" type="RayCast2D" parent="PlayerBody"]
+position = Vector2( 0, -18 )
+enabled = true
+cast_to = Vector2( 28, 0 )
 
 [connection signal="timeout" from="PlayerBody/JumpTimer" to="PlayerBody" method="_on_JumpTimer_timeout"]
 [connection signal="timeout" from="PlayerBody/WallJumpLeniencyTimer" to="PlayerBody" method="_on_WallJumpLeniencyTimer_timeout"]

@@ -70,8 +70,16 @@ func play_animation():
 	else:
 		$Sprite.flip_h = dir < 0
 		$AnimationPlayer.play("walk")
+	if (is_on_wall()): $AnimationPlayer.play("wallhug")
 	if (not is_on_floor()):
-		$AnimationPlayer.play("jump")
+		if (raycast_is_on_wall()):
+			if (armray_is_on_wall()):
+				$AnimationPlayer.play("wallslide")
+			else:
+				$AnimationPlayer.play("armless_wallslide")
+				
+		else:
+			$AnimationPlayer.play("jump")
 
 func _physics_process(delta):
 	player_move(delta)
@@ -257,6 +265,9 @@ func reset_state():
 	last_tick_vel = Vector2.ZERO
 	$AbilitySystem.reset_state()
 
+# check both arm rays to see if sprite texture is touching a wall
+func armray_is_on_wall():
+	return $LArmRay.is_colliding() or $RArmRay.is_colliding()
 
 # cast a ray to check if the player body is on a wall or not
 func raycast_is_on_wall():
