@@ -1,6 +1,13 @@
 extends Control
 
 
+onready var quit_button = $MarginContainer/VBoxContainer/HBoxContainer/Options/Quit
+
+
+func _ready():
+	if OS.has_feature("web"):
+		quit_button.disabled = true
+
 
 func go_tutorial():
 	SceneChanger.change_to_level(Levels.TUTORIAL_BASIC)
