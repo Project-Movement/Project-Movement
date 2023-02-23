@@ -10,7 +10,6 @@
 
 [sub_resource type="TileSet" id=1]
 0/name = "8x8_lava.png 0"
-0/texture = ExtResource( 8 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 24, 8 )
@@ -330,8 +329,6 @@ scale = Vector2( 20, 2.214 )
 [node name="Ground32" parent="Stage" instance=ExtResource( 2 )]
 position = Vector2( -2801, -391 )
 scale = Vector2( 20, 2.214 )
-
-[node name="blue_tile" parent="." instance=ExtResource( 6 )]
 
 [node name="lava_tile" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
