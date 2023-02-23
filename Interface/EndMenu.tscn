@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Interface/TitleBoxes.gd" type="Script" id=1]
+[ext_resource path="res://Interface/EndMenu.gd" type="Script" id=2]
+[ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-ExtraBold.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 3 )
+
+[node name="EndMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.2, 0.160784, 0.160784, 0.666667 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer"]
+margin_left = 352.0
+margin_top = 212.0
+margin_right = 928.0
+margin_bottom = 508.0
+alignment = 1
+script = ExtResource( 1 )
+
+[node name="Name" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
+modulate = Color( 0.333333, 0.921569, 0.882353, 1 )
+margin_right = 576.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 1 )
+text = "PROJECT MOVEMENT"
+align = 1
+valign = 1
+
+[node name="EndTime" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
+modulate = Color( 0.333333, 0.921569, 0.882353, 1 )
+margin_top = 84.0
+margin_right = 576.0
+margin_bottom = 164.0
+custom_colors/font_color = Color( 0.992157, 0.843137, 0.843137, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Time:"
+align = 1
+valign = 1
+
+[node name="Retry" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
+margin_top = 168.0
+margin_right = 576.0
+margin_bottom = 208.0
+rect_min_size = Vector2( 0, 40 )
+text = "Retry Level"
+
+[node name="Next level" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
+margin_top = 212.0
+margin_right = 576.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 0, 40 )
+text = "Next Level"
+
+[node name="Level Menu" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
+margin_top = 256.0
+margin_right = 576.0
+margin_bottom = 296.0
+rect_min_size = Vector2( 200, 40 )
+text = "Main Menu"
+
+[node name="Circus" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
+visible = false
+margin_top = 300.0
+margin_right = 576.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 0, 40 )
+text = "Circus"
+
+[node name="ChaosLevel" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
+visible = false
+margin_top = 300.0
+margin_right = 576.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 0, 40 )
+text = "Level3"
+
+[node name="Quit" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
+visible = false
+margin_top = 300.0
+margin_right = 576.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 0, 40 )
+text = "Quit"
+
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Retry" to="." method="_on_Retry_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Next level" to="." method="_on_Next_level_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Level Menu" to="." method="_on_Level_Menu_pressed"]

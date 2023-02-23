@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-Bold.ttf"
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = SubResource( 2 )
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="LookaroundIndicator" type="Label" parent="."]
+visible = false
+anchor_top = 0.4
+anchor_bottom = 0.4
+margin_left = 632.0
+margin_top = 360.0
+margin_right = 1259.0
+margin_bottom = 403.0
+custom_fonts/font = SubResource( 1 )
+text = "Press 'C' to stop looking around"
+
+[node name="SpeedIndicator" type="Control" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 48.0
+margin_bottom = 48.0
+
+[node name="XSpeedLabel" type="Label" parent="SpeedIndicator"]
+margin_right = 152.0
+margin_bottom = 43.0
+custom_fonts/font = SubResource( 1 )
+text = "Speed: 0"
+
+[node name="YSpeedLabel" type="Label" parent="SpeedIndicator"]
+margin_top = 48.0
+margin_right = 152.0
+margin_bottom = 97.0
+custom_fonts/font = SubResource( 1 )
+text = "Speed: 0"
+
+[node name="AbilityIndicator" type="Control" parent="."]
+anchor_left = 0.02
+anchor_top = 0.8
+anchor_right = 0.05
+anchor_bottom = 0.9
+margin_left = -9.6
+margin_top = 32.0
+margin_right = 30.4
+margin_bottom = 72.0
+
+[node name="Dash" type="Label" parent="AbilityIndicator"]
+custom_fonts/font = SubResource( 1 )
+text = "Dash"
+
+[node name="SuperJump" type="Label" parent="AbilityIndicator"]
+anchor_top = 0.4
+anchor_bottom = 0.4
+custom_fonts/font = SubResource( 1 )
+text = "SuperJump"

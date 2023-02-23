@@ -1,0 +1,195 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Elements/Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-Bold.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=10]
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+font_data = ExtResource( 8 )
+
+[sub_resource type="Theme" id=1]
+default_font = SubResource( 2 )
+
+[node name="TutorialLevel" type="Node2D"]
+
+[node name="Stopwatch" parent="." instance=ExtResource( 6 )]
+
+[node name="SpecialZones" type="Node2D" parent="."]
+
+[node name="StartZone" parent="SpecialZones" instance=ExtResource( 3 )]
+position = Vector2( 167, 526 )
+scale = Vector2( 8.48002, 9 )
+
+[node name="EndZone" parent="SpecialZones" instance=ExtResource( 5 )]
+position = Vector2( 10952, 720 )
+scale = Vector2( 2.12002, 1.64 )
+
+[node name="Checkpoint" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 1806, 504 )
+
+[node name="Checkpoint4" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 3052, 503 )
+
+[node name="Checkpoint3" parent="SpecialZones" instance=ExtResource( 10 )]
+position = Vector2( 6236, 504 )
+
+[node name="Checkpoint2" parent="SpecialZones" instance=ExtResource( 10 )]
+visible = false
+position = Vector2( 168, 512 )
+scale = Vector2( 9.96, 1 )
+
+[node name="LevelText" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Label9" type="Label" parent="LevelText"]
+margin_left = 7008.0
+margin_top = 248.0
+margin_right = 7360.0
+margin_bottom = 409.0
+theme = SubResource( 1 )
+text = "BUILD UP SPEED:
+TIME YOUR JUMPS TO BOUNCE
+AND KEEP YOUR SPEED FROM
+DASHING"
+
+[node name="Label14" type="Label" parent="LevelText"]
+margin_left = 5184.0
+margin_top = -136.0
+margin_right = 5643.0
+margin_bottom = 25.0
+theme = SubResource( 1 )
+text = "DON'T KNOW WHAT LIES AHEAD?
+PRESS 'C' TO LOOK AROUND"
+
+[node name="Label10" type="Label" parent="LevelText"]
+margin_left = 8031.0
+margin_top = 242.0
+margin_right = 8456.0
+margin_bottom = 403.0
+theme = SubResource( 1 )
+text = "TIP: IT IS BETTER TO DASH
+  AT AN UPWARD ANGLE FOR
+  GREATER DISTANCE"
+
+[node name="Label8" type="Label" parent="LevelText"]
+margin_left = 10600.0
+margin_top = 488.0
+margin_right = 11025.0
+margin_bottom = 567.0
+theme = SubResource( 1 )
+text = "END OF TUTORIAL"
+
+[node name="Label7" type="Label" parent="LevelText"]
+margin_left = 1312.0
+margin_top = 315.0
+margin_right = 1618.0
+margin_bottom = 435.0
+theme = SubResource( 1 )
+text = "TO WALL JUMP:
+STICK TO THE WALL
+AND PRESS SPACE"
+
+[node name="Label11" type="Label" parent="LevelText"]
+margin_left = 2559.0
+margin_top = 294.0
+margin_right = 2882.0
+margin_bottom = 455.0
+theme = SubResource( 1 )
+text = "WALL CLIMB:
+ATER WALLJUMPING,
+DASH UPWARDS BACK
+TO THE WALL TO
+CLIMB IT"
+
+[node name="Label13" type="Label" parent="LevelText"]
+margin_left = 3080.0
+margin_top = 256.0
+margin_right = 3304.0
+margin_bottom = 384.0
+theme = SubResource( 1 )
+text = "PRESS 'W' TO
+SUPERJUMP"
+
+[node name="Label12" type="Label" parent="LevelText"]
+margin_left = 3569.0
+margin_top = 36.0
+margin_right = 3977.0
+margin_bottom = 197.0
+theme = SubResource( 1 )
+text = "JUMP + DASH FOR A LONGER JUMP
+"
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 168, 560 )
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="KillZone2" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 4548, 551 )
+scale = Vector2( 64.8683, -4.56 )
+
+[node name="KillZone5" parent="Level" instance=ExtResource( 9 )]
+position = Vector2( 8664, 1264 )
+scale = Vector2( 256.517, -14.5437 )
+
+[node name="Ground" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 2000, 896 )
+scale = Vector2( 200.523, 30 )
+
+[node name="Ground6" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5512, -3075 )
+scale = Vector2( 610, 30 )
+
+[node name="Ground3" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5864, 896 )
+scale = Vector2( 200.523, 30 )
+
+[node name="Ground4" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 11119, 1114 )
+scale = Vector2( 60, 30 )
+
+[node name="Ground2" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( -288, -808 )
+rotation = 1.57079
+scale = Vector2( 200.523, 30 )
+
+[node name="Ground5" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 11419, -1285 )
+rotation = 1.57079
+scale = Vector2( 210, 30 )
+
+[node name="Ground10" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 1269, 200 )
+scale = Vector2( 1.84, 40 )
+
+[node name="Ground11" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 2510, 195 )
+scale = Vector2( 1.84, 40 )
+
+[node name="Ground13" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 1052, 39 )
+scale = Vector2( 1.84, 40 )
+
+[node name="Ground16" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 3640, 425 )
+scale = Vector2( 28.9, 20 )
+
+[node name="Ground20" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 5482, 355 )
+scale = Vector2( 28.9, 25 )
+
+[node name="Ground18" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 4565, 164 )
+rotation = -1.57079
+scale = Vector2( 0.56, 14.04 )
+
+[connection signal="body_entered" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
+[connection signal="body_exited" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
+[connection signal="body_entered" from="SpecialZones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
