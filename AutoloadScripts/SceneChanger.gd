@@ -11,11 +11,16 @@ func change_to_level(level: int):
 		printerr("Called to switch to nonexistent scene: " + str(level))
 		return
 
-	if cur_level_index == -1:
-		var i = 0
-		while Levels.levels_list[i] != level:
-			i += 1
-		cur_level_index = i
+	# look through levels list to find the one we are switching to now
+	# linear search may be inefficient if we have more levels
+	var i = 0
+	while Levels.levels_list[i] != level:
+		i += 1
+	cur_level_index = i
+
+	if cur_level != -1:  # there's already a level
+		prev_level = cur_level
+		Logger.log_level_end(str(Time.get_ticks_msec()))
 
 	Logger.log_level_start(level, str(Time.get_ticks_msec()))
 	cur_level = level
