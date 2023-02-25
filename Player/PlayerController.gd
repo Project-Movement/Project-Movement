@@ -3,11 +3,11 @@ extends KinematicBody2D
 # yea, this is definitely a real mess right now
 # basic player movement kinematics
 export var h_accel_ground = 2200  # player's horizontal acceleration
-export var h_accel_air = 400
-export var max_h_air_influence_speed = 200
+export var h_accel_air = 1000
+export var max_h_air_influence_speed = 300
 export var ground_friction = 1100  # friction of ground
 export var exceeding_ground_friction = 3000 # friction of ground when exceeding the max speed
-export var max_grounded_speed = 300  # maximum speed on ground
+export var max_grounded_speed = 400  # maximum speed on ground
 export var gravity = 750  # gravitational acceleration
 export var jump_vel = 400  # instantaneous velocity on jump
 export var wall_friction = 300  # wall friction
@@ -146,10 +146,10 @@ func player_move(delta):
 	if grounded and not bounced:
 		if c_action_pressed("right"):
 			velocity.x += h_accel_ground * delta
-			velocity.x = min(velocity.x, 300)
+			velocity.x = min(velocity.x, max_grounded_speed)
 		if c_action_pressed("left"):
 			velocity.x -= h_accel_ground * delta
-			velocity.x = max(velocity.x, -300)
+			velocity.x = max(velocity.x, -max_grounded_speed)
 
 	else:  # not grounded, in air
 		if c_action_pressed("right") and velocity.x < max_h_air_influence_speed:
