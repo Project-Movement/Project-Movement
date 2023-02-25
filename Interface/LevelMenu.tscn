@@ -17,6 +17,7 @@ anchor_bottom = 1.0
 theme = ExtResource( 4 )
 script = ExtResource( 2 )
 end_time = NodePath("ColorRect/CenterContainer/VBoxContainer/VBoxContainer2/EndTime")
+next_level = NodePath("ColorRect/CenterContainer/VBoxContainer/VBoxContainer/MenuButton2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -67,27 +68,6 @@ margin_top = 214.0
 margin_right = 504.0
 margin_bottom = 366.0
 
-[node name="Retry" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/VBoxContainer"]
-visible = false
-margin_right = 504.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 0, 40 )
-text = "Retry Level"
-
-[node name="Next level" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/VBoxContainer"]
-visible = false
-margin_right = 504.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 0, 40 )
-text = "Next Level"
-
-[node name="Level Menu" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/VBoxContainer"]
-visible = false
-margin_right = 504.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 200, 40 )
-text = "Main Menu"
-
 [node name="MenuButton" parent="ColorRect/CenterContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_right = 504.0
 text = "Retry Level"
@@ -104,9 +84,6 @@ margin_right = 504.0
 margin_bottom = 152.0
 text = "Main Menu"
 
-[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/VBoxContainer/Retry" to="." method="_on_Retry_pressed"]
-[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/VBoxContainer/Next level" to="." method="_on_Next_level_pressed"]
-[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/VBoxContainer/Level Menu" to="." method="_on_Level_Menu_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/VBoxContainer/MenuButton" to="." method="_on_Retry_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/VBoxContainer/MenuButton2" to="." method="_on_Next_level_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/VBoxContainer/MenuButton3" to="." method="_on_Level_Menu_pressed"]

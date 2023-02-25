@@ -17,6 +17,7 @@ func change_to_level(level: int):
 	while Levels.levels_list[i] != level:
 		i += 1
 	cur_level_index = i
+	print("changing level to index " + str(cur_level_index))
 
 	if cur_level != -1:  # there's already a level
 		prev_level = cur_level
@@ -65,6 +66,7 @@ func change_to_next_level():
 
 
 func has_next_level():
+	print(cur_level_index + 1 < Levels.levels_list.size())
 	return cur_level_index + 1 < Levels.levels_list.size()
 
 

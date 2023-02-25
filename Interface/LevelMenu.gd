@@ -1,9 +1,9 @@
 extends Control
 
 export (NodePath) var end_time
+export var next_level: NodePath
 
-
-onready var next_level_button: = $"ColorRect/CenterContainer/VBoxContainer/VBoxContainer/Next level"
+onready var next_level_button: = get_node(next_level)
 
 
 func _process(_delta):

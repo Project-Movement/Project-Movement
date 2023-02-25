@@ -3,8 +3,8 @@ extends KinematicBody2D
 # yea, this is definitely a real mess right now
 # basic player movement kinematics
 export var h_accel_ground = 2200  # player's horizontal acceleration
-export var h_accel_air = 200
-export var max_h_air_influence_speed = 100
+export var h_accel_air = 400
+export var max_h_air_influence_speed = 200
 export var ground_friction = 1100  # friction of ground
 export var exceeding_ground_friction = 3000 # friction of ground when exceeding the max speed
 export var max_grounded_speed = 300  # maximum speed on ground
