@@ -205,7 +205,8 @@ func do_any_bounce() -> bool:
 	# bouncing off ground, bhopping, perfect preservation of x vel
 	# if the player presses jump within the interval in time, they get bonus velocity as well
 	# if is_on_floor():
-	if raycast_is_on_floor() and not is_on_floor():
+	# if raycast_is_on_floor() and not is_on_floor():
+	if raycast_is_on_floor() and not grounded:
 		# if Input.is_action_pressed("bounce"):
 		# 	velocity.y = -jump_vel
 		# 	has_bounced = true
@@ -255,6 +256,9 @@ func apply_constant_forces(delta):
 func reset_state():
 	velocity = Vector2.ZERO
 	last_tick_vel = Vector2.ZERO
+	set_controls_enabled(true)
+	set_constant_forces_enabled(true)
+	set_friction_enabled(true)
 	$AbilitySystem.reset_state()
 
 
