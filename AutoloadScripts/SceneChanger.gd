@@ -66,7 +66,6 @@ func change_to_next_level():
 
 
 func has_next_level():
-	print(cur_level_index + 1 < Levels.levels_list.size())
 	return cur_level_index + 1 < Levels.levels_list.size()
 
 

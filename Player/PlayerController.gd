@@ -60,7 +60,7 @@ func _ready():
 	$WallJumpLeniencyTimer.one_shot = true
 
 
-func _process(delta):
+func _process(_delta):
 	play_animation()
 
 func play_animation():
