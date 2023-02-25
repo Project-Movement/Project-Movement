@@ -1,10 +1,71 @@
-[gd_resource type="Theme" load_steps=7 format=2]
+[gd_resource type="Theme" load_steps=15 format=2]
 
 [ext_resource path="res://Interface/TitleScreen_buttonhover.tres" type="StyleBox" id=1]
 [ext_resource path="res://Interface/TitleScreen_buttonpressed.tres" type="StyleBox" id=2]
 [ext_resource path="res://Interface/TitleScreen_button.tres" type="StyleBox" id=3]
 [ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-Light.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Interface/scrollbar_styleboxflat.tres" type="StyleBox" id=5]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0.238281, 0.238281, 0.238281, 1 )
+
+[sub_resource type="GradientTexture2D" id=7]
+gradient = SubResource( 6 )
+width = 16
+height = 16
+
+[sub_resource type="GradientTexture2D" id=8]
+width = 16
+height = 16
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0.503906, 0.965118, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=10]
+gradient = SubResource( 9 )
+width = 16
+height = 16
+fill_from = Vector2( 0.0375, 0.0541667 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.321569, 0.717647, 0.717647, 0.682353 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.0588235, 1, 0.976471, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.0392157, 0.0392157, 0.0392157, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.231373, 0.231373, 0.231373, 0.737255 )
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -16,6 +77,12 @@ Button/styles/disabled = ExtResource( 3 )
 Button/styles/hover = ExtResource( 1 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 2 )
+HSlider/icons/grabber = SubResource( 7 )
+HSlider/icons/grabber_disabled = SubResource( 8 )
+HSlider/icons/grabber_highlight = SubResource( 10 )
+HSlider/styles/grabber_area = SubResource( 3 )
+HSlider/styles/grabber_area_highlight = SubResource( 4 )
+HSlider/styles/slider = SubResource( 5 )
 VScrollBar/styles/grabber = ExtResource( 5 )
 VScrollBar/styles/grabber_highlight = ExtResource( 5 )
 VScrollBar/styles/grabber_pressed = ExtResource( 5 )

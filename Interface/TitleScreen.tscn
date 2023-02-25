@@ -64,9 +64,9 @@ is_level = false
 margin_top = 53.0
 margin_right = 510.0
 margin_bottom = 101.0
-text = "Settings (WIP)"
+text = "Settings"
 align = 0
-scene_name = "res://Interface/Settings.tscn"
+scene_name = "res://Interface/SettingsMenu.tscn"
 is_level = false
 
 [node name="Credits" parent="MarginContainer/VBoxContainer/HBoxContainer/Options" instance=ExtResource( 5 )]
