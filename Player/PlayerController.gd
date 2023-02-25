@@ -15,7 +15,7 @@ export var max_wallslide_fallingspeed = 400
 export var coyote_time_ms = 80  # coyote time, where player can jump despite not being grounded if they were just grounded
 
 # bhopping and walljumping
-export var walljump_speed = 350  # x speed after walljump
+export var walljump_speed = 500  # x speed after walljump
 export var bhop_bonus = 100
 export var wallhop_bonus_factor = 0.4
 export var jump_buffer_interval = 0.1  # interval to buffer jumps for, in seconds
