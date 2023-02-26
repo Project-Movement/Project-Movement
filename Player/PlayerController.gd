@@ -3,11 +3,11 @@ extends KinematicBody2D
 # yea, this is definitely a real mess right now
 # basic player movement kinematics
 export var h_accel_ground = 2200  # player's horizontal acceleration
-export var h_accel_air = 200
-export var max_h_air_influence_speed = 100
+export var h_accel_air = 1000
+export var max_h_air_influence_speed = 300
 export var ground_friction = 1100  # friction of ground
 export var exceeding_ground_friction = 3000 # friction of ground when exceeding the max speed
-export var max_grounded_speed = 300  # maximum speed on ground
+export var max_grounded_speed = 400  # maximum speed on ground
 export var gravity = 750  # gravitational acceleration
 export var jump_vel = 400  # instantaneous velocity on jump
 export var wall_friction = 300  # wall friction
@@ -15,7 +15,7 @@ export var max_wallslide_fallingspeed = 400
 export var coyote_time_ms = 80  # coyote time, where player can jump despite not being grounded if they were just grounded
 
 # bhopping and walljumping
-export var walljump_speed = 350  # x speed after walljump
+export var walljump_speed = 500  # x speed after walljump
 export var bhop_bonus = 100
 export var wallhop_bonus_factor = 0.4
 export var jump_buffer_interval = 0.1  # interval to buffer jumps for, in seconds
@@ -60,7 +60,7 @@ func _ready():
 	$WallJumpLeniencyTimer.one_shot = true
 
 
-func _process(delta):
+func _process(_delta):
 	play_animation()
 
 func play_animation():
@@ -146,10 +146,10 @@ func player_move(delta):
 	if grounded and not bounced:
 		if c_action_pressed("right"):
 			velocity.x += h_accel_ground * delta
-			velocity.x = min(velocity.x, 300)
+			velocity.x = min(velocity.x, max_grounded_speed)
 		if c_action_pressed("left"):
 			velocity.x -= h_accel_ground * delta
-			velocity.x = max(velocity.x, -300)
+			velocity.x = max(velocity.x, -max_grounded_speed)
 
 	else:  # not grounded, in air
 		if c_action_pressed("right") and velocity.x < max_h_air_influence_speed:
@@ -205,7 +205,8 @@ func do_any_bounce() -> bool:
 	# bouncing off ground, bhopping, perfect preservation of x vel
 	# if the player presses jump within the interval in time, they get bonus velocity as well
 	# if is_on_floor():
-	if raycast_is_on_floor() and not is_on_floor():
+	# if raycast_is_on_floor() and not is_on_floor():
+	if raycast_is_on_floor() and not grounded:
 		# if Input.is_action_pressed("bounce"):
 		# 	velocity.y = -jump_vel
 		# 	has_bounced = true
@@ -255,6 +256,9 @@ func apply_constant_forces(delta):
 func reset_state():
 	velocity = Vector2.ZERO
 	last_tick_vel = Vector2.ZERO
+	set_controls_enabled(true)
+	set_constant_forces_enabled(true)
+	set_friction_enabled(true)
 	$AbilitySystem.reset_state()
 
 
