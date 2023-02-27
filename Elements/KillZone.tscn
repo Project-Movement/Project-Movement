@@ -14,7 +14,8 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
 modulate = Color( 1, 0.156863, 0.156863, 1 )
 self_modulate = Color( 1, 0.168627, 0.168627, 1 )
-scale = Vector2( 20, 20 )
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -20, -20, 20, 20 )
 
 [connection signal="body_entered" from="." to="." method="_on_KillZone_body_entered"]

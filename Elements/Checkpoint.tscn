@@ -27,8 +27,9 @@ shape = SubResource( 3 )
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
 modulate = Color( 0.521569, 0.54902, 0.227451, 0.670588 )
 show_behind_parent = true
-scale = Vector2( 17, 184 )
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -8, -90, 16, 184 )
 
 [node name="SpawnPos" type="Position2D" parent="CollisionShape2D"]
 position = Vector2( 0, 32 )
