@@ -192,7 +192,7 @@ position = Vector2( 13339, -1848 )
 scale = Vector2( 43.7029, -4.1655 )
 
 [node name="KillZone20" parent="Level" instance=ExtResource( 9 )]
-position = Vector2( 17247, -1063 )
+position = Vector2( 17248, -1077 )
 scale = Vector2( 43.7029, -4.1655 )
 
 [node name="Node2D" type="Node2D" parent="Level"]
