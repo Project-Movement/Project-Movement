@@ -625,17 +625,17 @@ position = Vector2( 187, 504 )
 scale = Vector2( 8.48002, 9 )
 
 [node name="EndZone" parent="SpecialZones" instance=ExtResource( 5 )]
-position = Vector2( 19929, 803 )
+position = Vector2( 19932, 804 )
 scale = Vector2( 2.12002, 1.64 )
 
 [node name="Checkpoint" parent="SpecialZones" instance=ExtResource( 10 )]
-position = Vector2( 2104, 481 )
+position = Vector2( 2100, 484 )
 
 [node name="Checkpoint3" parent="SpecialZones" instance=ExtResource( 10 )]
-position = Vector2( 4546, 160 )
+position = Vector2( 4540, 164 )
 
 [node name="Checkpoint4" parent="SpecialZones" instance=ExtResource( 10 )]
-position = Vector2( 10977, -1566 )
+position = Vector2( 10980, -1564 )
 
 [node name="Checkpoint5" parent="SpecialZones" instance=ExtResource( 10 )]
 position = Vector2( 14886, -1562 )

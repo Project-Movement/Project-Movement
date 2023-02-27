@@ -157,10 +157,10 @@ STICK TO THE WALL
 AND PRESS SPACE"
 
 [node name="Label11" type="Label" parent="LevelText"]
-margin_left = 2559.0
-margin_top = 294.0
-margin_right = 2882.0
-margin_bottom = 455.0
+margin_left = 2576.0
+margin_top = 296.0
+margin_right = 2899.0
+margin_bottom = 498.0
 theme = SubResource( 1 )
 text = "WALL CLIMB:
 ATER WALLJUMPING,
