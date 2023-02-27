@@ -17,5 +17,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="StaticBody2D"]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 4.76837e-07, -4.76837e-07 )
-scale = Vector2( 21.3333, 21.3333 )
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 21.333, 21.333 )
