@@ -18,7 +18,7 @@ __meta__ = {
 }
 
 [node name="StartZone" parent="SpecialZones" instance=ExtResource( 1 )]
-position = Vector2( 0, 24 )
+scale = Vector2( 9.2, 5.08 )
 
 [node name="StartZoneSpawn" parent="SpecialZones" instance=ExtResource( 4 )]
 visible = false
