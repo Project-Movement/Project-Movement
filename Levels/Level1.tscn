@@ -100,6 +100,18 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 position = Vector2( -1000, 0 )
 z_index = -1
 
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer" index="0"]
+position = Vector2( 1, -1000 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer2" index="0"]
+position = Vector2( 0, -1000 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer3" index="0"]
+position = Vector2( 0, -1000 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer4" index="0"]
+position = Vector2( 0, -1000 )
+
 [node name="Stopwatch" parent="." instance=ExtResource( 7 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -218,3 +230,5 @@ format = 1
 [connection signal="body_entered" from="Zones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
 [connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
+
+[editable path="Parallax"]
