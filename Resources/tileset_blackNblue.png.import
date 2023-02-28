@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tileset_blackNblue.png-750531cfd8765b3434f1d3c67f8af968.stex"
+path="res://.import/tileset_blackNblue.png-187e516b8d472dacdc807f58d3efeeb1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tileset_blackNblue.png"
-dest_files=[ "res://.import/tileset_blackNblue.png-750531cfd8765b3434f1d3c67f8af968.stex" ]
+source_file="res://Resources/tileset_blackNblue.png"
+dest_files=[ "res://.import/tileset_blackNblue.png-187e516b8d472dacdc807f58d3efeeb1.stex" ]
 
 [params]
 
