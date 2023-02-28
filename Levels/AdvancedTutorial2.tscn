@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Resources/blue_arrow.png" type="Texture" id=2]
 [ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Collision_tile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Elements/Collision_tile.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-Bold.ttf" type="DynamicFontData" id=8]
@@ -54,6 +55,28 @@ scale = Vector2( 9.96, 1 )
 [node name="LevelText" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="BlueArrow" type="Sprite" parent="LevelText"]
+position = Vector2( 1152, 400 )
+rotation = -1.57079
+texture = ExtResource( 2 )
+
+[node name="BlueArrow2" type="Sprite" parent="LevelText"]
+position = Vector2( 2328, 264 )
+rotation = -1.57079
+texture = ExtResource( 2 )
+
+[node name="BlueArrow3" type="Sprite" parent="LevelText"]
+position = Vector2( 8027, 635.5 )
+texture = ExtResource( 2 )
+
+[node name="BlueArrow4" type="Sprite" parent="LevelText"]
+position = Vector2( 8179, 635.5 )
+texture = ExtResource( 2 )
+
+[node name="BlueArrow5" type="Sprite" parent="LevelText"]
+position = Vector2( 8331, 635.5 )
+texture = ExtResource( 2 )
 
 [node name="Label9" type="Label" parent="LevelText"]
 margin_left = 7008.0

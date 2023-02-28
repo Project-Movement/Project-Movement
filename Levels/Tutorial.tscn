@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Collision_tile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Elements/Collision_tile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tiles/64x64_blue.png" type="Texture" id=4]
 [ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resources/blue_arrow.png" type="Texture" id=7]
 [ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-Bold.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=10]
@@ -102,6 +103,10 @@ scale = Vector2( 9.96, 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
+[node name="BlueArrow" type="Sprite" parent="LevelText"]
+position = Vector2( 536, 376 )
+texture = ExtResource( 7 )
+
 [node name="A + D" type="Label" parent="LevelText"]
 margin_left = 40.0
 margin_top = 328.0
@@ -159,10 +164,10 @@ DOUBLE JUMP REFRESHES WHEN TOUCHING THE GROUND
 "
 
 [node name="Dash" type="Label" parent="LevelText"]
-margin_left = 710.0
-margin_top = 276.0
-margin_right = 1067.0
-margin_bottom = 396.0
+margin_left = 3824.0
+margin_top = 128.0
+margin_right = 4181.0
+margin_bottom = 248.0
 theme = SubResource( 1 )
 text = "'LEFTCLICK' TO DASH
 USE MOUSE TO CONTROL
