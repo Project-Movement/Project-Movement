@@ -109,7 +109,8 @@ func player_move(delta):
 	# landing sound
 	# this is getting messy
 	if is_on_floor() and not grounded and abs(velocity.y) >= jump_vel and not bounced:
-		AudioPlayer.play_sound(AudioPlayer.LANDING)
+		# AudioPlayer.play_sound(AudioPlayer.LANDING)
+		AudioPlayer.play_sound()
 
 
 	# if we didn't bounce, accept the default move and slide velocity change
