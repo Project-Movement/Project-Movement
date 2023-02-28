@@ -25,6 +25,7 @@ position = Vector2( -512, 424 )
 
 [node name="StartZone" parent="Zones" instance=ExtResource( 7 )]
 position = Vector2( 472, 376 )
+scale = Vector2( 7.35999, 2.88 )
 
 [node name="Checkpoint" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( -57.0442, -1183.6 )
