@@ -6,7 +6,7 @@ var player_body
 
 
 func _input(event):
-	if event.is_action_pressed("restart"):
+	if event.is_action_pressed("restart") and player_body.controls_enabled:
 		respawn_player()
 
 
