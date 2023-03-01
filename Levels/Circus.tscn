@@ -245,7 +245,6 @@ position = Vector2( 3500, -800 )
 scale = Vector2( 16, 16 )
 
 [node name="ParallaxLayer2" parent="Parallax/ParallaxBackground" index="1"]
-motion_scale = Vector2( 0.3, 1 )
 motion_mirroring = Vector2( 10240, 0 )
 
 [node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer2" index="0"]
@@ -260,7 +259,6 @@ position = Vector2( 3500, -800 )
 scale = Vector2( 16, 16 )
 
 [node name="ParallaxLayer4" parent="Parallax/ParallaxBackground" index="3"]
-motion_scale = Vector2( 0.1, 1 )
 motion_mirroring = Vector2( 5120, 0 )
 
 [node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer4" index="0"]
