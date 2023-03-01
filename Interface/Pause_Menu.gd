@@ -4,6 +4,7 @@ func _process(delta):
 	if Globals.paused == true and not self.visible:
 		self.visible = true
 		$"../../PlayerBody".set_controls_enabled(false)
+		get_tree().paused = true
 	if Globals.level_completed:
 		self.set_state()
 		
@@ -23,6 +24,7 @@ func _on_Menu_pressed():
 	SceneChanger.change_to_nonlevel("res://Interface/TitleScreen.tscn")
 	
 func set_state():
+	get_tree().paused = false
 	Globals.paused = false
 	$"../../PlayerBody".set_controls_enabled(true)
 	self.visible = false
