@@ -77,13 +77,6 @@ func _physics_process(delta):
 	player_move(delta)
 	last_tick_vel = move_and_slide(velocity, Vector2.UP)
 
-
-func _input(event):
-	if event.is_action("return_title"):
-		Logger.log_level_action(Logger.ACTIONS.QUIT_LEVEL, "")
-		SceneChanger.change_to_nonlevel("res://Interface/TitleScreen.tscn")
-
-
 func player_move(delta):
 	last_direction = Input.get_axis("left", "right")
 
