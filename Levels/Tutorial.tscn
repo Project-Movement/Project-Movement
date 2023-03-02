@@ -1,21 +1,23 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Collision_tile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Elements/Collision_tile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tiles/64x64_blue.png" type="Texture" id=4]
 [ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resources/blue_arrow.png" type="Texture" id=7]
 [ext_resource path="res://Resources/JetBrainsMono-2.304/fonts/ttf/JetBrainsMono-Bold.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Resources/parallax.tscn" type="PackedScene" id=11]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=5]
 size = 28
 font_data = ExtResource( 8 )
 
 [sub_resource type="Theme" id=1]
-default_font = SubResource( 2 )
+default_font = SubResource( 5 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -76,7 +78,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 0/z_index = 0
 
-[node name="TutorialLevel" type="Node2D"]
+[node name="TutorialLevel2" type="Node2D"]
 
 [node name="Stopwatch" parent="." instance=ExtResource( 6 )]
 
@@ -101,6 +103,10 @@ scale = Vector2( 9.96, 1 )
 [node name="LevelText" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="BlueArrow" type="Sprite" parent="LevelText"]
+position = Vector2( 536, 376 )
+texture = ExtResource( 7 )
 
 [node name="A + D" type="Label" parent="LevelText"]
 margin_left = 40.0
@@ -159,10 +165,10 @@ DOUBLE JUMP REFRESHES WHEN TOUCHING THE GROUND
 "
 
 [node name="Dash" type="Label" parent="LevelText"]
-margin_left = 710.0
-margin_top = 276.0
-margin_right = 1067.0
-margin_bottom = 396.0
+margin_left = 3824.0
+margin_top = 128.0
+margin_right = 4181.0
+margin_bottom = 248.0
 theme = SubResource( 1 )
 text = "'LEFTCLICK' TO DASH
 USE MOUSE TO CONTROL
@@ -186,6 +192,39 @@ tile_data = PoolIntArray( -1310722, 0, 0, -1310721, 0, 131076, -1376256, 0, 1310
 tile_set = SubResource( 4 )
 format = 1
 
+[node name="Parallax" parent="." instance=ExtResource( 11 )]
+position = Vector2( 769, -656 )
+
+[node name="ParallaxLayer" parent="Parallax/ParallaxBackground" index="0"]
+motion_mirroring = Vector2( 10240, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer" index="0"]
+position = Vector2( 3500, -800 )
+scale = Vector2( 16, 16 )
+
+[node name="ParallaxLayer2" parent="Parallax/ParallaxBackground" index="1"]
+motion_mirroring = Vector2( 10240, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer2" index="0"]
+position = Vector2( 3500, -800 )
+scale = Vector2( 16, 16 )
+
+[node name="ParallaxLayer3" parent="Parallax/ParallaxBackground" index="2"]
+motion_mirroring = Vector2( 10240, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer3" index="0"]
+position = Vector2( 3500, -800 )
+scale = Vector2( 16, 16 )
+
+[node name="ParallaxLayer4" parent="Parallax/ParallaxBackground" index="3"]
+motion_mirroring = Vector2( 5120, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer4" index="0"]
+position = Vector2( 1200, -800 )
+scale = Vector2( 8, 16 )
+
 [connection signal="body_entered" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
 [connection signal="body_entered" from="SpecialZones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
+
+[editable path="Parallax"]

@@ -11,7 +11,8 @@ onready var DASH: = preload("Sounds/laserSmall_000.ogg")
 onready var STOPWATCH_STOP: = preload("Sounds/toggle_001.ogg")
 onready var STOPWATCH_START: = preload("Sounds/toggle_002.ogg")
 onready var DIE: = preload("Sounds/die.wav")
-onready var LANDING: = preload("Sounds/impactPlank_medium_004.ogg")
+# onready var LANDING: = preload("Sounds/impactPlank_medium_004.ogg")
+onready var LANDING: = preload("Sounds/land.wav")
 onready var SUPERJUMP: = preload("Sounds/laserLarge_001.ogg")
 onready var WALLBOUNCE: = preload("Sounds/bounce.wav")
 
@@ -31,8 +32,10 @@ func _ready():
 	STEP.audio_stream = preload("Sounds/footstep_concrete_000.ogg")
 
 
-func play_sound(sound):
+func play_sound(sound=null):
 	if not enabled:
+		return
+	if not sound:
 		return
 	for stream_player in sfx_players.get_children():
 		if not stream_player.playing:

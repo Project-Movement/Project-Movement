@@ -3,15 +3,13 @@
 [ext_resource path="res://Resources/black.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10.6667, 10.6667 )
+extents = Vector2( 16, 16 )
 
 [node name="Ground" type="Node2D"]
-scale = Vector2( 3, 3 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -4.76837e-07, 4.76837e-07 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D"]
@@ -19,4 +17,4 @@ modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 4.76837e-07, -4.76837e-07 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 21.333, 21.333 )
+region_rect = Rect2( 0, 0, 32, 32 )

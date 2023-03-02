@@ -1,11 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Collision_tile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Elements/Collision_tile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tiles/64x64_blue.png" type="Texture" id=4]
 [ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resources/blue_arrow.png" type="Texture" id=7]
+[ext_resource path="res://Resources/parallax.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=10]
 
@@ -100,6 +102,33 @@ scale = Vector2( 9.96, 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
+[node name="BlueArrow" type="Sprite" parent="LevelText"]
+position = Vector2( 184, 320 )
+rotation = -1.57079
+texture = ExtResource( 7 )
+
+[node name="BlueArrow2" type="Sprite" parent="LevelText"]
+position = Vector2( 1944, -1104 )
+rotation = -1.57079
+texture = ExtResource( 7 )
+
+[node name="BlueArrow3" type="Sprite" parent="LevelText"]
+position = Vector2( 3168, -2336 )
+rotation = -1.57079
+texture = ExtResource( 7 )
+
+[node name="BlueArrow4" type="Sprite" parent="LevelText"]
+position = Vector2( 1096, -3744 )
+rotation = -2.09439
+texture = ExtResource( 7 )
+flip_v = true
+
+[node name="BlueArrow5" type="Sprite" parent="LevelText"]
+position = Vector2( 2016, -5208 )
+rotation = -1.57079
+texture = ExtResource( 7 )
+flip_v = true
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 176, 544 )
 
@@ -134,6 +163,39 @@ tile_data = PoolIntArray( -6750214, 0, 0, -6750213, 0, 131076, -6750212, 0, 1310
 tile_set = SubResource( 4 )
 format = 1
 
+[node name="Parallax" parent="." instance=ExtResource( 8 )]
+position = Vector2( 769, -656 )
+
+[node name="ParallaxLayer" parent="Parallax/ParallaxBackground" index="0"]
+motion_mirroring = Vector2( 10240, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer" index="0"]
+position = Vector2( 3500, -3000 )
+scale = Vector2( 32, 32 )
+
+[node name="ParallaxLayer2" parent="Parallax/ParallaxBackground" index="1"]
+motion_mirroring = Vector2( 10240, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer2" index="0"]
+position = Vector2( 3500, -3000 )
+scale = Vector2( 32, 32 )
+
+[node name="ParallaxLayer3" parent="Parallax/ParallaxBackground" index="2"]
+motion_mirroring = Vector2( 10240, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer3" index="0"]
+position = Vector2( 3500, -3000 )
+scale = Vector2( 32, 32 )
+
+[node name="ParallaxLayer4" parent="Parallax/ParallaxBackground" index="3"]
+motion_mirroring = Vector2( 5120, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer4" index="0"]
+position = Vector2( 1200, -3000 )
+scale = Vector2( 16, 32 )
+
 [connection signal="body_entered" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
 [connection signal="body_entered" from="SpecialZones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
+
+[editable path="Parallax"]

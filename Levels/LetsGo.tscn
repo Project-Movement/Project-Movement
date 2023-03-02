@@ -1,14 +1,16 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Elements/Ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Collision_tile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Elements/Collision_tile.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Tiles/64x64_blue.png" type="Texture" id=7]
+[ext_resource path="res://Resources/blue_arrow.png" type="Texture" id=8]
 [ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Resources/parallax.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "New Anim"
@@ -440,7 +442,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2, 4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 11955, -1873 ), Vector2( 11955, -641 ), Vector2( 11955, -1873 ) ]
+"values": [ Vector2( 11955, -1873 ), Vector2( 11955, -441 ), Vector2( 11955, -1873 ) ]
 }
 
 [sub_resource type="Animation" id=28]
@@ -472,7 +474,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2, 4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 12978, -667 ), Vector2( 12978, -1913 ), Vector2( 12978, -667 ) ]
+"values": [ Vector2( 12978, -667 ), Vector2( 12978, -1913 ), Vector2( 12978, -467 ) ]
 }
 
 [sub_resource type="Animation" id=30]
@@ -504,7 +506,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 1.9, 3, 4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 13922, -1322 ), Vector2( 13922, -1833 ), Vector2( 13922, -1322 ), Vector2( 13922, -666 ), Vector2( 13922, -1322 ) ]
+"values": [ Vector2( 13922, -1322 ), Vector2( 13922, -1833 ), Vector2( 13922, -1322 ), Vector2( 13922, -466 ), Vector2( 13922, -1322 ) ]
 }
 
 [sub_resource type="Animation" id=32]
@@ -648,6 +650,38 @@ scale = Vector2( 9.96, 1 )
 [node name="LevelText" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="BlueArrow" type="Sprite" parent="LevelText"]
+position = Vector2( 372, 348 )
+texture = ExtResource( 8 )
+
+[node name="BlueArrow2" type="Sprite" parent="LevelText"]
+position = Vector2( 4796, 108 )
+rotation = -1.57079
+texture = ExtResource( 8 )
+
+[node name="BlueArrow3" type="Sprite" parent="LevelText"]
+position = Vector2( 6340, -1716 )
+texture = ExtResource( 8 )
+
+[node name="BlueArrow4" type="Sprite" parent="LevelText"]
+position = Vector2( 15764, -1756 )
+rotation = 0.523598
+texture = ExtResource( 8 )
+
+[node name="BlueArrow7" type="Sprite" parent="LevelText"]
+position = Vector2( 17535, -756 )
+rotation = 0.523598
+texture = ExtResource( 8 )
+
+[node name="BlueArrow5" type="Sprite" parent="LevelText"]
+position = Vector2( 17460, 380 )
+texture = ExtResource( 8 )
+
+[node name="BlueArrow6" type="Sprite" parent="LevelText"]
+position = Vector2( 19484, -1244 )
+rotation = 1.57079
+texture = ExtResource( 8 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 194, 541 )
@@ -839,6 +873,39 @@ tile_data = PoolIntArray( -2883585, 0, 0, -2949120, 0, 131076, -2949119, 0, 1310
 tile_set = SubResource( 36 )
 format = 1
 
+[node name="Parallax" parent="." instance=ExtResource( 11 )]
+position = Vector2( 769, -656 )
+
+[node name="ParallaxLayer" parent="Parallax/ParallaxBackground" index="0"]
+motion_mirroring = Vector2( 10240, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer" index="0"]
+position = Vector2( 3500, -800 )
+scale = Vector2( 16, 16 )
+
+[node name="ParallaxLayer2" parent="Parallax/ParallaxBackground" index="1"]
+motion_mirroring = Vector2( 10240, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer2" index="0"]
+position = Vector2( 3500, -800 )
+scale = Vector2( 16, 16 )
+
+[node name="ParallaxLayer3" parent="Parallax/ParallaxBackground" index="2"]
+motion_mirroring = Vector2( 10240, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer3" index="0"]
+position = Vector2( 3500, -800 )
+scale = Vector2( 16, 16 )
+
+[node name="ParallaxLayer4" parent="Parallax/ParallaxBackground" index="3"]
+motion_mirroring = Vector2( 5120, 0 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer4" index="0"]
+position = Vector2( 1200, -800 )
+scale = Vector2( 8, 16 )
+
 [connection signal="body_entered" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="SpecialZones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
 [connection signal="body_entered" from="SpecialZones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
+
+[editable path="Parallax"]

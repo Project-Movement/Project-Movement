@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tileset_blackNblue.png-750531cfd8765b3434f1d3c67f8af968.stex"
+path="res://.import/purple_L1.png-9775bd43833d59b0ccab358068b13442.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tileset_blackNblue.png"
-dest_files=[ "res://.import/tileset_blackNblue.png-750531cfd8765b3434f1d3c67f8af968.stex" ]
+source_file="res://Resources/Background/purple_L1.png"
+dest_files=[ "res://.import/purple_L1.png-9775bd43833d59b0ccab358068b13442.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=2
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

@@ -1,7 +1,7 @@
 extends Node
 ## You should autoload this class, and fill in _ready with your information
 
-var VERSION = 2
+var VERSION = 4
 
 # these enums are important and should be updated when stuff changes
 enum ACTIONS {

@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/64x64_blue.png" type="Texture" id=2]
 [ext_resource path="res://Elements/KillZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Elements/EndZone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Elements/StartZone.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Collision_tile.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Elements/Collision_tile.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Interface/Stopwatch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Resources/blue_arrow.png" type="Texture" id=8]
 [ext_resource path="res://Elements/Checkpoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Resources/parallax.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -94,6 +96,22 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 
 [node name="TestScene" type="Node2D"]
 
+[node name="Parallax" parent="." instance=ExtResource( 10 )]
+position = Vector2( -1000, 0 )
+z_index = -1
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer" index="0"]
+position = Vector2( 1, -1000 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer2" index="0"]
+position = Vector2( 0, -1000 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer3" index="0"]
+position = Vector2( 0, -1000 )
+
+[node name="Sprite" parent="Parallax/ParallaxBackground/ParallaxLayer4" index="0"]
+position = Vector2( 0, -1000 )
+
 [node name="Stopwatch" parent="." instance=ExtResource( 7 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -168,6 +186,30 @@ position = Vector2( 3784, -344 )
 [node name="Checkpoint7" parent="Zones" instance=ExtResource( 9 )]
 position = Vector2( 1960, 104 )
 
+[node name="BlueArrow" type="Sprite" parent="Zones"]
+position = Vector2( 496, 240 )
+texture = ExtResource( 8 )
+
+[node name="BlueArrow5" type="Sprite" parent="Zones"]
+position = Vector2( -2824, 960 )
+texture = ExtResource( 8 )
+
+[node name="BlueArrow2" type="Sprite" parent="Zones"]
+position = Vector2( 2936, -168 )
+texture = ExtResource( 8 )
+flip_h = true
+
+[node name="BlueArrow4" type="Sprite" parent="Zones"]
+position = Vector2( -128, -1496 )
+texture = ExtResource( 8 )
+flip_h = true
+
+[node name="BlueArrow3" type="Sprite" parent="Zones"]
+position = Vector2( 1400, -584 )
+rotation = 0.523598
+texture = ExtResource( 8 )
+flip_h = true
+
 [node name="Stage" type="Node2D" parent="."]
 
 [node name="Node2D" type="Node2D" parent="Stage"]
@@ -188,3 +230,5 @@ format = 1
 [connection signal="body_entered" from="Zones/EndZone" to="Stopwatch" method="_on_EndZone_body_entered"]
 [connection signal="body_entered" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_entered"]
 [connection signal="body_exited" from="Zones/StartZone" to="Stopwatch" method="_on_StartZone_body_exited"]
+
+[editable path="Parallax"]
