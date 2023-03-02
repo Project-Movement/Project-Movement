@@ -13,10 +13,6 @@ func _process(delta):
 	# $Time.text = "%02d:%05.2f" % [minutes, time]
 	$Time.text = "%02d:%05.2f" % [minutes, fmod(time, 60.0)]
 	Globals.time = "%02d:%05.2f" % [minutes, fmod(time, 60.0)]
-	if Globals.paused == true:
-		active = false
-	if Globals.level_completed != true and Globals.paused == false:
-		active = true
 
 
 func reset():

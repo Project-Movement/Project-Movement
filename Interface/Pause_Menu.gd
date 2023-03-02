@@ -5,8 +5,8 @@ func _process(delta):
 		self.visible = true
 		$"../../PlayerBody".set_controls_enabled(false)
 		get_tree().paused = true
-	if Globals.level_completed:
-		self.set_state()
+#	if Globals.level_completed:
+#		self.set_state()
 		
 func _input(event):
 	if event.is_action_pressed("return_title") and self.visible:
