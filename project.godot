@@ -22,7 +22,9 @@ _global_script_class_icons={
 
 config/name="ProjectMovement"
 run/main_scene="res://Interface/StartupScreen.tscn"
-config/icon="res://icon.png"
+config/icon="res://Resources/Project_Movement_1.png"
+config/macos_native_icon="res://Resources/Project_Movement_1_512.icns"
+config/windows_native_icon="res://Resources/icon.ico"
 
 [autoload]
 
