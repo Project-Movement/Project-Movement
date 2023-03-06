@@ -12,17 +12,17 @@ var sprite
 var o_velocity
 
 
-func start_dash(duration: float, sprite: Sprite, velocity: Vector2, o_velocity):
+func start_dash(duration: float, _sprite: Sprite, velocity: Vector2, _o_velocity: Vector2):
 	ghost_timer.start()
 	duration_timer.wait_time = duration
 	duration_timer.start()
 
-	self.sprite = sprite
+	self.sprite = _sprite
 	# sprite.material.set_shader_param("mix_weight", 0.7)
 	# sprite.material.set_shader_param("whiten", true)
 	instance_ghost()
 
-	self.o_velocity = o_velocity
+	self.o_velocity = _o_velocity
 	parent_body.set_controls_enabled(false)
 	parent_body.set_constant_forces_enabled(false)
 	parent_body.set_friction_enabled(false)
@@ -48,7 +48,8 @@ func is_dashing():
 
 func end_dash():
 	# sprite.material.set_shader_param("whiten", false)
-	parent_body.set_controls_enabled(true)
+	if not Globals.level_completed:
+		parent_body.set_controls_enabled(true)
 	parent_body.set_constant_forces_enabled(true)
 	parent_body.set_friction_enabled(true)
 	parent_body.override_velocity(o_velocity)
