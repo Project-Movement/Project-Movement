@@ -23,6 +23,10 @@ onready var DROP2: = preload("Sounds/drop_002.ogg")
 onready var DROP3: = preload("Sounds/drop_003.ogg")
 onready var DROP4: = preload("Sounds/drop_004.ogg")
 
+onready var DASHRECHARGE: = preload("Sounds/recharge2.wav")
+# onready var DASHRECHARGE
+onready var SUPERJUMPRECHARGE: = preload("Sounds/confirmation_001.ogg")
+
 
 onready var sfx_players: = $SFXPlayers
 onready var ui_sfx_players: = $UISFX
@@ -30,6 +34,9 @@ onready var ui_sfx_players: = $UISFX
 func _ready():
 	STEP = AudioStreamRandomPitch.new()
 	STEP.audio_stream = preload("Sounds/footstep_concrete_000.ogg")
+
+	# DASHRECHARGE = AudioStreamRandomPitch.new()
+	# DASHRECHARGE.audio_stream = preload("Sounds/recharge.wav")
 
 
 func play_sound(sound=null):
