@@ -39,6 +39,8 @@ SceneChanger="*res://AutoloadScripts/SceneChanger.gd"
 
 window/size/width=1280
 window/size/height=720
+mouse_cursor/custom_image="res://Resources/cursor2.png"
+mouse_cursor/custom_image_hotspot=Vector2( 64, 64 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
