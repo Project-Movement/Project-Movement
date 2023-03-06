@@ -1,6 +1,7 @@
 extends Camera2D
 
 export var max_dist: int = 1000
+export var LOOKAROUND_SPEED = 0.07
 
 onready var player_body = get_parent()
 onready var SCREEN_CENTER = get_viewport().size / 2
@@ -35,9 +36,11 @@ func _process(_delta):
 		var x_travel_prop = diff.x / mouse_offset_limit_x
 		var y_travel_prop = diff.y / mouse_offset_limit_y
 
-		self.position = max_dist * Vector2(x_travel_prop, y_travel_prop)
+		self.position = lerp(self.position, max_dist * Vector2(x_travel_prop, y_travel_prop), LOOKAROUND_SPEED)
 
 
 
 func handle_viewport_size_change():
 	SCREEN_CENTER = get_viewport().size / 2
+	mouse_offset_limit_x = SCREEN_CENTER.x
+	mouse_offset_limit_y = SCREEN_CENTER.y
