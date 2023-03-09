@@ -118,7 +118,9 @@ func do_superjump():
 	ability_uses["superjump"] -= 1
 
 func _on_DashTimer_timeout():
+	AudioPlayer.play_ui_sound(AudioPlayer.DASHRECHARGE)
 	ability_uses["dash"] = max_dashes
 
 func _on_SuperJumpTimer_timeout():
+	AudioPlayer.play_ui_sound(AudioPlayer.SUPERJUMPRECHARGE)
 	ability_uses["superjump"] = max_superjumps

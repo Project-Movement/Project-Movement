@@ -250,6 +250,7 @@ func apply_constant_forces(delta):
 func reset_state():
 	velocity = Vector2.ZERO
 	last_tick_vel = Vector2.ZERO
+	has_jumped_in_buffer_interval = false
 	set_controls_enabled(true)
 	set_constant_forces_enabled(true)
 	set_friction_enabled(true)
