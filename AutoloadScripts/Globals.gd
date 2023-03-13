@@ -6,4 +6,4 @@ var max_superjumps = 1
 var time = 0
 var level_completed:bool = false;
 
-var LOGGING_ENABLED = true
+var LOGGING_ENABLED = false;
