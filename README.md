@@ -1,5 +1,5 @@
 # Project Movement
-
+Play now on [Itch](https://project-movement.itch.io/project-movement)!
 - A and S to move left and right, SPACE to jump
 - Press W perform a super jump
 - LSHIFT to dash in direction of mouse cursor
