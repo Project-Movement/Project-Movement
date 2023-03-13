@@ -59,18 +59,11 @@ func _ready():
 	Globals.LOGGING_ENABLED = false if OS.is_debug_build() else true  # comment this out for logging in debug builds
 	var cid = 1 if OS.is_debug_build() else VERSION
 	self.initialize(202304, "group04", "3b45e8ea6b313e516d18679e04be7779", cid)
-	# start_new_session()
-	# actually blocking like this seems to not give the request a chance to be sent
-	# if not OS.is_debug_build():  # don't pause and wait cause we don't really care about session ids for testing builds
-	# 	while not session_started:
-	# 		OS.delay_msec(25)  # pause until response received from database
-	# while not session_started:
-	# 	print("still waiting for response")
-	# 	OS.delay_msec(25)  # pause until response received from database
 
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		# this doesn't work since this needs to exist for a while to process the http request
 		log_action_with_no_level(ACTIONS.QUIT, JSON.print({"time": Time.get_ticks_msec()}))
 		get_tree().quit()
 
@@ -86,7 +79,7 @@ func initialize(_gameId: int, _gameName: String, _gameKey: String, _categoryId: 
 
 
 func generate_uuid():
-	var s = v4()  # code from someone else, see way bottom of script
+	var s = v4()  # code from someone else, see way bottom of script, it is a copy of uuid.gd
 	print("Generated ID: " + s)
 	return s
 
